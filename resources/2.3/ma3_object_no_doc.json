@@ -5,6 +5,7 @@
     "body": [
       "Acquire(${1:_class}, ${2:_undo})"
     ],
+    "description" : "Create new slot at the beginning, auto-resizes if no empty slot.\n\nFor object-types that can have gaps (empty slots) e.g. macros inside a macro pool.",
     "code": "Acquire(light_userdata:handle[, string:class[, light_userdata:undo]]): light_userdata:child_handle"   
   },
   "Handle:AddListChildren": {
@@ -96,6 +97,7 @@
     "body": [
       "Append(${1:_class}, ${2:_undo}, ${3:_count})"
     ],
+    "description" : "Create new slot at the end.\nFor object-types that cannot have gaps (empty slots) e.g. macro lines inside a macro.",
     "code": "Append(light_userdata:handle[, string:class[, light_userdata:undo[, integer:count]]]): light_userdata:child_handle"
   },
   "Handle:Changed": {
@@ -187,6 +189,7 @@
     "body": [
       "Create(${1:childIndex}, ${2:_class}, ${3:_undo})"
     ],
+    "description" : "Return or create new slot at specified index.\nFor object-types that can have gaps (empty slots) e.g. macros inside a macro pool.",
     "code": "Create(light_userdata:handle, integer:child_index(1-based)[, string:class[, light_userdata:undo]]): light_userdata:child_handle"
   },
   "Handle:CurrentChild": {
@@ -642,6 +645,7 @@
     "body": [
       "Insert(${1:childIndex}, ${2:_class}, ${3:_undo}, ${4:_count})"
     ],
+    "description" : "Create new slot at specified index.\nFor object-types that cannot have gaps (empty slots) e.g. macro lines inside a macro.",
     "code": "Insert(light_userdata:handle, integer:child_index(1-based)[, string:class[, light_userdata:undo[, integer:count]]]): light_userdata:child_handle"
   },
   "Handle:IsClass": {
@@ -712,6 +716,7 @@
     "body": [
       "MaxCount()"
     ],
+    "description": "Return the maximum of allowed slots\nFor object-types that can have gaps (empty slots) e.g. macros inside a macro pool.",
     "code": "MaxCount(light_userdata:handle): integer:child_count"
   },
   "Handle:OverlaySetCloseCallback": {
@@ -782,6 +787,7 @@
     "body": [
       "Resize(${1:size})"
     ],
+    "description": "Resize the number of slots to specified size\nFor object-types that can have gaps (empty slots) e.g. macros inside a macro pool.",
     "code": "Resize(light_userdata:handle, integer:size): nothing"
   },
   "Handle:Save": {

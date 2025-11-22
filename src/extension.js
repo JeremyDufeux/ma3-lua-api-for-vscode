@@ -415,8 +415,13 @@ function addFunctionsNoDocHover(context, data, className){
                     markdownContent.appendMarkdown(`# ${className}:${cleanedPrefix}\n\n`);
                 } else {
                     markdownContent.appendMarkdown(`# ${cleanedPrefix}\n\n`);
-                }          
-                markdownContent.appendMarkdown(`This function is not documented, this is what the 'HelpLua' command provided:\n\n`);
+                }
+                if(snippetData.description && snippetData.description.trim() !== ""){
+                    markdownContent.appendMarkdown(`${snippetData.description}\n\n`);
+                    markdownContent.appendMarkdown(`This function is not documented by MA, but by the community, this is what the 'HelpLua' command provided:\n\n`);
+                } else {
+                    markdownContent.appendMarkdown(`This function is not documented, this is what the 'HelpLua' command provided:\n\n`);
+                }
                 markdownContent.appendCodeblock(snippetData.code, 'lua');
 
                 return new vscode.Hover(markdownContent);

@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.4.3 — November 22, 2025
+
+- Added short description for those functions:
+  - Append
+  - Insert
+  - Create
+  - Count
+  - MaxCount
+  - Resize
+  - Acquire
+
 ## 1.4.2 — July 30, 2025
 
 - Update CHANGELOG.md to change space tabs to another markdown format
