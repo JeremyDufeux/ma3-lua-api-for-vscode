@@ -54,7 +54,7 @@
     "body": [
       "DevMode3d()"
     ],
-    "code": "DevMode3d(nothing): string:devmode3d"
+    "code": "DevMode3d(nothing): string:devMode3d"
   },
   "FSExtendedModeHasDots": {
     "prefix": "FSExtendedModeHasDots(handle, cell)",
@@ -110,7 +110,7 @@
     "body": [
       "GetProgPhaser(${1:uiChannelIndex}, ${2:phaserOnly})"
     ],
-    "code": "GetProgPhaser(integer:ui_channel_index, boolean:phaser_only): {['abs_preset'=light_userdata:handle], ['rel_preset'=light_userdata:handle], ['fade'=float:seconds], ['delay'=float:seconds], ['speed'=float:hz], ['phase'=float:degree], ['measure'=float:percent], ['gridpos'=integer:value], ['mask_active_phaser'=integer:bitmask], ['mask_active_value'=integer:bitmask], ['mask_individual'=integer:bitmask]}"
+    "code": "GetProgPhaser(integer:ui_channel_index, boolean:phaser_only): {['abs_preset'=light_userdata:handle], ['rel_preset'=light_userdata:handle], ['fade'=float:seconds], ['delay'=float:seconds], ['speed'=float:hz], ['phase'=float:degree], ['measure'=float:percent], ['gridPos'=integer:value], ['mask_active_phaser'=integer:bitmask], ['mask_active_value'=integer:bitmask], ['mask_individual'=integer:bitmask]}"
   },
   "GetProgPhaserValue": {
     "prefix": "GetProgPhaserValue(uiChannelIndex, step)",
@@ -152,28 +152,28 @@
     "body": [
       "GetUIChannel(${1:uiChannelIndex}, ${2:attributeIndex})"
     ],
-    "code": "GetUIChannel(integer:ui_channel_index or light_userdata: subfixture_reference, integer:attribute_index or string:attribute_name): table:ui_channel_descriptor"
+    "code": "GetUIChannel(integer:ui_channel_index or light_userdata: subFixture_reference, integer:attribute_index or string:attribute_name): table:ui_channel_descriptor"
   },
   "GetVarVersion": {
     "prefix": "GetVarVersion(variableHandle, varName)",
     "body": [
       "GetVarVersion(${1:variableHandle}, ${2:varName})"
     ],
-    "code": "GetVarVersion(light_userdata:variables, string:varname): integer:version"
+    "code": "GetVarVersion(light_userdata:variables, string:varName): integer:version"
   },
   "HostRevision": {
     "prefix": "HostRevision()",
     "body": [
       "HostRevision()"
     ],
-    "code": "HostRevision(nothing): string:hostrevision"
+    "code": "HostRevision(nothing): string:hostRevision"
   },
   "Keyboard": {
-    "prefix": "Keyboard(displayIndex, type, charOrKeycode, shift, ctrl, alt, numlock)",
+    "prefix": "Keyboard(displayIndex, type, charOrKeycode, shift, ctrl, alt, numLock)",
     "body": [
-      "Keyboard(${1:displayIndex}, ${2:type}, ${3:_charOrKeycode}, ${4:_shift}, ${5:_ctrl}, ${6:_alt}, ${7:_numlock})"
+      "Keyboard(${1:displayIndex}, ${2:type}, ${3:_charOrKeycode}, ${4:_shift}, ${5:_ctrl}, ${6:_alt}, ${7:_numLock})"
     ],
-    "code": "Keyboard(integer:display_index, string:type('press', 'char', 'release')[ ,string:char(for type 'char') or string:keycode, boolean:shift, boolean:ctrl, boolean:alt, boolean:numlock]): nothing"
+    "code": "Keyboard(integer:display_index, string:type('press', 'char', 'release')[ ,string:char(for type 'char') or string:keycode, boolean:shift, boolean:ctrl, boolean:alt, boolean:numLock]): nothing"
   },
   "LoadExecConfig": {
     "prefix": "LoadExecConfig(executor)",
@@ -243,7 +243,7 @@
     "body": [
       "RemoteCallRunning()"
     ],
-    "code": "RemoteCallRunning(nothing): boolean:remotecall_is_running"
+    "code": "RemoteCallRunning(nothing): boolean:remoteCall_is_running"
   },
   "SaveExecConfig": {
     "prefix": "SaveExecConfig(executor)",
@@ -306,7 +306,7 @@
     "body": [
       "SelectionTable()"
     ],
-    "code": "SelectionTable(nothing): table of subfixture_index"
+    "code": "SelectionTable(nothing): table of subFixture_index"
   },
   "SendLuaMessage": {
     "prefix": "SendLuaMessage(ipOrStation, channelName, data)",
@@ -327,7 +327,7 @@
     "body": [
       "SetProgPhaser(${1:uiChannelIndex}, ${2:options})"
     ],
-    "code": "SetProgPhaser(integer:ui_channel_index, {['abs_preset'=light_userdata:handle], ['rel_preset'=light_userdata:handle], ['fade'=number:seconds], ['delay'=number:seconds], ['speed'=number:hz], ['phase'=number:degree], ['measure'=number:percent], ['gridpos'=integer:value], {['channel_function'=integer:value], ['absolute'=number:percent], ['absolute_value'=integer:value], ['relative'=number:percent], ['accel'=number:percent[, 'accel_type'=integer:enum_value(Enums.SplineType)]], ['decel'=number:percent[, 'decel_type'=integer:enum_value(Enums.SplineType)]], ['trans'=number:percent], ['width'=number:percent], ['integrated'=light_userdata:preset_handle]}}): nothing"
+    "code": "SetProgPhaser(integer:ui_channel_index, {['abs_preset'=light_userdata:handle], ['rel_preset'=light_userdata:handle], ['fade'=number:seconds], ['delay'=number:seconds], ['speed'=number:hz], ['phase'=number:degree], ['measure'=number:percent], ['gridPos'=integer:value], {['channel_function'=integer:value], ['absolute'=number:percent], ['absolute_value'=integer:value], ['relative'=number:percent], ['accel'=number:percent[, 'accel_type'=integer:enum_value(Enums.SplineType)]], ['decel'=number:percent[, 'decel_type'=integer:enum_value(Enums.SplineType)]], ['trans'=number:percent], ['width'=number:percent], ['integrated'=light_userdata:preset_handle]}}): nothing"
   },
   "SetProgPhaserValue": {
     "prefix": "SetProgPhaserValue(uiChannelIndex, step, options)",

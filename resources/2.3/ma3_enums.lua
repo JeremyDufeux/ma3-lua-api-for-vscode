@@ -1,4 +1,4 @@
---- Ma3 API version: 2.3 -- TODO
+--- Ma3 API version: 2.3
 ---@meta
 
 ---@class Enums
@@ -2590,6 +2590,8 @@ Enums.HostStatus = {
 Enums.HostSubType = {
   Compact = 24,
   CompactXT = 25,
+  ["DMX-key"] = 99,
+  ["DMX-key starter"] = 100,
   FullSize = 20,
   FullSizeCRV = 21,
   IONode = 75,
@@ -3172,11 +3174,11 @@ Enums.Master = {
   GrandProgramTime = 18,
   GrandProgramXFade = 19,
   GrandRate = 16,
+  GrandReserved = 17,
   GrandSolo = 15,
   GrandSoundFade = 25,
   GrandSoundIn = 24,
   GrandSoundOut = 23,
-  GrandSpeed = 17,
   GrandWorld = 12,
   None = 255,
   Playback1 = 42,
@@ -7169,7 +7171,9 @@ Enums.UsbProductID = {
   ["grandMA3 MA-Key (Blank)"] = 46352,
   ["grandMA3 MA-Key (Viz-Key)"] = 46353,
   ["grandMA3 Master Module (MM)"] = 46531,
-  ["grandMA3 VR wing"] = 46543,
+  ["grandMA3 VR wing"] = 16962,
+  ["grandMA3 onPC DMX-key"] = 46543,
+  ["grandMA3 onPC DMX-key starter"] = 46544,
   ["grandMA3 xPort node"] = 46537,
 }
 
@@ -7732,3 +7736,4 @@ Enums.ZoomFactor = {
   ["80%"] = 2,
   ["90%"] = 3,
 }
+

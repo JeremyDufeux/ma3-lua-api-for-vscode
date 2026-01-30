@@ -2,21 +2,21 @@
   "name": "ma3-lua-api",
   "displayName": "Ma3 Lua Api for VS Code",
   "description": "Lua extension for Grand Ma 3 Api",
-  "version": "1.4.3",
+  "version": "1.5.0",
 	"publisher": "Carrot-Industries",
   "author": {
     "name": "Jeremy Dufeux",
     "email": "contact@carrot-industries.com"
   },
   "license": "GPL v3",
-  "homepage": "https://github.com/JeremyDufeux/ma3-lua-api",
+  "homepage": "https://github.com/JeremyDufeux/ma3-lua-api-for-vscode",
   "repository": {
     "type": "git",
-    "url": "https://github.com/JeremyDufeux/ma3-lua-api.git"
+    "url": "https://github.com/JeremyDufeux/ma3-lua-api-for-vscode.git"
   },
   "icon": "images/logo.png",
   "bugs": {
-    "url": "https://github.com/JeremyDufeux/ma3-lua-api/issues"
+    "url": "https://github.com/JeremyDufeux/ma3-lua-api-for-vscode/issues"
   },
   "engines": {
     "vscode": "^1.96.0"
@@ -57,10 +57,35 @@
           "type": "string",
           "description": "Select the GrandMa 3 API version"
         },
+        "grandMa3.lastInstalledVersion": {
+          "type": "string",
+          "description": "Last installed extension version"
+        },
         "grandMa3.extensionEnabled": {
-            "type": "boolean",
-            "default": true,
-            "description": "Enable/disable GrandMa 3 extension for this workspace"
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable GrandMa 3 extension for this workspace"
+        },
+        "grandMa3.removed-undefined-field-diagnostics": {
+          "type": "boolean",
+          "default": false,
+          "scope": "resource",
+          "description": "Internal flag to prevent re-disabling undefined-field diagnostics if already processed."
+        },
+        "grandMa3.terminalPath": {
+          "type": "string",
+          "default": "",
+          "description": "Manual path to app_terminal (leave empty for auto-detection)."
+        },
+        "grandMa3.terminalSystemMonitorVisibility": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show/Hide System Monitor Terminal Button"
+        },
+        "grandMa3.terminalCommandLineVisibility": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show/Hide Command Line Terminal Button"
         }
       }
     },
@@ -69,22 +94,27 @@
         "command": "grandMa3.menu",
         "title": "GrandMa 3: Open Menu",
         "category": "GrandMA 3 API"
+      },
+      {
+        "command": "grandMa3.openSysmon",
+        "title": "Open Ma3 System Monitor",
+        "category": "GrandMA 3 API",
+        "icon": "$(terminal)" 
+      },
+      {
+        "command": "grandMa3.openCmdLine",
+        "title": "Open Ma3 Command Line",
+        "category": "GrandMA 3 API",
+        "icon": "$(terminal)" 
       }
-    ]
-  },
-  "menus": {
+    ],
+    "menus": {
       "commandPalette": [
-          {
-              "command": "grandMa3.menu",
-              "when": "editorLangId == lua"
-          }
-      ],
-      "editor/title": [
-          {
-              "command": "grandMa3.menu",
-              "group": "navigation",
-              "when": "editorLangId == lua"
-          }
+        {
+          "command": "grandMa3.menu",
+          "when": "editorLangId == lua"
+        }
       ]
+    }
   }
 }

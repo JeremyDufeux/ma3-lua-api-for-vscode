@@ -1,5 +1,40 @@
 # Changelog
 
+## 1.5.0 — January 28, 2026
+
+### ⚠️ Important
+
+- **Lua Diagnostic Update:** Added `---@field [string] any` to the dummy Handle definition. This allows **re-enabling the `undefined-field` diagnostic** in workspaces, providing better error detection without false positives on dynamic properties.
+  
+### 💻 Terminal
+
+- **Ma3 System Monitor and Command Line in terminal:** Added two button in the bottom status bar to open Ma3 System Monitor and Command Line in a terminal.
+![ma3-terminal](images/ma3-terminal.png)
+- Those button can be hidden in the extension menu
+- Special thanks to ***gabe927*** for [his post on the Ma Lighting forum](https://forum.malighting.com/forum/thread/68211-grandma3-vscode-workflow/)
+
+### 🔤 Code Spell Checker
+
+- **Spellcheck:** Migrated `cspell` definitions to a dedicated dictionary file for a cleaner user configuration.
+- **Dictionary generation:** Added [utils/generate_cspell_dictionary.py](utils/generate_cspell_dictionary/generate_cspell_dictionary.py) to generate dictionary from resources
+
+### ➕ Added
+
+- **Generic Handle Property:** Added `---@field [string] any` to [resources/2.3/ma3_dummy_object.lua](resources/2.3/ma3_dummy_object.lua).
+- **Reference Links:** Added "See also..." documentation for core functions: `Append`, `Insert`, `Create`, `MaxCount`, `Resize`, and `Acquire`.
+- **Developer Documentation:** Added `Process_For_New_Ma3_Version.md` documenting the workflow for updating the extension for new Grand MA3 versions.
+- **Update Notifications:** System to inform users about extension changes.
+
+### 🪛 Fixed
+
+- **Documentation:** Corrected formatting in `MessageBox` function description and `GetRTChannels` description.
+- **Accuracy:** Fixed typos and inconsistencies in various JSON documentation and dummy Lua files.
+
+### 🔄 Updated
+
+- [CHANGELOG.md](CHANGELOG.md)
+- [README.md](README.md)
+
 ## 1.4.3 — November 22, 2025
 
 - Added short description for those functions:
@@ -21,7 +56,7 @@
 
 ## 1.4.0 — July 30, 2025
 
-### 🆕 Added support of GrandMa 3 2.3 API version
+### ➕ Added support of GrandMa 3 2.3 API version
 
 #### New Object-Free API functions
 
@@ -64,7 +99,7 @@ Added [ma_docs](ma_docs/2.1) folder with set of resources for each API version, 
 
 - **enums_list.txt** - generated with the Lua script located in the [generate_enums_file folder](utils/generate_enums_file)
 - **grandMA3_lua_functions.txt** - generated with the HelpLua command
-- **Lua Html** - from the official documentation located in the `C:\ProgramData\MALightingTechnology\gma3_x.x.x\shared\language\HTML` folder
+- **Lua Html** - from the official documentation located in the `C:/ProgramData/MALightingTechnology/gma3_x.x.x/shared/language/HTML` folder
 
 ### 🔧 Development
 

@@ -25,6 +25,13 @@ The extension provide documentation and examples with a mouse over popup.
 The extension also references functions that are not documented in the official manual, so the popup displays the description provided by the HelpLua command.
 ![undocumented_hover](images/undocumented_hover.png)
 
+## Ma3 Terminal
+
+The extension also add buttons in the bottom status bar to open Ma3 System Monitor and Command Line in a terminal.
+These buttons can be toggled on or off in the extension settings.
+
+![ma3-terminal](images/ma3-terminal.png)
+
 ## API version selection
 
 The VS Code bottom toolbar display the actual Ma3 API version.
@@ -33,6 +40,8 @@ The VS Code bottom toolbar display the actual Ma3 API version.
 Clicking on this toolbar button will open a quick pick menu that allow you to:
 
 - Select the Ma3 version
+- Open System Monitor and Command Line in a terminal
+- Show/Hide System Monitor and Command Line button
 - Disable the extension for the actual project
 - Restart the extension
 

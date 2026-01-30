@@ -1,8 +1,8 @@
 ---@meta
 --- Ma3 API version: 2.3
 
--- Not documented Object definition
--- ========================================
+--- Not documented Object definition
+--- ========================================
 
 ---@param class? string @Optional
 ---@param undo? Handle @Optional
@@ -447,7 +447,7 @@ function Handle:HookDelete(callback, argument)
     return true
 end
 
----@return  integer index
+---@return integer index
 function Handle:Index()
     return 0
 end

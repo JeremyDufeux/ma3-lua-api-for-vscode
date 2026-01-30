@@ -5,17 +5,9 @@
 -- ========================================
 
 ---@class Handle
---- @field dmxInvertPan boolean | string
---- @field dmxInvertTilt boolean | string
---- @field encInvertPan boolean | string
---- @field encInvertTilt boolean | string
---- @field castShadow boolean | string
---- @field followTarget boolean | string
---- @field gridInvX boolean | string
---- @field gridInvY boolean | string
---- @field gridInvZ boolean | string
-
+---@field [string] any
 Handle = {}
+Obj = {}
 
 ---@return Handle
 function Handle:new()

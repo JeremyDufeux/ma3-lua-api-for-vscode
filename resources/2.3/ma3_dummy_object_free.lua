@@ -1,8 +1,8 @@
 ---@meta
 --- Ma3 API version: 2.3
 
--- Object free definition
--- ========================================
+--- Object free definition
+--- ========================================
 
 ---@param fixtureTable table
 ---@return boolean | nil success

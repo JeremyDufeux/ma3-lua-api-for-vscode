@@ -2,48 +2,308 @@ const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
 
-const API_VERSION_CONFIG_KEY = 'apiVersion';
-const EXTENSION_ENABLED_CONFIG_KEY  = 'extensionEnabled';
+const API_VERSION_WORKSPACE_KEY = `apiVersion`;
+const EXTENSION_ENABLED_WORKSPACE_KEY  = `extensionEnabled`;
+
+const EXTENSION_ID = `Carrot-Industries.ma3-lua-api`;
+
+const LAST_INSTALLED_VERSION_GLOBAL_KEY  = `${EXTENSION_ID}.lastInstalledVersion`;
+const UPDATE_NOTIFICATION_HIDDEN_GLOBAL_KEY  = `${EXTENSION_ID}.updateNotificationHidden`;
+const TERMINAL_PATH_GLOBAL_KEY = `${EXTENSION_ID}.terminalPath`;
+const TERMINAL_SYSTEM_MONITOR_VISIBILITY_GLOBAL_KEY = `${EXTENSION_ID}.terminalSystemMonitorVisibility`;
+const TERMINAL_COMMAND_LINE_VISIBILITY_GLOBAL_KEY = `${EXTENSION_ID}.terminalCommandLineVisibility`;
 
 const extensionState = {
     hoverProviders: [],
     completionProviders: []
 };
 
+async function activate(context) {
+    const extension = vscode.extensions.getExtension(EXTENSION_ID);
 
-function activate(context) {
-    const configuration = vscode.workspace.getConfiguration('grandMa3');
-    const isExtensionEnabled = configuration.get(EXTENSION_ENABLED_CONFIG_KEY, true);
-
-
-    if (!extensionState.statusBarItem) {
-        extensionState.statusBarItem = createApiVersionStatusBarItem();
-        createMenu(context);
-    }
-    extensionState.statusBarItem.show();
-    
-    if (!isExtensionEnabled) {
-        extensionState.statusBarItem.text = `GrandMa 3 API: Off`;
+    const currentVersion = extension.packageJSON.version;
+    const lastKnownVersion = context.globalState.get(LAST_INSTALLED_VERSION_GLOBAL_KEY);
+        
+    if (!lastKnownVersion) {
+        await context.globalState.update(LAST_INSTALLED_VERSION_GLOBAL_KEY, currentVersion);
+        await context.globalState.update(getUpdateHiddenKey(currentVersion), true);
         return;
     }
 
-    const currentApiVersion = getCurrentApiVersion(context);
+    if (lastKnownVersion !== currentVersion) {
+        await context.globalState.update(LAST_INSTALLED_VERSION_GLOBAL_KEY, currentVersion);
+    }
+
+    await showUpdateNotification(context, currentVersion);
+
+    const configuration = vscode.workspace.getConfiguration('grandMa3');
+    const isExtensionEnabled = configuration.get(EXTENSION_ENABLED_WORKSPACE_KEY, true);
+
+    if (!extensionState.statusBarItem) {
+        extensionState.statusBarItem = createApiVersionStatusBarItem();
+        extensionState.sysmonStatusBarItem = createSysmonStatusBarItem();
+        extensionState.cmdLineStatusBarItem = createCmdLineStatusBarItem();
+        
+        createMenu(context);
+
+        context.subscriptions.push(extensionState.statusBarItem);
+        context.subscriptions.push(extensionState.sysmonStatusBarItem);
+        context.subscriptions.push(extensionState.cmdLineStatusBarItem);
+    }
+
+    extensionState.statusBarItem.show();
+
+    const isSysmonVisible = context.globalState.get(TERMINAL_SYSTEM_MONITOR_VISIBILITY_GLOBAL_KEY, true);
+    const isCmdLineVisible = context.globalState.get(TERMINAL_COMMAND_LINE_VISIBILITY_GLOBAL_KEY, true);
+
+    updateUIComponentsVisibility(isSysmonVisible, isCmdLineVisible);
+
+    if (!isExtensionEnabled) {
+        extensionState.statusBarItem.text = `GrandMa 3 API: Off`;
+        migrateLuaDiagnostics(); 
+        return;
+    }
+
+    const currentApiVersion = await getCurrentApiVersion(context);
     extensionState.statusBarItem.text = `GrandMa 3 API: ${currentApiVersion}`;
 
-    configureWorkspace(context, currentApiVersion);
-    loadApiFiles(context, currentApiVersion);
+    await configureWorkspace(context, currentApiVersion);
+
+    migrateLuaDiagnostics();
+}
+
+async function showUpdateNotification(context, version) {
+    const isHidden = context.globalState.get(getUpdateHiddenKey(version), false);
+
+    if (!isHidden) {
+        const whatsUpAction = "What's up?";
+        const laterAction = "Later";
+        const message = `Ma3 Lua Api updated to v${version}. Check out the new features!`;
+
+        vscode.window.showInformationMessage(message, whatsUpAction, laterAction).then(async (selection) => {
+            if (selection === whatsUpAction) {
+                const uri = vscode.Uri.joinPath(context.extensionUri, 'CHANGELOG.md');
+                await vscode.commands.executeCommand('markdown.showPreview', uri);
+                
+                await context.globalState.update(getUpdateHiddenKey(version), true);
+            }
+        });
+    }
+}
+
+
+function getUpdateHiddenKey(version) {
+    return `${UPDATE_NOTIFICATION_HIDDEN_GLOBAL_KEY}_${version}`;
+}
+
+async function migrateLuaDiagnostics() {
+    const extensionConfig = vscode.workspace.getConfiguration('grandMa3');
+    const luaConfig = vscode.workspace.getConfiguration('Lua');
+
+    const hasBeenMigrated = extensionConfig.get('removed-undefined-field-diagnostics');
+
+    if (!hasBeenMigrated) {
+        const inspection = luaConfig.inspect('diagnostics.disable');
+        let disabledList = inspection?.workspaceValue || [];
+
+        if (Array.isArray(disabledList) && disabledList.includes("undefined-field")) {
+            const newList = disabledList.filter(item => item !== "undefined-field");
+            
+            await luaConfig.update(
+                'diagnostics.disable', 
+                newList.length > 0 ? newList : undefined, 
+                vscode.ConfigurationTarget.Workspace
+            );
+        }
+
+        await extensionConfig.update(
+            'removed-undefined-field-diagnostics', 
+            true, 
+            vscode.ConfigurationTarget.Workspace
+        );
+    }
+}
+
+async function getGMA3TerminalPath(context) {
+    const savedPath = context.globalState.get(TERMINAL_PATH_GLOBAL_KEY);
+    if (savedPath && fs.existsSync(savedPath)) {
+        return savedPath;
+    }
+    
+    const platform = process.platform;
+    const isWin = platform === 'win32';
+    const isMac = platform === 'darwin';
+
+    const configuration = vscode.workspace.getConfiguration('grandMa3');
+    const selectedVersion = configuration.get(API_VERSION_WORKSPACE_KEY);
+
+    if (!selectedVersion) {
+        vscode.window.showWarningMessage("No grandMA3 API version selected.");
+        return null;
+    }
+
+    let possibleScanDirs = [];
+    let binaryName = "";
+
+    if (isWin) {
+        possibleScanDirs = ["C:\\Program Files\\MALightingTechnology"];
+        binaryName = path.join('bin', 'app_terminal.exe');
+    } else if (isMac) {
+        possibleScanDirs = [
+            "/Applications/grandMA3/Contents/MacOS",
+            "/Applications/grandMA3.app/Contents/MacOS"
+        ];
+        binaryName = "app_terminal";
+    }
+
+    for (const scanDir of possibleScanDirs) {
+        if (fs.existsSync(scanDir)) {
+            try {
+                const dirs = fs.readdirSync(scanDir);
+
+                const matchingDirs = dirs
+                    .filter(d => d.toLowerCase().startsWith(`gma3_${selectedVersion}`))
+                    .sort((a, b) => b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' }));
+
+                if (matchingDirs.length > 0) {
+                    const bestMatch = matchingDirs[0];
+                    const terminalPath = path.join(scanDir, bestMatch, binaryName);
+                    
+                    
+                    if (fs.existsSync(terminalPath)) {
+                        return terminalPath;
+                    }
+                }
+            } catch (err) {
+                console.error("Error scanning grandMA3 directory:", err);
+            }
+        }
+    }
+
+    const profileKey = isWin ? 'terminal.integrated.profiles.windows' : 'terminal.integrated.profiles.osx';
+    const profiles = vscode.workspace.getConfiguration().get(profileKey);
+    if (profiles && profiles['grandMA3'] && profiles['grandMA3'].path) {
+        return profiles['grandMA3'].path;
+    }
+
+    const manualPath = await askUserForTerminalPath(isMac);
+    if (manualPath) {
+        await context.globalState.update(TERMINAL_PATH_GLOBAL_KEY, manualPath);
+        return manualPath;
+    }
+
+    return null;
+}
+
+async function askUserForTerminalPath(isMac) {
+    const fileName = isMac ? 'app_terminal' : 'app_terminal.exe';
+    
+    const defaultUri = isMac 
+        ? vscode.Uri.file('/Applications/grandMA3/Contents/MacOS') 
+        : vscode.Uri.file('C:\\Program Files\\MALightingTechnology');
+
+    const selectedFile = await vscode.window.showOpenDialog({
+        canSelectMany: false,
+        openLabel: `Select ${fileName}`,
+        title: `Select grandMA3 ${fileName}`,
+        defaultUri: defaultUri,
+        filters: isMac ? {} : { 'Executable': ['exe'] }
+    });
+
+    if (selectedFile && selectedFile[0]) {
+        return selectedFile[0].fsPath;
+    }
+    
+    return null;
+}
+
+async function handleTerminal(context, mode) {
+    const terminalPath = await getGMA3TerminalPath(context);
+
+    if (!terminalPath) {
+        vscode.window.showErrorMessage("Could not find grandMA3 terminal. Please select it manually.");
+        return;
+    }
+    let terminalName = ""
+    if(mode == "sysmon") {
+        terminalName = "Ma3 System Monitor";
+    } else {
+        terminalName = "Ma3 Command Line";
+    }
+
+    let terminal = vscode.window.terminals.find(t => t.name === terminalName);
+    
+    if (terminal) {
+        terminal.dispose(); 
+    }
+
+    try {
+        const terminalOptions = {
+            name: terminalName,
+            shellPath: terminalPath
+        };
+
+        terminal = vscode.window.createTerminal(terminalOptions);
+        terminal.show();
+        
+        setTimeout(() => {
+            if(mode == "sysmon") {
+                terminal.sendText("sysmon");
+            } else {
+                terminal.sendText("cmdline");
+            }
+        }, 1500);
+    } catch (error) {
+        await context.globalState.update(TERMINAL_PATH_GLOBAL_KEY, undefined);
+        vscode.window.showErrorMessage(`Error launching terminal. Path cleared. Please try again.`);
+    }
+}
+
+function updateUIComponentsVisibility(sysmonVisible, cmdLineVisible) {
+    vscode.commands.executeCommand('setContext', 'grandMa3.sysmonVisible', sysmonVisible);
+    vscode.commands.executeCommand('setContext', 'grandMa3.cmdLineVisible', cmdLineVisible);
+
+    if (extensionState.sysmonStatusBarItem) {
+        sysmonVisible ? extensionState.sysmonStatusBarItem.show() : extensionState.sysmonStatusBarItem.hide();
+    }
+    if (extensionState.cmdLineStatusBarItem) {
+        cmdLineVisible ? extensionState.cmdLineStatusBarItem.show() : extensionState.cmdLineStatusBarItem.hide();
+    }
 }
 
 function createMenu(context){
     context.subscriptions.push(extensionState.statusBarItem);
 
+    const openSysmonCommand = vscode.commands.registerCommand('grandMa3.openSysmon', async () => {
+        await handleTerminal(context, "sysmon"); 
+    });
+    context.subscriptions.push(openSysmonCommand);
+
+    const openCmdLineCommand = vscode.commands.registerCommand('grandMa3.openCmdLine', async () => {
+        await handleTerminal(context, "cmdline"); 
+    });
+    context.subscriptions.push(openCmdLineCommand);
+
     const changeApiVersionCommand = vscode.commands.registerCommand('grandMa3.menu', async () => {
         const configuration = vscode.workspace.getConfiguration('grandMa3');
-        const isExtensionEnabled = configuration.get(EXTENSION_ENABLED_CONFIG_KEY, true);
+        const isExtensionEnabled = configuration.get(EXTENSION_ENABLED_WORKSPACE_KEY, true);
+
+        const isSysmonVisible = context.globalState.get(TERMINAL_SYSTEM_MONITOR_VISIBILITY_GLOBAL_KEY, true);
+        const isCmdLineVisible = context.globalState.get(TERMINAL_COMMAND_LINE_VISIBILITY_GLOBAL_KEY, true);
 
         const selection = isExtensionEnabled ? await vscode.window.showQuickPick(
             [
                 { label: 'Select GrandMa 3 API version' },
+
+                { label: '', kind: vscode.QuickPickItemKind.Separator },
+
+                { label: 'Open System Monitor in terminal' },
+                { label: 'Open Command Line in terminal' },
+
+                { label: '', kind: vscode.QuickPickItemKind.Separator },
+
+                { label: isSysmonVisible ? 'Hide System Monitor button' : 'Show System Monitor button' },
+                { label: isCmdLineVisible ? 'Hide Command Line button' : 'Show Command Line button' },
                 { label: 'Disable extension for this project' },
                 { label: 'Restart extension' }
             ],
@@ -61,20 +321,34 @@ function createMenu(context){
                 placeHolder: 'Choose an action'
             }
         );
-    
-        if (!selection) return;
-    
-        switch(selection.label) {
-            case 'Restart extension':
-                const currentApiVersion = getCurrentApiVersion(context);
-                configureWorkspace(context, currentApiVersion);
-                loadApiFiles(context, currentApiVersion);
-                restartLuaServer();
-                vscode.window.showInformationMessage(`GrandMa 3 extension restarted`);
-                break;
 
+        if (!selection) return;
+
+        switch(selection.label) {
             case 'Select GrandMa 3 API version':
                 await showApiVersionQuickPick(context);
+                break;
+
+            case 'Open System Monitor in terminal':
+                await handleTerminal(context, "sysmon");
+                break;
+
+            case 'Open Command Line in terminal':
+                await handleTerminal(context, "cmdline");
+                break;
+
+            case 'Hide System Monitor button':
+            case 'Show System Monitor button':
+                const newSysmonState = !isSysmonVisible;
+                await context.globalState.update(TERMINAL_SYSTEM_MONITOR_VISIBILITY_GLOBAL_KEY, newSysmonState);
+                updateUIComponentsVisibility(newSysmonState, isCmdLineVisible);
+                break;
+
+            case 'Hide Command Line button':
+            case 'Show Command Line button':
+                const newCmdLineState = !isCmdLineVisible;
+                await context.globalState.update(TERMINAL_COMMAND_LINE_VISIBILITY_GLOBAL_KEY, newCmdLineState);
+                updateUIComponentsVisibility(isSysmonVisible, newCmdLineState);
                 break;
 
             case 'Disable extension for this project':
@@ -84,14 +358,26 @@ function createMenu(context){
             case 'Enable extension for this project':
                 await toggleExtension(context, true);
                 break;
+                
+            case 'Restart extension':
+                const currentApiVersion = getCurrentApiVersion(context);
+                configureWorkspace(context, currentApiVersion);
+                restartLuaServer();
+                vscode.window.showInformationMessage(`GrandMa 3 extension restarted`);
+                break;
         }
     });
     context.subscriptions.push(changeApiVersionCommand);
+    
+    const isSysmonVisible = context.globalState.get(TERMINAL_SYSTEM_MONITOR_VISIBILITY_GLOBAL_KEY, true);
+    const isCmdLineVisible = context.globalState.get(TERMINAL_COMMAND_LINE_VISIBILITY_GLOBAL_KEY, true);
+
+    updateUIComponentsVisibility(isSysmonVisible, isCmdLineVisible);
 }
 
 async function toggleExtension(context, enable) {
     const configuration = vscode.workspace.getConfiguration('grandMa3');
-    await configuration.update(EXTENSION_ENABLED_CONFIG_KEY, enable, vscode.ConfigurationTarget.Workspace);
+    await configuration.update(EXTENSION_ENABLED_WORKSPACE_KEY, enable, vscode.ConfigurationTarget.Workspace);
 
     const luaConfig = vscode.workspace.getConfiguration('Lua');
 
@@ -99,7 +385,6 @@ async function toggleExtension(context, enable) {
         const currentApiVersion = getCurrentApiVersion(context);
         extensionState.statusBarItem.text = `GrandMa 3 API: ${currentApiVersion}`;
         configureWorkspace(context, currentApiVersion);
-        loadApiFiles(context, currentApiVersion);
         vscode.window.showInformationMessage('GrandMa 3 extension enabled for this workspace');
     } else {
         deactivate()
@@ -118,15 +403,41 @@ function createApiVersionStatusBarItem() {
     return statusBarItem;
 }
 
-function getCurrentApiVersion(context) {
+function createSysmonStatusBarItem() {
+    const item = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 99);
+    item.command = 'grandMa3.openSysmon';
+    item.text = `$(terminal) Ma3 System Monitor`;
+    item.tooltip = 'Open Ma3 System Monitor in terminal';
+    return item;
+}
+
+function createCmdLineStatusBarItem() {
+    const item = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 98);
+    item.command = 'grandMa3.openCmdLine';
+    item.text = `$(terminal) Ma3 Command Line`;
+    item.tooltip = 'Open Ma3 Command Line in terminal';
+    return item;
+}
+
+async function getCurrentApiVersion(context) {
     const configuration = vscode.workspace.getConfiguration('grandMa3');
     const availableVersions = getAvailableApiVersions(context);
-    
-    const configuredVersion = configuration.get(API_VERSION_CONFIG_KEY);
 
-    return availableVersions.includes(configuredVersion) 
-        ? configuredVersion 
-        : availableVersions[0];
+    const inspection = configuration.inspect(API_VERSION_WORKSPACE_KEY);
+    const configuredVersion = configuration.get(API_VERSION_WORKSPACE_KEY);
+
+    if (availableVersions.includes(configuredVersion)) {
+        if (!inspection.workspaceValue) {
+            await configuration.update(API_VERSION_WORKSPACE_KEY, configuredVersion, vscode.ConfigurationTarget.Workspace);
+        }
+        return configuredVersion;
+    }
+
+    const defaultVersion = availableVersions[0];
+
+    await configuration.update(API_VERSION_WORKSPACE_KEY, defaultVersion, vscode.ConfigurationTarget.Workspace);
+
+    return defaultVersion;
 }
 
 function getAvailableApiVersions(context) {
@@ -153,12 +464,11 @@ async function showApiVersionQuickPick(context) {
 
     if (selection && selection.label != currentVersion) {
         const configuration = vscode.workspace.getConfiguration('grandMa3');
-        await configuration.update(API_VERSION_CONFIG_KEY, selection.label, vscode.ConfigurationTarget.Workspace);
+        await configuration.update(API_VERSION_WORKSPACE_KEY, selection.label, vscode.ConfigurationTarget.Workspace);
 
         extensionState.statusBarItem.text = `GrandMa 3 API: ${selection.label}`;
 
         configureWorkspace(context, selection.label);
-        loadApiFiles(context, selection.label);
 
         restartLuaServer();
         vscode.window.showInformationMessage(`GrandMa 3 API version changed to ${selection.label}`);
@@ -174,7 +484,7 @@ async function restartLuaServer() {
     }
 }
 
-function loadApiFiles(context, version) {
+async function loadApiFiles(context, version) {
     if (extensionState.hoverProviders) {
         extensionState.hoverProviders.forEach(provider => provider.dispose());
         extensionState.hoverProviders.length = 0;
@@ -231,38 +541,45 @@ function loadApiFiles(context, version) {
     });
 }
 
-function configureWorkspace(context, version){
+async function updateCSpellActiveDictionary(context, version) {
+    const cspellConfig = vscode.workspace.getConfiguration('cSpell');
+    const dictName = `grandma3-api-${version}`;
+    const dictPath = path.join(context.extensionPath, 'resources', version, 'ma3_dictionary_for_cspell.txt');
+
+    let definitions = cspellConfig.get('dictionaryDefinitions') || [];
+    
+    definitions = definitions.filter(d => d.name && !d.name.startsWith('grandma3-api-'));
+    
+    definitions.push({
+        name: dictName,
+        path: dictPath,
+    });
+
+    await cspellConfig.update('dictionaryDefinitions', definitions, vscode.ConfigurationTarget.Workspace);
+
+    const dictsInspection = cspellConfig.inspect('dictionaries');
+    let activeDicts = dictsInspection?.workspaceValue || [];
+
+    activeDicts = activeDicts.filter(d => typeof d === 'string' && !d.startsWith('grandma3-api-'));
+    
+    activeDicts.push(dictName);
+
+    await cspellConfig.update('dictionaries', activeDicts, vscode.ConfigurationTarget.Workspace);
+}
+
+async function configureWorkspace(context, version){
     importDummyFunctions(context, version);
-    addFunctionNamesToCSpell(context, version);
+    loadApiFiles(context, version);
+    updateCSpellActiveDictionary(context, version);
 }
 
 async function importDummyFunctions(context, version){
     const luaConfig = vscode.workspace.getConfiguration('Lua');
+    const versionFolder = context.asAbsolutePath(`resources/${version}`);
 
     await luaConfig.update('workspace.library', [
-        context.asAbsolutePath(path.join('resources', version))
+        versionFolder
     ], vscode.ConfigurationTarget.Workspace);
-
-    await luaConfig.update('diagnostics.disable', ['undefined-field'], vscode.ConfigurationTarget.Workspace);
-}
-
-async function addFunctionNamesToCSpell(context, version) {
-    const objectFreeApiPath = getObjectFreeFilePath(context, version);
-    const objectFreeApiData = JSON.parse(fs.readFileSync(objectFreeApiPath, 'utf8'));
-    const functionNames = Object.keys(objectFreeApiData);
-
-    const cspellUserConfig = vscode.workspace.getConfiguration('cSpell', undefined);
-
-    let words = cspellUserConfig.get('userWords') || [];
-    if (!Array.isArray(words)) {
-        words = [];
-    }
-
-    const newWords = functionNames.filter(word => !words.includes(word));
-    if (newWords.length > 0) {
-        words = [...words, ...newWords];
-        await cspellUserConfig.update('userWords', words, vscode.ConfigurationTarget.Global);
-    }
 }
 
 function addFunctionsHover(context, data, className){
@@ -556,7 +873,8 @@ function getObjectNoDocFilePath(context, version){
 }
 
 function normalizePath(filePath) {
-    return path.resolve(filePath).toLowerCase();
+    const normalizedPath = path.resolve(filePath);
+    return normalizedPath
 }
 
 function deactivate() {
@@ -573,5 +891,6 @@ function deactivate() {
 
 module.exports = {
     activate,
-    deactivate
+    deactivate,
+    handleOpenSysmon: handleTerminal 
 };

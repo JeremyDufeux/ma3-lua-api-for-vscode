@@ -1,8 +1,8 @@
 ---@meta
 --- Ma3 API version: 2.3
 
--- Not documented Object free definition
--- ========================================
+--- Not documented Object free definition
+--- ========================================
 
 ---@param functionName string
 ---@return boolean | integer | number | string | table | nil | Handle resultOfFunction
@@ -45,7 +45,7 @@ function CreateDirectoryRecursive(path)
     return true
 end
 
----@return string devmode3d
+---@return string devMode3d
 function DevMode3d()
     return ""
 end
@@ -155,8 +155,8 @@ end
 ---@param shift? boolean @Optional
 ---@param ctrl? boolean @Optional
 ---@param alt? boolean @Optional
----@param numlock? boolean @Optional
-function Keyboard(displayIndex, type, charOrKeycode, shift, ctrl, alt, numlock)
+---@param numLock? boolean @Optional
+function Keyboard(displayIndex, type, charOrKeycode, shift, ctrl, alt, numLock)
 end
 
 ---@param executor Handle
@@ -252,7 +252,7 @@ end
 function SelectionNotifyObject(objectToNotify)
 end
 
----@return table subfixtureIndexes
+---@return table subFixtureIndexes
 function SelectionTable()
     return {}
 end
