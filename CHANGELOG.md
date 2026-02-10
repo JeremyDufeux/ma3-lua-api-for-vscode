@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.1 — February 28, 2026
+
+### 🪛 Fixed
+
+- Documentation of `handle:Export`
+
 ## 1.5.0 — January 28, 2026
 
 ### ⚠️ Important

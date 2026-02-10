@@ -135,27 +135,17 @@
     ,
     "examples": {
       "1": {
-        "description": "These examples all print information about the selected sequence in the Command Line History.\n\nThe first example using the colon operator:\n\n"
+        "description": "This example exports the selected sequence into an XML file:\n\n"
 
         ,
-        "code": "return function ()\n    -- Dump() is called on a function\n    Printf(\"=============== START OF DUMP ===============\")\n    SelectedSequence():Dump()\n    Printf(\"================ END OF DUMP ================\")\nend"
-        
-        ,
-        "suffix": ""
-        
-      },
-      "2": {
-        "description": "The second example uses a variable with the same result:"
-
-        ,
-        "code": "return function ()\n    --Stores the handle for the selected sequence in a local variable.\n    local mySeqHandle = SelectedSequence()\n    -- Dump() is called on the variable.\n    Printf(\"=============== START OF DUMP ===============\")\n    mySeqHandle:Dump()\n    Printf(\"================ END OF DUMP ================\")\nend"
+        "code": "return function()\n    --SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    if selectedSequence == nil then\n        ErrPrintf(\"The selected sequence could not be found.\")\n        return\n    end\n    --The path is stored in a variable.\n    local exportPath = GetPath(Enums.PathType.UserSequences)\n    --The actual export function.\n    local success = selectedSequence:Export(exportPath, \"mySelectedSequence.xml\")\n    --Print some feedback. \n    if success then\n        Printf(\"The sequence is exported to: \" .. exportPath)\n    else\n        ErrPrintf(\"The sequence could not be exported.\")\n    end\nend"
         
         ,
         "suffix": ""
         
       }
     },
-    "suffix": ""
+    "suffix": "Related Object Functions[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_export.html#h2_1194798447 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------------------------\n\n[Import](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_import.html) - object function used to import an XML table."
     
   },
   "Handle:Get": {
