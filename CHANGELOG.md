@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.5.2 — March 15, 2026
+
+### 🔔 Notifications
+
+- **Smarter "What's New" alerts:** The update notification now only appears for **Major and Minor** releases (e.g., 1.5.0, 1.6.0). Patch updates (e.g., 1.5.1 to 1.5.2) will no longer trigger the pop-up if you have already acknowledged the changelog for that version cycle.
+
+### ⚙️ Internal & Housekeeping
+
+- **Dual-Scope Migration System:** Improved the update engine to handle both global extension states and project-specific workspace settings. This ensures that maintenance tasks (like configuration fixes) are correctly applied to every project you open.
+- **Workspace Settings Cleanup:** Automatically identifies and removes legacy migration flags (such as `removed-undefined-field-diagnostics`) from your `.vscode/settings.json`. This keeps your project files clean and focused only on what's necessary.
+- **Storage Optimization:** Optimized internal global storage by migrating and consolidating old version-tracking keys into a new, streamlined format.
+
 ## 1.5.1 — February 28, 2026
 
 ### 🪛 Fixed

@@ -7,34 +7,99 @@ const EXTENSION_ENABLED_WORKSPACE_KEY  = `extensionEnabled`;
 
 const EXTENSION_ID = `Carrot-Industries.ma3-lua-api`;
 
-const LAST_INSTALLED_VERSION_GLOBAL_KEY  = `${EXTENSION_ID}.lastInstalledVersion`;
-const UPDATE_NOTIFICATION_HIDDEN_GLOBAL_KEY  = `${EXTENSION_ID}.updateNotificationHidden`;
-const TERMINAL_PATH_GLOBAL_KEY = `${EXTENSION_ID}.terminalPath`;
-const TERMINAL_SYSTEM_MONITOR_VISIBILITY_GLOBAL_KEY = `${EXTENSION_ID}.terminalSystemMonitorVisibility`;
-const TERMINAL_COMMAND_LINE_VISIBILITY_GLOBAL_KEY = `${EXTENSION_ID}.terminalCommandLineVisibility`;
+const LAST_INSTALLED_VERSION_KEY  = `${EXTENSION_ID}.lastInstalledVersion`;
+const MIGRATION_VERSION_KEY = `${EXTENSION_ID}.migration_version`;
+const UPDATE_NOTIFICATION_HIDDEN_KEY  = `${EXTENSION_ID}.updateNotificationHidden`;
+const TERMINAL_PATH_KEY = `${EXTENSION_ID}.terminalPath`;
+const TERMINAL_SYSTEM_MONITOR_VISIBILITY_KEY = `${EXTENSION_ID}.terminalSystemMonitorVisibility`;
+const TERMINAL_COMMAND_LINE_VISIBILITY_KEY = `${EXTENSION_ID}.terminalCommandLineVisibility`;
 
 const extensionState = {
     hoverProviders: [],
     completionProviders: []
 };
 
+const MIGRATIONS = [
+    {
+        version: '1.5.0',
+        scope: 'workspace',
+        run: async () => {
+            ('--- workspace Migration 1.5.0 ---');
+            const extensionConfig = vscode.workspace.getConfiguration('grandMa3');
+            const luaConfig = vscode.workspace.getConfiguration('Lua');
+
+            const hasBeenMigrated = extensionConfig.get('removed-undefined-field-diagnostics');
+
+            if (!hasBeenMigrated) {
+                const inspection = luaConfig.inspect('diagnostics.disable');
+                let disabledList = inspection?.workspaceValue || [];
+
+                if (Array.isArray(disabledList) && disabledList.includes("undefined-field")) {
+                    const newList = disabledList.filter(item => item !== "undefined-field");
+
+                    await luaConfig.update(
+                        'diagnostics.disable', 
+                        newList.length > 0 ? newList : undefined, 
+                        vscode.ConfigurationTarget.Workspace
+                    );
+                }
+
+                await extensionConfig.update(
+                    'removed-undefined-field-diagnostics', 
+                    true, 
+                    vscode.ConfigurationTarget.Workspace
+                );
+            }
+        }
+    },
+    {
+        version: '1.5.2',
+        scope: 'global',
+        run: async (context) => {
+            const keys = context.globalState.keys();
+            for (const key of keys) {
+                if (key.startsWith(UPDATE_NOTIFICATION_HIDDEN_KEY)) {
+                    const versionPart = key.replace(`${UPDATE_NOTIFICATION_HIDDEN_KEY}_`, "");
+                    
+                    if (/^\d+\.\d+\.\d+$/.test(versionPart)) {
+                        const wasSeen = context.globalState.get(key);
+
+                        if (wasSeen === true) {
+                            const newKey = getUpdateHiddenKey(versionPart); 
+                            await context.globalState.update(newKey, true);
+                        }
+
+                        await context.globalState.update(key, undefined);
+                    }
+                }
+            }
+        }
+    },
+    {
+        version: '1.5.2',
+        scope: 'workspace',
+        run: async () => {
+            const extensionConfig = vscode.workspace.getConfiguration('grandMa3');
+            const hasOldFlag = extensionConfig.inspect('removed-undefined-field-diagnostics')?.workspaceValue !== undefined;
+            
+            if (hasOldFlag) {
+                await extensionConfig.update(
+                    'removed-undefined-field-diagnostics', 
+                    undefined, 
+                    vscode.ConfigurationTarget.Workspace
+                );
+            }
+        }
+    }
+];
+
 async function activate(context) {
     const extension = vscode.extensions.getExtension(EXTENSION_ID);
-
     const currentVersion = extension.packageJSON.version;
-    const lastKnownVersion = context.globalState.get(LAST_INSTALLED_VERSION_GLOBAL_KEY);
-        
-    if (!lastKnownVersion) {
-        await context.globalState.update(LAST_INSTALLED_VERSION_GLOBAL_KEY, currentVersion);
-        await context.globalState.update(getUpdateHiddenKey(currentVersion), true);
-        return;
-    }
+    
+    await runMigrations(context, currentVersion);
 
-    if (lastKnownVersion !== currentVersion) {
-        await context.globalState.update(LAST_INSTALLED_VERSION_GLOBAL_KEY, currentVersion);
-    }
-
-    await showUpdateNotification(context, currentVersion);
+    await checkUpdateNotification(context, currentVersion);
 
     const configuration = vscode.workspace.getConfiguration('grandMa3');
     const isExtensionEnabled = configuration.get(EXTENSION_ENABLED_WORKSPACE_KEY, true);
@@ -53,14 +118,13 @@ async function activate(context) {
 
     extensionState.statusBarItem.show();
 
-    const isSysmonVisible = context.globalState.get(TERMINAL_SYSTEM_MONITOR_VISIBILITY_GLOBAL_KEY, true);
-    const isCmdLineVisible = context.globalState.get(TERMINAL_COMMAND_LINE_VISIBILITY_GLOBAL_KEY, true);
+    const isSysmonVisible = context.globalState.get(TERMINAL_SYSTEM_MONITOR_VISIBILITY_KEY, true);
+    const isCmdLineVisible = context.globalState.get(TERMINAL_COMMAND_LINE_VISIBILITY_KEY, true);
 
     updateUIComponentsVisibility(isSysmonVisible, isCmdLineVisible);
 
     if (!isExtensionEnabled) {
         extensionState.statusBarItem.text = `GrandMa 3 API: Off`;
-        migrateLuaDiagnostics(); 
         return;
     }
 
@@ -68,64 +132,111 @@ async function activate(context) {
     extensionState.statusBarItem.text = `GrandMa 3 API: ${currentApiVersion}`;
 
     await configureWorkspace(context, currentApiVersion);
+}
 
-    migrateLuaDiagnostics();
+function printStateContent(context) {
+    console.log("")
+    console.log('--- Global State Content ---');
+    const globalKeys = context.globalState.keys();
+    for (const key of globalKeys) {
+        console.log(`${key}: ${context.globalState.get(key)}`);
+    }
+    console.log("----------------------------")
+    console.log("")
+    console.log('--- Workspace State Content ---');
+    const workspaceKeys = context.workspaceState.keys();
+    for (const key of workspaceKeys) {
+        console.log(`${key}: ${context.globalState.get(key)}`);
+    }
+    console.log("----------------------------")
+    console.log("")
+}
+
+async function runMigrations(context, currentVersion) {
+    const lastGlobalMigrated = context.globalState.get(MIGRATION_VERSION_KEY, '0.0.0');
+    const lastWorkspaceMigrated = context.workspaceState.get(MIGRATION_VERSION_KEY, '0.0.0');
+
+    for (const task of MIGRATIONS) {
+        const lastRunVersion = task.scope === 'global' ? lastGlobalMigrated : lastWorkspaceMigrated;
+        const stateStorage = task.scope === 'global' ? context.globalState : context.workspaceState;
+
+        if (isVersionLower(lastRunVersion, task.version) && !isVersionLower(currentVersion, task.version)) {
+            try {
+                await task.run(context);
+                await stateStorage.update(MIGRATION_VERSION_KEY, task.version);
+            } catch (error) {
+                console.error(`[Ma3 Lua Api] Migration ${task.version} (${task.scope}) failed:`, error);
+            }
+        }
+    }
+
+    await context.globalState.update(MIGRATION_VERSION_KEY, currentVersion);
+    await context.workspaceState.update(MIGRATION_VERSION_KEY, currentVersion);
+}
+
+function isVersionLower(v1, v2) {
+    if (!v1) return true;
+    const parts1 = v1.split('.').map(Number);
+    const parts2 = v2.split('.').map(Number);
+    for (let i = 0; i < Math.max(parts1.length, parts2.length); i++) {
+        const n1 = parts1[i] || 0;
+        const n2 = parts2[i] || 0;
+        if (n1 < n2) return true;
+        if (n1 > n2) return false;
+    }
+    return false;
+}
+
+function getMajorMinor(version) {
+    if (!version) return "0.0";
+    const parts = version.split('.');
+    return parts.length >= 2 ? `${parts[0]}.${parts[1]}` : version;
+}
+
+async function checkUpdateNotification(context, currentVersion) {
+    const lastKnownVersion = context.globalState.get(LAST_INSTALLED_VERSION_KEY);
+    
+    const updateKey = getUpdateHiddenKey(currentVersion);
+    const hasBeenSeen = context.globalState.get(updateKey, false);
+
+    if (!lastKnownVersion) {
+        await context.globalState.update(LAST_INSTALLED_VERSION_KEY, currentVersion);
+        await context.globalState.update(updateKey, true);
+        return;
+    }
+
+    if (lastKnownVersion !== currentVersion) {
+        await context.globalState.update(LAST_INSTALLED_VERSION_KEY, currentVersion);
+    }
+
+    if (!hasBeenSeen) {
+        await showUpdateNotification(context, currentVersion);
+    }
 }
 
 async function showUpdateNotification(context, version) {
-    const isHidden = context.globalState.get(getUpdateHiddenKey(version), false);
+    const whatsUpAction = "What's up?";
+    const laterAction = "Later";
+    const message = `Ma3 Lua Api updated to v${version}. Major changes are available!`;
 
-    if (!isHidden) {
-        const whatsUpAction = "What's up?";
-        const laterAction = "Later";
-        const message = `Ma3 Lua Api updated to v${version}. Check out the new features!`;
-
-        vscode.window.showInformationMessage(message, whatsUpAction, laterAction).then(async (selection) => {
-            if (selection === whatsUpAction) {
-                const uri = vscode.Uri.joinPath(context.extensionUri, 'CHANGELOG.md');
-                await vscode.commands.executeCommand('markdown.showPreview', uri);
-                
-                await context.globalState.update(getUpdateHiddenKey(version), true);
-            }
-        });
-    }
+    vscode.window.showInformationMessage(message, whatsUpAction, laterAction).then(async (selection) => {
+        if (selection === whatsUpAction) {
+            const uri = vscode.Uri.joinPath(context.extensionUri, 'CHANGELOG.md');
+            await vscode.commands.executeCommand('markdown.showPreview', uri);
+            
+            const updateKey = getUpdateHiddenKey(version);
+            await context.globalState.update(updateKey, true);
+        }
+    });
 }
-
 
 function getUpdateHiddenKey(version) {
-    return `${UPDATE_NOTIFICATION_HIDDEN_GLOBAL_KEY}_${version}`;
-}
-
-async function migrateLuaDiagnostics() {
-    const extensionConfig = vscode.workspace.getConfiguration('grandMa3');
-    const luaConfig = vscode.workspace.getConfiguration('Lua');
-
-    const hasBeenMigrated = extensionConfig.get('removed-undefined-field-diagnostics');
-
-    if (!hasBeenMigrated) {
-        const inspection = luaConfig.inspect('diagnostics.disable');
-        let disabledList = inspection?.workspaceValue || [];
-
-        if (Array.isArray(disabledList) && disabledList.includes("undefined-field")) {
-            const newList = disabledList.filter(item => item !== "undefined-field");
-            
-            await luaConfig.update(
-                'diagnostics.disable', 
-                newList.length > 0 ? newList : undefined, 
-                vscode.ConfigurationTarget.Workspace
-            );
-        }
-
-        await extensionConfig.update(
-            'removed-undefined-field-diagnostics', 
-            true, 
-            vscode.ConfigurationTarget.Workspace
-        );
-    }
+    const shortVersion = getMajorMinor(version);
+    return `${UPDATE_NOTIFICATION_HIDDEN_KEY}_${shortVersion}`;
 }
 
 async function getGMA3TerminalPath(context) {
-    const savedPath = context.globalState.get(TERMINAL_PATH_GLOBAL_KEY);
+    const savedPath = context.globalState.get(TERMINAL_PATH_KEY);
     if (savedPath && fs.existsSync(savedPath)) {
         return savedPath;
     }
@@ -188,7 +299,7 @@ async function getGMA3TerminalPath(context) {
 
     const manualPath = await askUserForTerminalPath(isMac);
     if (manualPath) {
-        await context.globalState.update(TERMINAL_PATH_GLOBAL_KEY, manualPath);
+        await context.globalState.update(TERMINAL_PATH_KEY, manualPath);
         return manualPath;
     }
 
@@ -254,7 +365,7 @@ async function handleTerminal(context, mode) {
             }
         }, 1500);
     } catch (error) {
-        await context.globalState.update(TERMINAL_PATH_GLOBAL_KEY, undefined);
+        await context.globalState.update(TERMINAL_PATH_KEY, undefined);
         vscode.window.showErrorMessage(`Error launching terminal. Path cleared. Please try again.`);
     }
 }
@@ -288,8 +399,8 @@ function createMenu(context){
         const configuration = vscode.workspace.getConfiguration('grandMa3');
         const isExtensionEnabled = configuration.get(EXTENSION_ENABLED_WORKSPACE_KEY, true);
 
-        const isSysmonVisible = context.globalState.get(TERMINAL_SYSTEM_MONITOR_VISIBILITY_GLOBAL_KEY, true);
-        const isCmdLineVisible = context.globalState.get(TERMINAL_COMMAND_LINE_VISIBILITY_GLOBAL_KEY, true);
+        const isSysmonVisible = context.globalState.get(TERMINAL_SYSTEM_MONITOR_VISIBILITY_KEY, true);
+        const isCmdLineVisible = context.globalState.get(TERMINAL_COMMAND_LINE_VISIBILITY_KEY, true);
 
         const selection = isExtensionEnabled ? await vscode.window.showQuickPick(
             [
@@ -340,14 +451,14 @@ function createMenu(context){
             case 'Hide System Monitor button':
             case 'Show System Monitor button':
                 const newSysmonState = !isSysmonVisible;
-                await context.globalState.update(TERMINAL_SYSTEM_MONITOR_VISIBILITY_GLOBAL_KEY, newSysmonState);
+                await context.globalState.update(TERMINAL_SYSTEM_MONITOR_VISIBILITY_KEY, newSysmonState);
                 updateUIComponentsVisibility(newSysmonState, isCmdLineVisible);
                 break;
 
             case 'Hide Command Line button':
             case 'Show Command Line button':
                 const newCmdLineState = !isCmdLineVisible;
-                await context.globalState.update(TERMINAL_COMMAND_LINE_VISIBILITY_GLOBAL_KEY, newCmdLineState);
+                await context.globalState.update(TERMINAL_COMMAND_LINE_VISIBILITY_KEY, newCmdLineState);
                 updateUIComponentsVisibility(isSysmonVisible, newCmdLineState);
                 break;
 
@@ -369,8 +480,8 @@ function createMenu(context){
     });
     context.subscriptions.push(changeApiVersionCommand);
     
-    const isSysmonVisible = context.globalState.get(TERMINAL_SYSTEM_MONITOR_VISIBILITY_GLOBAL_KEY, true);
-    const isCmdLineVisible = context.globalState.get(TERMINAL_COMMAND_LINE_VISIBILITY_GLOBAL_KEY, true);
+    const isSysmonVisible = context.globalState.get(TERMINAL_SYSTEM_MONITOR_VISIBILITY_KEY, true);
+    const isCmdLineVisible = context.globalState.get(TERMINAL_COMMAND_LINE_VISIBILITY_KEY, true);
 
     updateUIComponentsVisibility(isSysmonVisible, isCmdLineVisible);
 }
