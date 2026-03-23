@@ -1,3 +1,4 @@
+---@diagnostic disable: unused-local
 ---@meta
 --- Ma3 API version: 2.3
 

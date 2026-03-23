@@ -6,10 +6,10 @@ local function test()
     local handle = Handle:new()
     local fixtureTable, name, startAddress, fixtureId, type, command, fixtureTableHandle, multiPatchAmount
     local undoText, message, fileName, exportData, path, textureName, objectString, addressHandle
-    local Ma3ModuleHandle, channelIndex, attributeName, displayIndex, universeNumber, folderName, createIfNotExist
+    local Ma3ModuleHandle, channelIndex, attributeName, universeNumber, folderName, createIfNotExist
     local address, universe, executorNumber, screenHandle, patchIndex, attributeIndex, positionTable
     local basePath, rtChannelIndex, presetHandle, attribute, uiChannelIndex, phaserOnly, step, footprint
-    local sampleType, _returnType, _backwards, _reason, _charOrKeycode, _shift, _ctrl, _alt, _numlock, _absY
+    local sampleType, _returnType, _backwards, _reason, _charOrKeycode, _shift, _ctrl, _alt, _numLock
     local variableHandle, varName, functionName, objectHandle, pluginHandle, waitSeconds, iterations, _timerCleanup
     local index, position, title, text, _title, _textGuide, _xPosition, _yPosition, timedFunction, startingAddress
     local fixtureIndex, shortKeyword,progressBarHandle, value, expectedChildren, secondsToWait, patch, options
@@ -496,7 +496,7 @@ local function test()
     Keyboard(displayIndex, type, _charOrKeycode, _shift)
     Keyboard(displayIndex, type, _charOrKeycode, _shift, _ctrl)
     Keyboard(displayIndex, type, _charOrKeycode, _shift, _ctrl, _alt)
-    Keyboard(displayIndex, type, _charOrKeycode, _shift, _ctrl, _alt, _numlock)
+    Keyboard(displayIndex, type, _charOrKeycode, _shift, _ctrl, _alt, _numLock)
 
     LoadExecConfig(executor)
 

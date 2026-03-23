@@ -1,4 +1,5 @@
----@meta
+---@diagnostic disable: unused-local
+---@---@meta
 --- Ma3 API version: 2.3
 
 --- Not documented Object free definition

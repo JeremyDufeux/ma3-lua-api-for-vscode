@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.3 — April 2, 2026
+
+### 🛠️ Lua Development Improvements
+
+- **Lua Linting Control**: Added `--@diagnostic disable: unused-local` at the top of dummy Lua files to allow developers to toggle unused variable warnings via the Lua extension by sumneko. This ensures cleaner code analysis while maintaining flexibility for debugging.
+
 ## 1.5.2 — March 15, 2026
 
 ### 🔔 Notifications

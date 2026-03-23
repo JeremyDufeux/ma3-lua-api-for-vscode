@@ -6,7 +6,7 @@ local function test()
     local handle = Handle:new()
     local fixtureTable, name, startAddress, fixtureId, type, command, fixtureTableHandle, multiPatchAmount
     local undoText, message, fileName, exportData, path, textureName, objectString, addressHandle
-    local Ma3ModuleHandle, channelIndex, attributeName, displayIndex, universeNumber, folderName, createIfNotExist
+    local Ma3ModuleHandle, channelIndex, attributeName, displayIndex, universeNumber
     local address, universe, executorNumber, screenHandle, patchIndex, attributeIndex, positionTable
     local basePath, rtChannelIndex, presetHandle, attribute, uiChannelIndex, phaserOnly, step, footprint
     local sampleType, _returnType, _backwards, _reason, _charOrKeycode, _shift, _ctrl, _alt, _numlock, _absY
@@ -15,7 +15,7 @@ local function test()
     local fixtureIndex, shortKeyword,progressBarHandle, value, expectedChildren, secondsToWait, patch, options
     local handleInteger, derivedClassName, baseClassName, hookId, targetObjectHandle, contextObjectHandle
     local moduleHandle, progress, rangeTart, rangeEnd, handleString, baseLocationHandle, _forceReInit
-    local pathTypeIndex, block, filePath, propertyName, childIndex, tokenAndIndex, settingsTable, targetObject
+    local block, filePath, propertyName, childIndex, tokenAndIndex, settingsTable, targetObject
     local parent, callback, appearance, items, targetHandle, changeLevelEnum, destHandle, otherHandle, srcHandle
     local searchName, searchClassName, lineNumber, rowId, x, y, columnId, size, cell, valueType, updateOpposite
     local objectToCheck, parameterName, parameterValue, nameValue, length, callbackName, propertyIndex, scrollType
