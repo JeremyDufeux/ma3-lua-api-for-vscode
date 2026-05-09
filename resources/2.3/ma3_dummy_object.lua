@@ -90,9 +90,9 @@ function Handle:GetFaderText(tokenAndIndex)
     return ""
 end
 
----@return string references
+---@return table references
 function Handle:GetReferences()
-    return ""
+    return {}
 end
 
 ---@return string uiEditorName

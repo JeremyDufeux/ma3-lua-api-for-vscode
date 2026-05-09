@@ -2,7 +2,7 @@
   "name": "ma3-lua-api",
   "displayName": "Ma3 Lua Api for VS Code",
   "description": "Lua extension for Grand Ma 3 Api",
-  "version": "1.5.3",
+  "version": "1.5.4",
 	"publisher": "Carrot-Industries",
   "author": {
     "name": "Jeremy Dufeux",
@@ -29,9 +29,6 @@
     "onLanguage:lua"
   ],
   "main": "./src/extension.js",
-  "files": [
-    "resources/ma3_documented_api.lua"
-  ],
   "extensionDependencies": [
     "sumneko.lua"
   ],

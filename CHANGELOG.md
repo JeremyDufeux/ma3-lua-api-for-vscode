@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.4 — May 9, 2026
+
+- Fixed: set Handle:GetReferences return type to table
+
 ## 1.5.3 — April 2, 2026
 
 ### 🛠️ Lua Development Improvements
