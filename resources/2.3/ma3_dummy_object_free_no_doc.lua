@@ -253,7 +253,7 @@ end
 function SelectionNotifyObject(objectToNotify)
 end
 
----@return table subFixtureIndexes
+---@return number[] subFixtureIndexes
 function SelectionTable()
     return {}
 end

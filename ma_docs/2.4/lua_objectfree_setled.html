@@ -1,0 +1,1510 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" dir="ltr" class="">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="MobileOptimized" content="width">
+  <meta name="HandheldFriendly" content="true">
+  <link rel='shortcut icon' href='../_webHelpImages/favicon.ico' /><link rel='icon' href='../_webHelpImages/favicon.ico' />
+  <link rel='stylesheet' type='text/css' href='../_webHelpStyles/CHWebHelp.css?t='/><link rel='stylesheet' type='text/css' href='../_webHelpStyles/CommonControls.css?t='/><link rel='stylesheet' type='text/css' href='../_webHelpStyles/CommonControls/FontAwesome/css/font-awesome.min-ignore.css?t='/><link rel='stylesheet' type='text/css' href='../_webHelpStyles/RTL.css?t='/>
+  <script  src='../_webHelpScripts/Master/1-script.js?t=' type='text/javascript'></script><script  src='../_webHelpScripts/Master/toc_nav.js?t=' type='text/javascript'></script>
+  
+<script type="text/javascript">//<!--
+appendEventHandler(window, 'load', function() {webHelpSelectTocNodeByExtId('lua_objectfree_setled',true);});
+//--></script><title>SetLED(handle,table)</title><script type="text/javascript">//<!--
+var imgPopupTexts={openInNewWindowText: 'Open in new window', closeText: 'Close'};var articleTitleText='SetLED(handle,table)';
+//--></script><link rel="stylesheet" type="text/css" href="../Styles/article-published.css"/><link rel="stylesheet" type="text/css" href="../Styles/grandma3-user-manual-publication/global-shared-style.css"/><link rel="stylesheet" type="text/css" href="../Styles/grandma3-user-manual-publication/SiteOffline.css"/><script src="../Scripts/article-published.js" type="text/javascript"></script><meta charset="utf-8"><meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  
+  <script src='../_webHelpScripts/video.js' type='text/javascript'></script>
+  <script src='../_webHelpScripts/console.js' type='text/javascript'></script>
+  <!-- Matomo -->
+  <script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="https://stats.help.m-a-lighting.de/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '2']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+<body class="WebHelp_body" onload="consoleSubInit();">
+  <div id="pnlContainer" class="CHOffCanvasPanel_container">
+    <div class="CHOffCanvasPanel_content">
+      <nav id="pnlOffCanvasNav" class="CHOffCanvasPanel_nav noselect">
+        <div id="pnlOffCanvasHeader" class="BaseMaster_offCanvasHeader">
+        </div>
+        <script  type='text/javascript'>//<!--
+window['mobileMenu']=new CHMenu('pnlOffCanvasHeader',{"cssClasses":{"menu":null,"popup":null},"templates":{"itemContent":null,"treeItemContent":null,"dropDownArrow":null},"isMobileViewIfParentOverflow":false,"mobileViewMinWidthThreshold":-1,"selectedItemId":"tabContents","isAllowItemSelection":true,"isEscapeMenuItemText":true,"isUseFontAwesomeIcons":true,"fontAwesomeVersion":"4","isMovePopupToBodyChildLevel":true,"isShowPopupOnHover":false},[{"id":"menuItemMenu","t":"Menu","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}},{"id":"tabContents","t":"Topics","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}},{"id":"tabSearch","t":"Search","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}}]);window['mobileMenu'].onItemClick=function(s,e){webHelpMobileMenuItemClick(s,e);};
+//--></script>
+        <div id="pnlOffCanvasContent" class="BaseMaster_offCanvasContent">
+        </div>        
+      </nav>
+      <div id="pnlOffCanvasOverlay" class="CHOffCanvasPanel_overlay"></div>
+      <nav id="pnlMainMenuContainer" class="BaseMaster_mainMenuContainer">
+        <button type="button" aria-label="Show mobile menu" title="Show mobile menu" id="btnMobileMenu" style="display:none"
+          class="CHHamburger_container CHHamburger_container-htla BaseMaster_hamburgerMenuIcon">
+          <span></span>
+        </button>
+        <a title='As master distributor MA Lighting International is responsible for worldwide sales and marketing of the renowned MA control systems, digital dimming systems'  ><img alt='As master distributor MA Lighting International is responsible for worldwide sales and marketing of the renowned MA control systems, digital dimming systems' class='BaseMaster_imgLogo' src='../_webHelpImages/MA_Logo_2-farbig_cmyk.svg' /></a>
+        <div id="pnlMainMenu" class="BaseMaster_pnlMainMenu"></div>
+        <script  type='text/javascript'>//<!--
+window['mainMenu']=new CHMenu('pnlMainMenu',{"cssClasses":{"menu":null,"popup":null},"templates":{"itemContent":null,"treeItemContent":null,"dropDownArrow":null},"isMobileViewIfParentOverflow":true,"mobileViewMinWidthThreshold":979,"selectedItemId":null,"isAllowItemSelection":false,"isEscapeMenuItemText":true,"isUseFontAwesomeIcons":true,"fontAwesomeVersion":"4","isMovePopupToBodyChildLevel":true,"isShowPopupOnHover":false},[]);window['mainMenu'].onViewSwitched=function(s,e){webHelpMasterPageMainMenuViewSwitched(s,e);};
+//--></script>
+        <div class="WebHelp_searchBoxContainer">
+          <input id="edtSearch" type="search" class="WebHelp_searchBox" aria-label="Search" />
+          <button id="btnSearch" class="btnSearch" alt="Search" title="Search" aria-label="Search" href="javascript:void(0)"></button>
+        </div>
+      </nav>
+      <div id="pnlContentContainer" class="BaseMaster_contentContainer clearfix">
+        <nav id="pnlArticlesNav" class="WebHelp_navPanel">
+          <div id="pnlNavTabs" class="WebHelp_navMenu"></div>
+          <script  type='text/javascript'>//<!--
+window['navMenu']=new CHMenu('pnlNavTabs',{"cssClasses":{"menu":null,"popup":null},"templates":{"itemContent":null,"treeItemContent":null,"dropDownArrow":null},"isMobileViewIfParentOverflow":false,"mobileViewMinWidthThreshold":-1,"selectedItemId":"tabContents","isAllowItemSelection":true,"isEscapeMenuItemText":true,"isUseFontAwesomeIcons":true,"fontAwesomeVersion":"4","isMovePopupToBodyChildLevel":true,"isShowPopupOnHover":false},[{"id":"tabContents","t":"Topics","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}},{"id":"tabSearch","t":"Search","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}}]);window['navMenu'].onItemClick=function(s,e){webHelpNavMenuItemClick(s,e);};
+//--></script>
+          <div id="pnlTocContainer" class="WebHelp_navPanelContent ArticleSelector_tabContent TocTreeLight_container">
+            <div id="pnlToc"></div>
+          </div>
+          <div id="pnlIndex" class="WebHelp_navPanelContent ArticleSelector_tabContent" style="display:none">
+            <iframe id="frameIndex" style="height: 100%; width:100%; display:block;" frameborder="0"></iframe>
+          </div>
+          <div id="pnlSearch" class="WebHelp_navPanelContent ArticleSelector_tabContent" style="display:none">
+            <iframe id="frameSearch" src="../search.html" style="height: 100%; width:100%; display: block;" frameborder="0"></iframe>
+          </div>
+        </nav>
+        <article class="TopicViewer_container">
+          <header id="pnlTopicHeader" class="TopicViewer_header" >
+            <div class="TopicViewer_headerText">
+              <div class="ArticleEditor_projectName">grandMA3 User Manual Publication</div>
+              <h1 id="pnlTitle" class="ArticleEditor_title">SetLED(handle,table)</h1>
+              <button type="button" id="btnPrint" class="CHImageButton ArticleEditor_imageButton ArticleEditor_fontAwesomeButton ArticleEditor_btnPrint" title="Print this topic">
+                <i class="fa fa-print"></i>
+              </button>
+            </div>
+          </header>
+          <div id="pnlTopicContentContainer" class="TopicViewer_contentContainer">
+            <style>
+#body {
+    margin-top: 0px;
+    height: 100%;
+}
+
+.topic-tree {
+    display: none
+}
+
+#offline-topic {
+    margin-left: 10px;
+}
+</style>
+		
+
+		<div id="body">
+			
+
+			<main>
+				<div id="offline-topic" class="topic-content"><div id="offline-content"><table class="FlatTable" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td class="FlatTable  " style="width: 80%">
+        <span class="CHBreadcrumb"><span class="CHBreadcrumb_item"><a href="help.html">grandMA3 User Manual</a></span><span class="CHBreadcrumb_separator"> » </span><span class="CHBreadcrumb_item"><a href="plugins.html">Plugins</a></span><span class="CHBreadcrumb_separator"> » </span><span class="CHBreadcrumb_item"><a href="lua_objectfree.html">Lua Functions - Object-Free API</a></span><span class="CHBreadcrumb_separator"> » </span><span class="CHBreadcrumb_item CHBreadcrumb_itemSelf">SetLED(handle,table)</span></span>
+        <br/>
+      </td>
+      <td style="text-align: right;">
+        Version 2.2
+        <br/>
+      </td>
+    </tr>
+  </tbody>
+</table>
+						<h2 id="h2_873740972" data-has-heading-anchor="true">Description<a href="lua_objectfree_setled.html#h2_873740972" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h2>
+
+<p>The <strong>SetLED</strong> Lua function sends a table with a set of LED brightness values to an MA3Module. After around two seconds, the system automatically sets the LED values to what it believes it should be.</p>
+
+<p>Below the example is a table listing all the grandMA3 hardware modules and which index number matches which LED on the hardware module.</p>
+
+<table class="maImportantBox" borderspacing="0" padding="10px">
+    <tbody>
+    <tr>
+        <td class="maImportantBoxImageCell" rowspan="2">
+            <img src="../Storage/grandma3-user-manual-publication/Client/Content/images/icons/important_gray.png" alt="" data-ch-thumbnail-mode="none" style="max-width: 100%; height: auto;" loading="lazy"/>
+        </td>
+        <td>
+            <b>Important:</b>
+        </td></tr>
+    <tr class="maImportantBoxTextCell">
+        <td>Setting a value above 0 for a table index number not connected to an LED can cause the module to crash and reboot<br/></td>
+    </tr>
+    </tbody>
+</table><h2 id="h2__615384334" data-has-heading-anchor="true">Arguments<a href="lua_objectfree_setled.html#h2__615384334" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h2>
+
+<ul>
+	<li><strong>Handle:</strong><br/>
+	This function does not accept any arguments.</li>
+	<li><strong>Table:</strong><br/>
+	The table should be an indexed table with a set of integer values. The value range is from 0 to 255. This range indicates a brightness level. A special value of "-1" is used to release the LED to the system. The table should contain 1024 indexes.</li>
+</ul>
+
+<h2 id="h2__607298120" data-has-heading-anchor="true">Return<a href="lua_objectfree_setled.html#h2__607298120" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h2>
+
+<p>This function does not return anything.</p>
+
+<h2 id="h2_1689083776" data-has-heading-anchor="true">Example<a href="lua_objectfree_setled.html#h2_1689083776" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h2>
+
+<p>This example sets the LEDs on encoder 1 to green on a full-size console:</p>
+
+<table class="CHCodeSample_container notranslate" cellspacing="0" cellpadding="0"><tr class="CHCodeSample_tr1"><td class="CHCodeSample_header"><div class="CHCodeSample_copyCode nonPrintable"><a onclick="copyCodeSample(this)" href="javascript:void(0)">Copy Code</a></div><div class="CHCodeSample_langName notranslate">Lua</div></td></tr><tr class="CHCodeSample_tr2"><td class="CHCodeSample_code notranslate cm-s-default"><pre><pre class="cm-s-default"><span class="cm-keyword">return</span> <span class="cm-keyword">function</span>()
+    <span class="cm-comment">-- Create the LED table</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">myLedTable</span> = {}
+    <span class="cm-comment">-- Fill the table with default &quot;release&quot; value</span>
+    <span class="cm-keyword">for</span> <span class="cm-variable">index</span>=<span class="cm-number">1</span>,<span class="cm-number">256</span> <span class="cm-keyword">do</span>
+        <span class="cm-variable">myLedTable</span>[<span class="cm-variable">index</span>] = -<span class="cm-number">1</span>;
+    <span class="cm-keyword">end</span>
+    <span class="cm-comment">-- Set values in the table</span>
+    <span class="cm-comment">-- Encoder_inside1 = green</span>
+    <span class="cm-variable">myLedTable</span>[<span class="cm-number">7</span>] = <span class="cm-number">0</span>
+    <span class="cm-variable">myLedTable</span>[<span class="cm-number">10</span>] = <span class="cm-number">255</span>
+    <span class="cm-variable">myLedTable</span>[<span class="cm-number">22</span>] = <span class="cm-number">0</span>
+    <span class="cm-comment">-- Encoder_outside1 = green</span>
+    <span class="cm-variable">myLedTable</span>[<span class="cm-number">8</span>] = <span class="cm-number">0</span>
+    <span class="cm-variable">myLedTable</span>[<span class="cm-number">11</span>] = <span class="cm-number">255</span>
+    <span class="cm-variable">myLedTable</span>[<span class="cm-number">23</span>] = <span class="cm-number">0</span>
+    <span class="cm-comment">-- Get the handle for the MasterModule on a console</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">usbDeviceHandle</span> = <span class="cm-variable">Root</span>().<span class="cm-variable">UsbNotifier.MA3Modules</span>[<span class="cm-string">&quot;UsbDeviceMA3 2&quot;</span>]
+    <span class="cm-comment">-- Set the values for the LEDs</span>
+    <span class="cm-variable">SetLED</span>(<span class="cm-variable">usbDeviceHandle</span>, <span class="cm-variable">myLedTable</span>)
+<span class="cm-keyword">end</span></pre></pre></td></tr></table><h2 id="h2_1987336602" data-has-heading-anchor="true">Hardware Modules LED Table<a href="lua_objectfree_setled.html#h2_1987336602" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h2>
+
+<p>This table provides a list of index numbers (indexed from 1). The numbers are matched with elements on the three different kinds of hardware modules that are relevant. Notice that the naming here comes from the internal hardware definition and might not match exactly the print on the keys or the official name.</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:600px">
+	<thead>
+		<tr>
+			<th scope="col" style="width: 44px;">Index</th>
+			<th scope="col" style="width: 182px;">grandMA3 Master Module(MM)</th>
+			<th scope="col" style="width: 165px;">grandMA3 Fader Module Encoder(MFE)</th>
+			<th scope="col" style="width: 169px;">grandMA3 Fader Module Crossfader(MFX)</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="width: 44px;">0</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">&nbsp;</td>
+			<td style="width: 169px;">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">1</td>
+			<td style="width: 182px;">ENCODER_INSIDE4 Red</td>
+			<td style="width: 165px;">Executor 108 Button</td>
+			<td style="width: 169px;">Executor 108 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">2</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE3 Red</td>
+			<td style="width: 165px;">Executor 110 Button</td>
+			<td style="width: 169px;">Executor 110 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">3</td>
+			<td style="width: 182px;">ENCODER_INSIDE2 Red</td>
+			<td style="width: 165px;">Executor 211 Button</td>
+			<td style="width: 169px;">Executor 211 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">4</td>
+			<td style="width: 182px;">EXEC_GrandKnob Red</td>
+			<td style="width: 165px;">Executor 212 Button</td>
+			<td style="width: 169px;">Executor 212 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">5</td>
+			<td style="width: 182px;">MENU</td>
+			<td style="width: 165px;">Executor 213 Button</td>
+			<td style="width: 169px;">Executor 213 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">6</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE2 Red</td>
+			<td style="width: 165px;">Executor 214 Button</td>
+			<td style="width: 169px;">Executor 214 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">7</td>
+			<td style="width: 182px;">ENCODER_INSIDE1 Red</td>
+			<td style="width: 165px;">Executor 215 Button</td>
+			<td style="width: 169px;">Executor 215 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">8</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE1 Red</td>
+			<td style="width: 165px;">Executor 209 Button</td>
+			<td style="width: 169px;">XFade1Btn Knob Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">9</td>
+			<td style="width: 182px;">EXEC_GrandKnob&nbsp; Green</td>
+			<td style="width: 165px;">Executor 210 Button</td>
+			<td style="width: 169px;">XFade2Btn Knob Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">10</td>
+			<td style="width: 182px;">ENCODER_INSIDE1 Green</td>
+			<td style="width: 165px;">Executor 208 Button</td>
+			<td style="width: 169px;">Executor 209 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">11</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE1 Green</td>
+			<td style="width: 165px;">Executor 115 Button</td>
+			<td style="width: 169px;">Executor 210 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">12</td>
+			<td style="width: 182px;">ENCODER_INSIDE2 Green</td>
+			<td style="width: 165px;">Executor 114 Button</td>
+			<td style="width: 169px;">Executor 208 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">13</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE2 Green</td>
+			<td style="width: 165px;">Executor 113 Button</td>
+			<td style="width: 169px;">XFade1Btn Knob Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">14</td>
+			<td style="width: 182px;">ENCODER_INSIDE3 Green</td>
+			<td style="width: 165px;">Executor 112 Button</td>
+			<td style="width: 169px;">XFade2Btn Knob Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">15</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE3 Green</td>
+			<td style="width: 165px;">Executor 207 Button</td>
+			<td style="width: 169px;">DEF_GO</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">16</td>
+			<td style="width: 182px;">ENCODER_INSIDE4 Green</td>
+			<td style="width: 165px;">Executor 206 Button</td>
+			<td style="width: 169px;">Executor 115 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">17</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE4 Green</td>
+			<td style="width: 165px;">Executor 205 Button</td>
+			<td style="width: 169px;">Executor 114 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">18</td>
+			<td style="width: 182px;">ENCODER_INSIDE5 Green</td>
+			<td style="width: 165px;">Executor 105 Button</td>
+			<td style="width: 169px;">Executor 113 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">19</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE5 Green</td>
+			<td style="width: 165px;">Executor 106 Button</td>
+			<td style="width: 169px;">Executor 112 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">20</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE4 Red</td>
+			<td style="width: 165px;">Executor 107 Button</td>
+			<td style="width: 169px;">Executor 207 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">21</td>
+			<td style="width: 182px;">EXEC_GrandKnob Blue</td>
+			<td style="width: 165px;">Executor 109 Button</td>
+			<td style="width: 169px;">Executor 206 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">22</td>
+			<td style="width: 182px;">ENCODER_INSIDE1 Blue</td>
+			<td style="width: 165px;">Executor 204 Button</td>
+			<td style="width: 169px;">Executor 205 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">23</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE1 Blue</td>
+			<td style="width: 165px;">Executor 203 Button</td>
+			<td style="width: 169px;">XFade2 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">24</td>
+			<td style="width: 182px;">ENCODER_INSIDE2 Blue</td>
+			<td style="width: 165px;">Executor 202 Button</td>
+			<td style="width: 169px;">XFade2 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">25</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE2 Blue</td>
+			<td style="width: 165px;">Executor 201 Button</td>
+			<td style="width: 169px;">XFade2 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">26</td>
+			<td style="width: 182px;">ENCODER_INSIDE3 Blue</td>
+			<td style="width: 165px;">Executor 111 Button</td>
+			<td style="width: 169px;">Executor 105 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">27</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE3 Blue</td>
+			<td style="width: 165px;">Executor 101 Button</td>
+			<td style="width: 169px;">Executor 106 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">28</td>
+			<td style="width: 182px;">ENCODER_INSIDE4 Blue</td>
+			<td style="width: 165px;">Executor 102 Button</td>
+			<td style="width: 169px;">Executor 107 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">29</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE4 Blue</td>
+			<td style="width: 165px;">Executor 103 Button</td>
+			<td style="width: 169px;">XFade1Btn Knob Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">30</td>
+			<td style="width: 182px;">ENCODER_INSIDE5 Blue</td>
+			<td style="width: 165px;">Executor 104 Button</td>
+			<td style="width: 169px;">XFade2Btn Knob Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">31</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE5 Blue</td>
+			<td style="width: 165px;">Executor 312 Fader Red</td>
+			<td style="width: 169px;">Executor 109 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">32</td>
+			<td style="width: 182px;">ENCODER_OUTSIDE5 Red</td>
+			<td style="width: 165px;">Executor 311 Fader Red</td>
+			<td style="width: 169px;">Executor 204 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">33</td>
+			<td style="width: 182px;">ENCODER_INSIDE5 Red</td>
+			<td style="width: 165px;">Executor 413 Fader Red</td>
+			<td style="width: 169px;">Executor 203 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">34</td>
+			<td style="width: 182px;">ENCODER_INSIDE3 Red</td>
+			<td style="width: 165px;">Executor 411 Button</td>
+			<td style="width: 169px;">Executor 202 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">35</td>
+			<td style="width: 182px;">ESC</td>
+			<td style="width: 165px;">Executor 412 Button</td>
+			<td style="width: 169px;">Executor 201 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">36</td>
+			<td style="width: 182px;">CLEAR</td>
+			<td style="width: 165px;">Executor 414 Fader Red</td>
+			<td style="width: 169px;">XFade2Btn Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">37</td>
+			<td style="width: 182px;">HELP</td>
+			<td style="width: 165px;">Executor 411 Fader Red</td>
+			<td style="width: 169px;">DEF_PAUSE</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">38</td>
+			<td style="width: 182px;">GOTO</td>
+			<td style="width: 165px;">Executor 412 Fader Red</td>
+			<td style="width: 169px;">XFade1Btn Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">39</td>
+			<td style="width: 182px;">ALIGN</td>
+			<td style="width: 165px;">Executor 415 Button</td>
+			<td style="width: 169px;">Executor 111 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">40</td>
+			<td style="width: 182px;">COPY</td>
+			<td style="width: 165px;">Executor 414 Button</td>
+			<td style="width: 169px;">Executor 101 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">41</td>
+			<td style="width: 182px;">OFF</td>
+			<td style="width: 165px;">Executor 413 Button</td>
+			<td style="width: 169px;">Executor 102 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">42</td>
+			<td style="width: 182px;">FULL</td>
+			<td style="width: 165px;">Executor 411 Fader Green</td>
+			<td style="width: 169px;">Executor 103 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">43</td>
+			<td style="width: 182px;">PLEASE</td>
+			<td style="width: 165px;">Executor 412 Fader Green</td>
+			<td style="width: 169px;">Executor 104 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">44</td>
+			<td style="width: 182px;">NUM4</td>
+			<td style="width: 165px;">Executor 413 Fader Green</td>
+			<td style="width: 169px;">DEF_GOBACK</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">45</td>
+			<td style="width: 182px;">NUM5</td>
+			<td style="width: 165px;">Executor 414 Fader Green</td>
+			<td style="width: 169px;">XFade1 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">46</td>
+			<td style="width: 182px;">UNDO</td>
+			<td style="width: 165px;">Executor 415 Fader Green</td>
+			<td style="width: 169px;">XFade1 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">47</td>
+			<td style="width: 182px;">GROUP</td>
+			<td style="width: 165px;">Executor 311 Fader Green</td>
+			<td style="width: 169px;">XFade1 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">48</td>
+			<td style="width: 182px;">THRU</td>
+			<td style="width: 165px;">Executor 312 Fader Green</td>
+			<td style="width: 169px;">Executor 312 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">49</td>
+			<td style="width: 182px;">NUM6</td>
+			<td style="width: 165px;">Executor 313 Fader Green</td>
+			<td style="width: 169px;">Executor 311 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">50</td>
+			<td style="width: 182px;">NUM2</td>
+			<td style="width: 165px;">Executor 314 Fader Green</td>
+			<td style="width: 169px;">Executor 413 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">51</td>
+			<td style="width: 182px;">STORE</td>
+			<td style="width: 165px;">Executor 315 Fader Green</td>
+			<td style="width: 169px;">Executor 411 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">52</td>
+			<td style="width: 182px;">ASSIGN</td>
+			<td style="width: 165px;">Executor 312 Button</td>
+			<td style="width: 169px;">Executor 412 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">53</td>
+			<td style="width: 182px;">AT</td>
+			<td style="width: 165px;">Executor 313 Fader Red</td>
+			<td style="width: 169px;">Executor 414 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">54</td>
+			<td style="width: 182px;">MA1</td>
+			<td style="width: 165px;">Executor 311 Button</td>
+			<td style="width: 169px;">Executor 411 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">55</td>
+			<td style="width: 182px;">SLASH</td>
+			<td style="width: 165px;">Executor 411 Fader Blue</td>
+			<td style="width: 169px;">Executor 412 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">56</td>
+			<td style="width: 182px;">NUM1</td>
+			<td style="width: 165px;">Executor 412 Fader Blue</td>
+			<td style="width: 169px;">Executor 415 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">57</td>
+			<td style="width: 182px;">CUE</td>
+			<td style="width: 165px;">Executor 413 Fader Blue</td>
+			<td style="width: 169px;">Executor 414 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">58</td>
+			<td style="width: 182px;">TIME</td>
+			<td style="width: 165px;">Executor 414 Fader Blue</td>
+			<td style="width: 169px;">Executor 413 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">59</td>
+			<td style="width: 182px;">SEQUENCE</td>
+			<td style="width: 165px;">Executor 415 Fader Blue</td>
+			<td style="width: 169px;">Executor 411 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">60</td>
+			<td style="width: 182px;">CHANNEL</td>
+			<td style="width: 165px;">Executor 311 Fader Blue</td>
+			<td style="width: 169px;">Executor 412 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">61</td>
+			<td style="width: 182px;">NUM7</td>
+			<td style="width: 165px;">Executor 312 Fader Blue</td>
+			<td style="width: 169px;">Executor 413 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">62</td>
+			<td style="width: 182px;">NUM8</td>
+			<td style="width: 165px;">Executor 313 Fader Blue</td>
+			<td style="width: 169px;">Executor 414 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">63</td>
+			<td style="width: 182px;">NUM9</td>
+			<td style="width: 165px;">Executor 314 Fader Blue</td>
+			<td style="width: 169px;">Executor 415 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">64</td>
+			<td style="width: 182px;">NUM3</td>
+			<td style="width: 165px;">Executor 315 Fader Blue</td>
+			<td style="width: 169px;">Executor 311 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">65</td>
+			<td style="width: 182px;">MINUS</td>
+			<td style="width: 165px;">Executor 313 Button</td>
+			<td style="width: 169px;">Executor 312 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">66</td>
+			<td style="width: 182px;">NUM0</td>
+			<td style="width: 165px;">Executor 315 Fader Red</td>
+			<td style="width: 169px;">Executor 313 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">67</td>
+			<td style="width: 182px;">DOT</td>
+			<td style="width: 165px;">Executor 314 Fader Red</td>
+			<td style="width: 169px;">Executor 314 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">68</td>
+			<td style="width: 182px;">IF</td>
+			<td style="width: 165px;">Executor 314 Button</td>
+			<td style="width: 169px;">Executor 315 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">69</td>
+			<td style="width: 182px;">PLUS</td>
+			<td style="width: 165px;">Executor 315 Button</td>
+			<td style="width: 169px;">Executor 312 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">70</td>
+			<td style="width: 182px;">LEARN</td>
+			<td style="width: 165px;">Executor 415 Fader Red</td>
+			<td style="width: 169px;">Executor 313 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">71</td>
+			<td style="width: 182px;">Executor 297 Knob Red</td>
+			<td style="width: 165px;">Executor 307 Fader Red</td>
+			<td style="width: 169px;">Executor 311 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">72</td>
+			<td style="width: 182px;">Executor 295 "X5 | Step"</td>
+			<td style="width: 165px;">Executor 306 Fader Red</td>
+			<td style="width: 169px;">Executor 411 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">73</td>
+			<td style="width: 182px;">Executor 296 "X6 | TC"</td>
+			<td style="width: 165px;">Executor 408 Fader Red</td>
+			<td style="width: 169px;">Executor 412 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">74</td>
+			<td style="width: 182px;">Executor 298 Knob Red</td>
+			<td style="width: 165px;">Executor 406 Button</td>
+			<td style="width: 169px;">Executor 413 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">75</td>
+			<td style="width: 182px;">Executor 295 Knob Red</td>
+			<td style="width: 165px;">Executor 407 Button</td>
+			<td style="width: 169px;">Executor 414 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">76</td>
+			<td style="width: 182px;">Executor 296 Knob Red</td>
+			<td style="width: 165px;">Executor 409 Fader Red</td>
+			<td style="width: 169px;">Executor 415 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">77</td>
+			<td style="width: 182px;">GOFAST</td>
+			<td style="width: 165px;">Executor 406 Fader Red</td>
+			<td style="width: 169px;">Executor 311 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">78</td>
+			<td style="width: 182px;">Executor 195 "X13 | Phaser"</td>
+			<td style="width: 165px;">Executor 407 Fader Red</td>
+			<td style="width: 169px;">Executor 312 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">79</td>
+			<td style="width: 182px;">Executor 196 "X14 | Macro"</td>
+			<td style="width: 165px;">Executor 410 Button</td>
+			<td style="width: 169px;">Executor 313 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">80</td>
+			<td style="width: 182px;">Executor 295 Knob Green</td>
+			<td style="width: 165px;">Executor 409 Button</td>
+			<td style="width: 169px;">Executor 314 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">81</td>
+			<td style="width: 182px;">Executor 296 Knob Green</td>
+			<td style="width: 165px;">Executor 408 Button</td>
+			<td style="width: 169px;">Executor 315 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">82</td>
+			<td style="width: 182px;">Executor 297 Knob Green</td>
+			<td style="width: 165px;">Executor 406 Fader Green</td>
+			<td style="width: 169px;">Executor 313 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">83</td>
+			<td style="width: 182px;">Executor 298 Knob Green</td>
+			<td style="width: 165px;">Executor 407 Fader Green</td>
+			<td style="width: 169px;">Executor 315 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">84</td>
+			<td style="width: 182px;">DELETE</td>
+			<td style="width: 165px;">Executor 408 Fader Green</td>
+			<td style="width: 169px;">Executor 314 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">85</td>
+			<td style="width: 182px;">Executor 197 "X15 | Page"</td>
+			<td style="width: 165px;">Executor 409 Fader Green</td>
+			<td style="width: 169px;">Executor 314 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">86</td>
+			<td style="width: 182px;">GOBACKFAST</td>
+			<td style="width: 165px;">Executor 410 Fader Green</td>
+			<td style="width: 169px;">Executor 315 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">87</td>
+			<td style="width: 182px;">Executor 298 "X8 | DMX"</td>
+			<td style="width: 165px;">Executor 306 Fader Green</td>
+			<td style="width: 169px;">Executor 415 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">88</td>
+			<td style="width: 182px;">STOMP</td>
+			<td style="width: 165px;">Executor 307 Fader Green</td>
+			<td style="width: 169px;">Executor 307 Fader</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">89</td>
+			<td style="width: 182px;">SELECT</td>
+			<td style="width: 165px;">Executor 308 Fader Green</td>
+			<td style="width: 169px;">Executor 306 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">90</td>
+			<td style="width: 182px;">Executor 295 Knob Blue</td>
+			<td style="width: 165px;">Executor 309 Fader Green</td>
+			<td style="width: 169px;">Executor 408 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">91</td>
+			<td style="width: 182px;">Executor 296 Knob Blue</td>
+			<td style="width: 165px;">Executor 310 Fader Green</td>
+			<td style="width: 169px;">Executor 406 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">92</td>
+			<td style="width: 182px;">Executor 297 Knob Blue</td>
+			<td style="width: 165px;">Executor 307 Button</td>
+			<td style="width: 169px;">Executor 407 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">93</td>
+			<td style="width: 182px;">Executor 298 Knob Blue</td>
+			<td style="width: 165px;">Executor 308 Fader Red</td>
+			<td style="width: 169px;">Executor 409 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">94</td>
+			<td style="width: 182px;">Executor 198 "X16 | Exec"</td>
+			<td style="width: 165px;">Executor 306 Button</td>
+			<td style="width: 169px;">Executor 406 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">95</td>
+			<td style="width: 182px;">Executor 297 "X7 | View"</td>
+			<td style="width: 165px;">Executor 406 Fader Blue</td>
+			<td style="width: 169px;">Executor 407 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">96</td>
+			<td style="width: 182px;">ON</td>
+			<td style="width: 165px;">Executor 407 Fader Blue</td>
+			<td style="width: 169px;">Executor 410 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">97</td>
+			<td style="width: 182px;">MOVE</td>
+			<td style="width: 165px;">Executor 408 Fader Blue</td>
+			<td style="width: 169px;">Executor 409 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">98</td>
+			<td style="width: 182px;">FIXTURE</td>
+			<td style="width: 165px;">Executor 409 Fader Blue</td>
+			<td style="width: 169px;">Executor 408 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">99</td>
+			<td style="width: 182px;">PRESET</td>
+			<td style="width: 165px;">Executor 410 Fader Blue</td>
+			<td style="width: 169px;">Executor 406 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">100</td>
+			<td style="width: 182px;">EDIT</td>
+			<td style="width: 165px;">Executor 306 Fader Blue</td>
+			<td style="width: 169px;">Executor 407 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">101</td>
+			<td style="width: 182px;">UPDATE</td>
+			<td style="width: 165px;">Executor 307 Fader Blue</td>
+			<td style="width: 169px;">Executor 408 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">102</td>
+			<td style="width: 182px;">PAUSE</td>
+			<td style="width: 165px;">Executor 308 Fader Blue</td>
+			<td style="width: 169px;">Executor 409 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">103</td>
+			<td style="width: 182px;">GOBACK</td>
+			<td style="width: 165px;">Executor 309 Fader Blue</td>
+			<td style="width: 169px;">Executor 410 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">104</td>
+			<td style="width: 182px;">Executor 293 Knob Red</td>
+			<td style="width: 165px;">Executor 310 Fader Blue</td>
+			<td style="width: 169px;">Executor 306 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">105</td>
+			<td style="width: 182px;">SOLO</td>
+			<td style="width: 165px;">Executor 308 Button</td>
+			<td style="width: 169px;">Executor 307 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">106</td>
+			<td style="width: 182px;">HIGHLIGHT</td>
+			<td style="width: 165px;">Executor 310 Fader Red</td>
+			<td style="width: 169px;">Executor 308 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">107</td>
+			<td style="width: 182px;">Executor 294 Knob Red</td>
+			<td style="width: 165px;">Executor 309 Fader Red</td>
+			<td style="width: 169px;">Executor 309 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">108</td>
+			<td style="width: 182px;">Executor 291 Knob Red</td>
+			<td style="width: 165px;">Executor 309 Button</td>
+			<td style="width: 169px;">Executor 310 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">109</td>
+			<td style="width: 182px;">Executor 292 Knob Red</td>
+			<td style="width: 165px;">Executor 310 Button</td>
+			<td style="width: 169px;">Executor 307 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">110</td>
+			<td style="width: 182px;">GO</td>
+			<td style="width: 165px;">Executor 410 Fader Red</td>
+			<td style="width: 169px;">Executor 308 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">111</td>
+			<td style="width: 182px;">LIST</td>
+			<td style="width: 165px;">Executor 302 Fader Red</td>
+			<td style="width: 169px;">Executor 306 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">112</td>
+			<td style="width: 182px;">PAGE_DOWN</td>
+			<td style="width: 165px;">Executor 301 Fader Red</td>
+			<td style="width: 169px;">Executor 406 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">113</td>
+			<td style="width: 182px;">Executor 291 Knob Green</td>
+			<td style="width: 165px;">Executor 403 Fader Red</td>
+			<td style="width: 169px;">Executor 407 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">114</td>
+			<td style="width: 182px;">Executor 292 Knob Green</td>
+			<td style="width: 165px;">Executor 401 Button</td>
+			<td style="width: 169px;">Executor 408 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">115</td>
+			<td style="width: 182px;">Executor 293 Knob Green</td>
+			<td style="width: 165px;">Executor 402 Button</td>
+			<td style="width: 169px;">Executor 409 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">116</td>
+			<td style="width: 182px;">Executor 294 Knob Green</td>
+			<td style="width: 165px;">Executor 404 Fader Red</td>
+			<td style="width: 169px;">Executor 410 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">117</td>
+			<td style="width: 182px;">SELFIX</td>
+			<td style="width: 165px;">Executor 401 Fader Red</td>
+			<td style="width: 169px;">Executor 306 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">118</td>
+			<td style="width: 182px;">MA2</td>
+			<td style="width: 165px;">Executor 402 Fader Red</td>
+			<td style="width: 169px;">Executor 307 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">119</td>
+			<td style="width: 182px;">PAGE_UP</td>
+			<td style="width: 165px;">Executor 405 Button</td>
+			<td style="width: 169px;">Executor 308 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">120</td>
+			<td style="width: 182px;">XKEYS</td>
+			<td style="width: 165px;">Executor 404 Button</td>
+			<td style="width: 169px;">Executor 309 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">121</td>
+			<td style="width: 182px;">BLIND</td>
+			<td style="width: 165px;">Executor 403 Button</td>
+			<td style="width: 169px;">Executor 310 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">122</td>
+			<td style="width: 182px;">Executor 192 "X10"</td>
+			<td style="width: 165px;">Executor 401 Fader Green</td>
+			<td style="width: 169px;">Executor 308 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">123</td>
+			<td style="width: 182px;">Executor 193 "X11"</td>
+			<td style="width: 165px;">Executor 402 Fader Green</td>
+			<td style="width: 169px;">Executor 310 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">124</td>
+			<td style="width: 182px;">Executor 194 "X12"</td>
+			<td style="width: 165px;">Executor 403 Fader Green</td>
+			<td style="width: 169px;">Executor 309 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">125</td>
+			<td style="width: 182px;">Executor 291 Knob Blue</td>
+			<td style="width: 165px;">Executor 404 Fader Green</td>
+			<td style="width: 169px;">Executor 309 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">126</td>
+			<td style="width: 182px;">Executor 292 Knob Blue</td>
+			<td style="width: 165px;">Executor 405 Fader Green</td>
+			<td style="width: 169px;">Executor 310 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">127</td>
+			<td style="width: 182px;">Executor 293 Knob Blue</td>
+			<td style="width: 165px;">Executor 301 Fader Green</td>
+			<td style="width: 169px;">Executor 410 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">128</td>
+			<td style="width: 182px;">Executor 294 Knob Blue</td>
+			<td style="width: 165px;">Executor 302 Fader Green</td>
+			<td style="width: 169px;">Executor 302 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">129</td>
+			<td style="width: 182px;">PREVIEW</td>
+			<td style="width: 165px;">Executor 303 Fader Green</td>
+			<td style="width: 169px;">Executor 301 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">130</td>
+			<td style="width: 182px;">FREEZE</td>
+			<td style="width: 165px;">Executor 304 Fader Green</td>
+			<td style="width: 169px;">Executor 403 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">131</td>
+			<td style="width: 182px;">DOWN</td>
+			<td style="width: 165px;">Executor 305 Fader Green</td>
+			<td style="width: 169px;">Executor 401 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">132</td>
+			<td style="width: 182px;">PREV</td>
+			<td style="width: 165px;">Executor 302 Button</td>
+			<td style="width: 169px;">Executor 402 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">133</td>
+			<td style="width: 182px;">RESET</td>
+			<td style="width: 165px;">Executor 303 Fader Red</td>
+			<td style="width: 169px;">Executor 404 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">134</td>
+			<td style="width: 182px;">UP</td>
+			<td style="width: 165px;">Executor 301 Button</td>
+			<td style="width: 169px;">Executor 401 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">135</td>
+			<td style="width: 182px;">Executor 291 "X1 | Clone"</td>
+			<td style="width: 165px;">Executor 401 Fader Blue</td>
+			<td style="width: 169px;">Executor 402 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">136</td>
+			<td style="width: 182px;">Executor 292 "X2 | Link"</td>
+			<td style="width: 165px;">Executor 402 Fader Blue</td>
+			<td style="width: 169px;">Executor 405 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">137</td>
+			<td style="width: 182px;">Executor 293 "X3 | Grid"</td>
+			<td style="width: 165px;">Executor 403 Fader Blue</td>
+			<td style="width: 169px;">Executor 404 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">138</td>
+			<td style="width: 182px;">Executor 294 "X4 | Layout"</td>
+			<td style="width: 165px;">Executor 404 Fader Blue</td>
+			<td style="width: 169px;">Executor 403 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">139</td>
+			<td style="width: 182px;">Executor 191 "X9"</td>
+			<td style="width: 165px;">Executor 405 Fader Blue</td>
+			<td style="width: 169px;">Executor 401 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">140</td>
+			<td style="width: 182px;">NEXT</td>
+			<td style="width: 165px;">Executor 301 Fader Blue</td>
+			<td style="width: 169px;">Executor 402 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">141</td>
+			<td style="width: 182px;">All LEDs on the Keyboard</td>
+			<td style="width: 165px;">Executor 302 Fader Blue</td>
+			<td style="width: 169px;">Executor 403 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">142</td>
+			<td style="width: 182px;">Small Screen Backlight</td>
+			<td style="width: 165px;">Executor 303 Fader Blue</td>
+			<td style="width: 169px;">Executor 404 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">143</td>
+			<td style="width: 182px;">Letterbox Screen Backlight</td>
+			<td style="width: 165px;">Executor 304 Fader Blue</td>
+			<td style="width: 169px;">Executor 405 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">144</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 305 Fader Blue</td>
+			<td style="width: 169px;">Executor 301 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">145</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 303 Button</td>
+			<td style="width: 169px;">Executor 302 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">146</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 305 Fader Red</td>
+			<td style="width: 169px;">Executor 303 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">147</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 304 Fader Red</td>
+			<td style="width: 169px;">Executor 304 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">148</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 304 Button</td>
+			<td style="width: 169px;">Executor 305 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">149</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 305 Button</td>
+			<td style="width: 169px;">Executor 302 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">150</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 405 Fader Red</td>
+			<td style="width: 169px;">Executor 303 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">151</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">RateBtn2</td>
+			<td style="width: 169px;">Executor 301 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">152</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">ExecBtn1</td>
+			<td style="width: 169px;">Executor 401 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">153</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">SpeedBtn1</td>
+			<td style="width: 169px;">Executor 402 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">154</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">RateBtn1</td>
+			<td style="width: 169px;">Executor 403 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">155</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">SpeedBtn2</td>
+			<td style="width: 169px;">Executor 404 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">156</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">ProgBtn1</td>
+			<td style="width: 169px;">Executor 405 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">157</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">ProgBtn2</td>
+			<td style="width: 169px;">Executor 301 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">158</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">ProgBtn3</td>
+			<td style="width: 169px;">Executor 302 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">159</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">ExecBtn3</td>
+			<td style="width: 169px;">Executor 303 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">160</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">ExecBtn2</td>
+			<td style="width: 169px;">Executor 304 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">161</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 201 Fader Red</td>
+			<td style="width: 169px;">Executor 305 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">162</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 201 Fader Green</td>
+			<td style="width: 169px;">Executor 303 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">163</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 201 Fader Blue</td>
+			<td style="width: 169px;">Executor 305 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">164</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 202 Fader Red</td>
+			<td style="width: 169px;">Executor 304 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">165</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 202 Fader Green</td>
+			<td style="width: 169px;">Executor 304 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">166</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 202 Fader Blue</td>
+			<td style="width: 169px;">Executor 305 Button</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">167</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 203 Fader Red</td>
+			<td style="width: 169px;">Executor 405 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">168</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 203 Fader Green</td>
+			<td style="width: 169px;">Executor 201 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">169</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 203 Fader Blue</td>
+			<td style="width: 169px;">Executor 201 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">170</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 204 Fader Red</td>
+			<td style="width: 169px;">Executor 201 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">171</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 204 Fader Green</td>
+			<td style="width: 169px;">Executor 202 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">172</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 204 Fader Blue</td>
+			<td style="width: 169px;">Executor 202 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">173</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 205 Fader Red</td>
+			<td style="width: 169px;">Executor 202 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">174</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 205 Fader Green</td>
+			<td style="width: 169px;">Executor 203 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">175</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 205 Fader Blue</td>
+			<td style="width: 169px;">Executor 203 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">176</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 206 Fader Red</td>
+			<td style="width: 169px;">Executor 203 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">177</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 206 Fader Green</td>
+			<td style="width: 169px;">Executor 204 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">178</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 206 Fader Blue</td>
+			<td style="width: 169px;">Executor 204 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">179</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 207 Fader Red</td>
+			<td style="width: 169px;">Executor 204 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">180</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 207 Fader Green</td>
+			<td style="width: 169px;">Executor 205 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">181</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 207 Fader Blue</td>
+			<td style="width: 169px;">Executor 205 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">182</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 208 Fader Red</td>
+			<td style="width: 169px;">Executor 205 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">183</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 208 Fader Green</td>
+			<td style="width: 169px;">Executor 206 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">184</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 208 Fader Blue</td>
+			<td style="width: 169px;">Executor 206 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">185</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 209 Fader Red</td>
+			<td style="width: 169px;">Executor 206 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">186</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 209 Fader Green</td>
+			<td style="width: 169px;">Executor 207 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">187</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 209 Fader Blue</td>
+			<td style="width: 169px;">Executor 207 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">188</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 210 Fader Red</td>
+			<td style="width: 169px;">Executor 207 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">189</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 210 Fader Green</td>
+			<td style="width: 169px;">Executor 208 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">190</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 210 Fader Blue</td>
+			<td style="width: 169px;">Executor 208 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">191</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 211 Fader Red</td>
+			<td style="width: 169px;">Executor 208 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">192</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 211 Fader Green</td>
+			<td style="width: 169px;">Executor 209 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">193</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 211 Fader Blue</td>
+			<td style="width: 169px;">Executor 209 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">194</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 212 Fader Red</td>
+			<td style="width: 169px;">Executor 209 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">195</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 212 Fader Green</td>
+			<td style="width: 169px;">Executor 210 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">196</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 212 Fader Blue</td>
+			<td style="width: 169px;">Executor 210 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">197</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 213 Fader Red</td>
+			<td style="width: 169px;">Executor 210 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">198</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 213 Fader Green</td>
+			<td style="width: 169px;">Executor 211 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">199</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 213 Fader Blue</td>
+			<td style="width: 169px;">Executor 211 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">200</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 214 Fader Red</td>
+			<td style="width: 169px;">Executor 211 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">201</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 214 Fader Green</td>
+			<td style="width: 169px;">Executor 212 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">202</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 214 Fader Blue</td>
+			<td style="width: 169px;">Executor 212 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">203</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 215 Fader Red</td>
+			<td style="width: 169px;">Executor 212 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">204</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 215 Fader Green</td>
+			<td style="width: 169px;">Executor 213 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">205</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Executor 215 Fader Blue</td>
+			<td style="width: 169px;">Executor 213 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">206</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Desklights</td>
+			<td style="width: 169px;">Executor 213 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">207</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Letterbox Screen Backlight</td>
+			<td style="width: 169px;">Executor 214 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">208</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">Small Screen Backlight</td>
+			<td style="width: 169px;">Executor 214 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">209</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">&nbsp;</td>
+			<td style="width: 169px;">Executor 214 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">210</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">&nbsp;</td>
+			<td style="width: 169px;">Executor 215 Fader Red</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">211</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">&nbsp;</td>
+			<td style="width: 169px;">Executor 215 Fader Green</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">212</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">&nbsp;</td>
+			<td style="width: 169px;">Executor 215 Fader Blue</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">213</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">&nbsp;</td>
+			<td style="width: 169px;">Desklights</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">214</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">&nbsp;</td>
+			<td style="width: 169px;">Letterbox Screen Backlight</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">215</td>
+			<td style="width: 182px;">&nbsp;</td>
+			<td style="width: 165px;">&nbsp;</td>
+			<td style="width: 169px;">Small Screen Backlight</td>
+		</tr>
+	</tbody>
+</table>
+
+</div>
+
+					<div id="offline-subtopics"><h4 id="h4_414355063"></h4> <ul></ul></div>
+				</div>
+			</main>
+		</div>
+
+		
+			
+
+	
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>  
+</body>
+</html>

@@ -98,7 +98,7 @@ end
 function Handle:ClearUIChildren()
 end
 
----@return table childHandles
+---@return Handle[] childHandles
 function Handle:CmdlineChildren()
     return {}
 end
@@ -721,7 +721,7 @@ end
 function Handle:ShowModal(callback)
 end
 
----@return table childHandles
+---@return Handle[] childHandles
 function Handle:UIChildren()
     return {}
 end

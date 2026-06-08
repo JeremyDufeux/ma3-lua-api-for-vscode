@@ -393,7 +393,7 @@ end
 
 ---@param fixtureIndexOrHandle integer | Handle
 ---@param returnHandles? boolean @Optional
----@return table rtChannels
+---@return Handle[] | number[] rtChannels
 function GetRTChannels(fixtureIndexOrHandle, returnHandles)
     return {}
 end
@@ -468,7 +468,7 @@ end
 
 ---@param fixtureIndexOrHandle integer | Handle
 ---@param returnHandles? boolean @Optional
----@return table channels
+---@return Handle[] | number[] channels
 function GetUIChannels(fixtureIndexOrHandle, returnHandles)
     return {}
 end
@@ -586,7 +586,7 @@ end
 
 ---@param objectListCommand string
 ---@param optionsTable? table @Optional
----@return table objectList
+---@return Handle[] objectList
 function ObjectList(objectListCommand, optionsTable)
     return {}
 end

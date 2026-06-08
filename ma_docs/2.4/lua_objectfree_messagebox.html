@@ -1,0 +1,479 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" dir="ltr" class="">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="MobileOptimized" content="width">
+  <meta name="HandheldFriendly" content="true">
+  <link rel='shortcut icon' href='../_webHelpImages/favicon.ico' /><link rel='icon' href='../_webHelpImages/favicon.ico' />
+  <link rel='stylesheet' type='text/css' href='../_webHelpStyles/CHWebHelp.css?t='/><link rel='stylesheet' type='text/css' href='../_webHelpStyles/CommonControls.css?t='/><link rel='stylesheet' type='text/css' href='../_webHelpStyles/CommonControls/FontAwesome/css/font-awesome.min-ignore.css?t='/><link rel='stylesheet' type='text/css' href='../_webHelpStyles/RTL.css?t='/>
+  <script  src='../_webHelpScripts/Master/1-script.js?t=' type='text/javascript'></script><script  src='../_webHelpScripts/Master/toc_nav.js?t=' type='text/javascript'></script>
+  
+<script type="text/javascript">//<!--
+appendEventHandler(window, 'load', function() {webHelpSelectTocNodeByExtId('lua_objectfree_messagebox',true);});
+//--></script><title>MessageBox(table)</title><script type="text/javascript">//<!--
+var imgPopupTexts={openInNewWindowText: 'Open in new window', closeText: 'Close'};var articleTitleText='MessageBox(table)';
+//--></script><link rel="stylesheet" type="text/css" href="../Styles/article-published.css"/><link rel="stylesheet" type="text/css" href="../Styles/grandma3-user-manual-publication/global-shared-style.css"/><link rel="stylesheet" type="text/css" href="../Styles/grandma3-user-manual-publication/SiteOffline.css"/><script src="../Scripts/article-published.js" type="text/javascript"></script><meta charset="utf-8"><meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  
+  <script src='../_webHelpScripts/video.js' type='text/javascript'></script>
+  <script src='../_webHelpScripts/console.js' type='text/javascript'></script>
+  <!-- Matomo -->
+  <script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="https://stats.help.m-a-lighting.de/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '2']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+<body class="WebHelp_body" onload="consoleSubInit();">
+  <div id="pnlContainer" class="CHOffCanvasPanel_container">
+    <div class="CHOffCanvasPanel_content">
+      <nav id="pnlOffCanvasNav" class="CHOffCanvasPanel_nav noselect">
+        <div id="pnlOffCanvasHeader" class="BaseMaster_offCanvasHeader">
+        </div>
+        <script  type='text/javascript'>//<!--
+window['mobileMenu']=new CHMenu('pnlOffCanvasHeader',{"cssClasses":{"menu":null,"popup":null},"templates":{"itemContent":null,"treeItemContent":null,"dropDownArrow":null},"isMobileViewIfParentOverflow":false,"mobileViewMinWidthThreshold":-1,"selectedItemId":"tabContents","isAllowItemSelection":true,"isEscapeMenuItemText":true,"isUseFontAwesomeIcons":true,"fontAwesomeVersion":"4","isMovePopupToBodyChildLevel":true,"isShowPopupOnHover":false},[{"id":"menuItemMenu","t":"Menu","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}},{"id":"tabContents","t":"Topics","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}},{"id":"tabSearch","t":"Search","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}}]);window['mobileMenu'].onItemClick=function(s,e){webHelpMobileMenuItemClick(s,e);};
+//--></script>
+        <div id="pnlOffCanvasContent" class="BaseMaster_offCanvasContent">
+        </div>        
+      </nav>
+      <div id="pnlOffCanvasOverlay" class="CHOffCanvasPanel_overlay"></div>
+      <nav id="pnlMainMenuContainer" class="BaseMaster_mainMenuContainer">
+        <button type="button" aria-label="Show mobile menu" title="Show mobile menu" id="btnMobileMenu" style="display:none"
+          class="CHHamburger_container CHHamburger_container-htla BaseMaster_hamburgerMenuIcon">
+          <span></span>
+        </button>
+        <a title='As master distributor MA Lighting International is responsible for worldwide sales and marketing of the renowned MA control systems, digital dimming systems'  ><img alt='As master distributor MA Lighting International is responsible for worldwide sales and marketing of the renowned MA control systems, digital dimming systems' class='BaseMaster_imgLogo' src='../_webHelpImages/MA_Logo_2-farbig_cmyk.svg' /></a>
+        <div id="pnlMainMenu" class="BaseMaster_pnlMainMenu"></div>
+        <script  type='text/javascript'>//<!--
+window['mainMenu']=new CHMenu('pnlMainMenu',{"cssClasses":{"menu":null,"popup":null},"templates":{"itemContent":null,"treeItemContent":null,"dropDownArrow":null},"isMobileViewIfParentOverflow":true,"mobileViewMinWidthThreshold":979,"selectedItemId":null,"isAllowItemSelection":false,"isEscapeMenuItemText":true,"isUseFontAwesomeIcons":true,"fontAwesomeVersion":"4","isMovePopupToBodyChildLevel":true,"isShowPopupOnHover":false},[]);window['mainMenu'].onViewSwitched=function(s,e){webHelpMasterPageMainMenuViewSwitched(s,e);};
+//--></script>
+        <div class="WebHelp_searchBoxContainer">
+          <input id="edtSearch" type="search" class="WebHelp_searchBox" aria-label="Search" />
+          <button id="btnSearch" class="btnSearch" alt="Search" title="Search" aria-label="Search" href="javascript:void(0)"></button>
+        </div>
+      </nav>
+      <div id="pnlContentContainer" class="BaseMaster_contentContainer clearfix">
+        <nav id="pnlArticlesNav" class="WebHelp_navPanel">
+          <div id="pnlNavTabs" class="WebHelp_navMenu"></div>
+          <script  type='text/javascript'>//<!--
+window['navMenu']=new CHMenu('pnlNavTabs',{"cssClasses":{"menu":null,"popup":null},"templates":{"itemContent":null,"treeItemContent":null,"dropDownArrow":null},"isMobileViewIfParentOverflow":false,"mobileViewMinWidthThreshold":-1,"selectedItemId":"tabContents","isAllowItemSelection":true,"isEscapeMenuItemText":true,"isUseFontAwesomeIcons":true,"fontAwesomeVersion":"4","isMovePopupToBodyChildLevel":true,"isShowPopupOnHover":false},[{"id":"tabContents","t":"Topics","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}},{"id":"tabSearch","t":"Search","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}}]);window['navMenu'].onItemClick=function(s,e){webHelpNavMenuItemClick(s,e);};
+//--></script>
+          <div id="pnlTocContainer" class="WebHelp_navPanelContent ArticleSelector_tabContent TocTreeLight_container">
+            <div id="pnlToc"></div>
+          </div>
+          <div id="pnlIndex" class="WebHelp_navPanelContent ArticleSelector_tabContent" style="display:none">
+            <iframe id="frameIndex" style="height: 100%; width:100%; display:block;" frameborder="0"></iframe>
+          </div>
+          <div id="pnlSearch" class="WebHelp_navPanelContent ArticleSelector_tabContent" style="display:none">
+            <iframe id="frameSearch" src="../search.html" style="height: 100%; width:100%; display: block;" frameborder="0"></iframe>
+          </div>
+        </nav>
+        <article class="TopicViewer_container">
+          <header id="pnlTopicHeader" class="TopicViewer_header" >
+            <div class="TopicViewer_headerText">
+              <div class="ArticleEditor_projectName">grandMA3 User Manual Publication</div>
+              <h1 id="pnlTitle" class="ArticleEditor_title">MessageBox(table)</h1>
+              <button type="button" id="btnPrint" class="CHImageButton ArticleEditor_imageButton ArticleEditor_fontAwesomeButton ArticleEditor_btnPrint" title="Print this topic">
+                <i class="fa fa-print"></i>
+              </button>
+            </div>
+          </header>
+          <div id="pnlTopicContentContainer" class="TopicViewer_contentContainer">
+            <style>
+#body {
+    margin-top: 0px;
+    height: 100%;
+}
+
+.topic-tree {
+    display: none
+}
+
+#offline-topic {
+    margin-left: 10px;
+}
+</style>
+		
+
+		<div id="body">
+			
+
+			<main>
+				<div id="offline-topic" class="topic-content"><div id="offline-content"><table class="FlatTable" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td class="FlatTable  " style="width: 80%">
+        <span class="CHBreadcrumb"><span class="CHBreadcrumb_item"><a href="help.html">grandMA3 User Manual</a></span><span class="CHBreadcrumb_separator"> » </span><span class="CHBreadcrumb_item"><a href="plugins.html">Plugins</a></span><span class="CHBreadcrumb_separator"> » </span><span class="CHBreadcrumb_item"><a href="lua_objectfree.html">Lua Functions - Object-Free API</a></span><span class="CHBreadcrumb_separator"> » </span><span class="CHBreadcrumb_item CHBreadcrumb_itemSelf">MessageBox(table)</span></span>
+        <br/>
+      </td>
+      <td style="text-align: right;">
+        Version 2.2
+        <br/>
+      </td>
+    </tr>
+  </tbody>
+</table>
+						<h2 id="h2_873740972" data-has-heading-anchor="true">Description<a href="lua_objectfree_messagebox.html#h2_873740972" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h2>
+
+<p>The MessageBox Lua function is used to create pop-up message boxes. These can be simple or complex information pop-ups with many different options and user inputs.</p>
+
+<p>The message box contains multiple elements that must be defined in a table. This table is the single input argument to the function.</p>
+
+<p>The elements in the message box are displayed in alphabetical order.</p>
+
+<p>This function is part of the User Interface functions.</p>
+
+<h2 id="h2__615384334" data-has-heading-anchor="true">Arguments<a href="lua_objectfree_messagebox.html#h2__615384334" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h2>
+
+<ul>
+	<li><strong>Table</strong>:<br/>
+	The input to the function must be formatted as a table using key-value pairs. The needed elements have default values that will be used if not overwritten. The values can be defined in any order if the key is defined.<br/>
+	The table can have the following elements:
+	<ul>
+		<li><strong>title</strong>:<br/>
+		This is the title of the pop-up message box.</li>
+		<li><strong>titleTextColor</strong>:<br/>
+		This is the text color for the title text. The value is a number or string that refers to the <strong>UI Colors</strong> in the color theme. See the link below.</li>
+		<li><strong>backColor</strong>:<br/>
+		This is the color of the frame or border of the pop-up. The value is a number or string that refers to the <strong>UI Colors</strong> in the color theme. See the link below.</li>
+		<li><strong>icon</strong>:<br/>
+		This is an icon that can be shown in the upper left corner of the pop-up. The value can be an integer or a string that refers to the number or name of a texture image (without the file format).<br/>
+		The icons can be listed by navigating to the texture folder <span class="syntax">ChangeDestination GraphicsRoot/TextureCollect/Textures</span> and then doing a <span class="syntax">List</span> command.<br/>
+		This shows a long list with numbers and names of all the textures in the Command Line History window.</li>
+		<li><strong>message</strong>:<br/>
+		This message text string is displayed in the main part of the pop-up. A new line can be created by adding a "\n" in the text.</li>
+		<li><strong>messageTextColor</strong>:<br/>
+		This is the text color for the message text. The value is a number or string that refers to the <strong>UI Colors</strong> in the color theme. See the link below.</li>
+		<li><b>autoCloseOnInput</b>:<br/>This option defines if a <span class="hardkey">Please</span> (or Enter) from an input field closes the message box pop-up. The default value is <b>true</b>. Setting this to <b>false</b> keeps the message box open until it is explicitly closed. See example 5 below.</li>
+		<li><strong>timeout</strong>:<br/>
+		The timeout value is an integer that indicates how long the message box is displayed in milliseconds. It will show a countdown timer at the top of the message area. When the countdown runs out, it will close the pop-up.<br/>
+		When the timeout closes the pop-up, it returns a <strong>success</strong> element with a <strong>true</strong> value (see more about the return below). It was closed "normally".</li>
+		<li><strong>timeoutResultCancel</strong>:<br/>
+		This element can change the return to mimic a cancel of the pop-up, which returns a <strong>false</strong> instead of a <strong>true</strong> for the <strong>success </strong>element.</li>
+		<li><strong>timeoutResultID</strong>:<br/>
+		When the timeout closes the pop-up with the <strong>success </strong>value = <strong>true</strong>, a special return result can be defined using this, for instance, setting the value to 99 - then 99 is returned when the message box is closed by the timeout.</li>
+		<li><strong>commands</strong>:<br/>
+		The commands are buttons at the bottom of the message box pop-up. The input here is a table of objects using the following structure:
+		<ul>
+			<li><strong>value</strong>:<br/>
+			This integer value will be returned as the result value - see more about the return below.</li>
+			<li><strong>name</strong>:<br/>
+			This is a string which will be shown on the button.</li>
+		</ul>
+		</li>
+		<li><strong>inputs</strong>:<br/>
+		The inputs are user input fields where text or numbers can be input. The input fields will be displayed in alphabetical order.<br/>
+		The input fields are defined using an table with the following structure (see example 5 below):
+		<ul>
+			<li><strong>name</strong>:<br/>
+			This is a string value - the text will be shown as a label for the input field.</li>
+			<li><strong>value</strong>:<br/>
+			This is a string value - it is a default input value for the input field.</li>
+			<li><strong>blackfilter</strong>:<br/>
+			This is a string value - it defines input characters that are not allowed.</li>
+			<li><strong>whitefilter</strong>:<br/>
+			This is a string value - it defines which input characters are allowed.</li>
+			<li><strong>vkPlugin</strong>:<br/>
+			This is a string value - it is the name of the input pop-up, which is opened if the on-screen keyboard icon (<img alt="" src="../Storage/grandma3-user-manual-publication/img/icon_keyboard_15_v1-9.png" loading="lazy"/>) is tapped in the pop-up. Example 5 below has a list of possible vkPlugin values.</li>
+			<li><strong>maxTextLength</strong>:<br/>
+			This is an integer value - it defines the maximum number of characters for the input.</li>
+		</ul>
+		</li>
+		<li><strong>states</strong>:<br/>
+		The states are buttons in the pop-up. State buttons have a small checkbox and can have a true or false state. The buttons will be displayed in alphabetical order.<br/>
+		The buttons are defined using a table with the following structure (see example 4 below):
+		<ul>
+			<li><strong>name</strong>:<br/>
+			This is a string value - the text will be shown on the button.</li>
+			<li><strong>state</strong>:<br/>
+			This is the initial state of the button checkbox.</li>
+		</ul>
+		</li>
+		<li><strong>selectors</strong>:<br/>
+		Selector buttons are two different types of buttons. Each type can have a selected value based on a list of available values. The two types are <strong>Swipe </strong>button (type 0) and <strong>Radio </strong>button (type 1).<br/>
+		The buttons are defined in a table with the following structure:
+		<ul>
+			<li><strong>name</strong>:<br/>
+			This is a string value - the text will be shown on the button (swipe button) or as a label above the buttons (radio buttons).</li>
+			<li><strong>selectedValue</strong>:<br/>
+			This is an integer value - it defines the default selected value</li>
+			<li><strong>type</strong>:<br/>
+			This is an integer value - it defines the type of selector button. The options are:
+			<ul>
+				<li><strong>0</strong>:<br/>
+				This defines the button as a swipe button.</li>
+				<li><strong>1</strong>:<br/>
+				This defines the button as a radio button.</li>
+			</ul>
+			</li>
+			<li><strong>values</strong>:<br/>
+			This is another table containing the different values available for the selector button. Each value element in the table has the following structure: <span class="syntax">["string"]=integer</span><br/>
+			The string is the name displayed for the value. The integer is the value returned and the one used for <strong>selectedValue</strong> (see above). See example 6 below for an example of use.</li>
+		</ul>
+		</li>
+	</ul>
+	</li>
+</ul>
+
+<p>The table can contain some or all of the elements described above.</p>
+
+<p>The colors mentioned above can be a string or number value. It refers to a defined UI Color in the color theme, for instance, <strong>"Global.Text"</strong> or <strong>1.27</strong>. See more in the <a href="ws_colors_color_theme.html" >Color Theme topic</a>.</p>
+
+<p>A message box pop-up should have at least a title, message, and <em>either </em>a timeout <em>or</em> some basic command buttons. See the first three examples below.</p>
+
+<h2 id="h2__607298120" data-has-heading-anchor="true">Return<a href="lua_objectfree_messagebox.html#h2__607298120" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h2>
+
+<ul>
+	<li><strong>Table</strong>:<br/>
+	The return from a message box pop-up is formatted in a table. The returned table adjusts to match the elements of the message box. For instance, if there are selection buttons in the message box, then there is another table inside the result table containing the return from the selection buttons. See the examples for details on how to retrieve the results. The table can contain the following elements:
+	<ul>
+		<li><strong>success</strong>:<br/>
+		This is a boolean - it returns true if the message box was closed by tapping a command button or by a timeout (see <strong>timeoutResultCancel</strong> above for exceptions).</li>
+		<li><strong>result</strong>:<br/>
+		This is an integer - it returns the value of the tapped command button or the timeout result ID.</li>
+		<li><strong>inputs</strong> (only if the message box has inputs fields):<br/>
+		This is a table with a list of the input fields' name and string value in a key-value pair table.</li>
+		<li><strong>states</strong> (only if the message box has state buttons):<br/>
+		This is a table with a list of the state buttons' name and boolean value in a key-value pair table.</li>
+		<li><strong>selectors</strong> (only if the message box has selector buttons):<br/>
+		This is a table with a list of the selector buttons' name and integer value in a key-value pair table.</li>
+	</ul>
+	</li>
+</ul>
+
+<p>An error is thrown if the message box does not have inputs, states, and selectors, but the script tries to use the table elements.</p>
+
+<p>See the examples to see how to extract the results.</p>
+
+<h2 id="h2__1406500097" data-has-heading-anchor="true">Examples<a href="lua_objectfree_messagebox.html#h2__1406500097" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h2>
+
+<p>There are six different examples demonstrating different elements of the message box. The elements can be combined, but the examples highlight different functions.</p>
+
+<h3 id="h3_1330111217" data-has-heading-anchor="true">Example 1<a href="lua_objectfree_messagebox.html#h3_1330111217" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h3>
+
+<p>A simple message box pop-up that shows a single confirm button:</p>
+
+<table class="CHCodeSample_container notranslate" cellspacing="0" cellpadding="0"><tr class="CHCodeSample_tr1"><td class="CHCodeSample_header"><div class="CHCodeSample_copyCode nonPrintable"><a onclick="copyCodeSample(this)" href="javascript:void(0)">Copy Code</a></div><div class="CHCodeSample_langName notranslate">Lua</div></td></tr><tr class="CHCodeSample_tr2"><td class="CHCodeSample_code notranslate cm-s-default"><pre><pre class="cm-s-default"><span class="cm-keyword">return</span> <span class="cm-keyword">function</span> ()
+    <span class="cm-comment">-- This creates a small pop-up with a single button.</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">returnTable</span> = <span class="cm-variable">MessageBox</span>(
+        {
+            <span class="cm-variable">title</span> = <span class="cm-string">&quot;Please confirm This&quot;</span>,
+            <span class="cm-variable">commands</span> = {{<span class="cm-variable">value</span> = <span class="cm-number">1</span>, <span class="cm-variable">name</span> = <span class="cm-string">&quot;Confirm&quot;</span>}}
+        }
+    )
+
+    <span class="cm-comment">-- Print the content of the returned table. </span>
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Success = &quot;</span>..<span class="cm-builtin">tostring</span>(<span class="cm-variable">returnTable.success</span>))
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Result = &quot;</span>..<span class="cm-variable">returnTable.result</span>)
+<span class="cm-keyword">end</span></pre></pre></td></tr></table><h3 id="h3_1330111218" data-has-heading-anchor="true">Example 2<a href="lua_objectfree_messagebox.html#h3_1330111218" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h3>
+
+<p>This example opens a pop-up with some text and two command buttons:</p>
+
+<table class="CHCodeSample_container notranslate" cellspacing="0" cellpadding="0"><tr class="CHCodeSample_tr1"><td class="CHCodeSample_header"><div class="CHCodeSample_copyCode nonPrintable"><a onclick="copyCodeSample(this)" href="javascript:void(0)">Copy Code</a></div><div class="CHCodeSample_langName notranslate">Lua</div></td></tr><tr class="CHCodeSample_tr2"><td class="CHCodeSample_code notranslate cm-s-default"><pre><pre class="cm-s-default"><span class="cm-keyword">return</span> <span class="cm-keyword">function</span> ()
+    <span class="cm-comment">-- A table with two default buttons for the pop-up</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">defaultCommandButtons</span> = {
+        {<span class="cm-variable">value</span> = <span class="cm-number">2</span>, <span class="cm-variable">name</span> = <span class="cm-string">&quot;OK&quot;</span>},
+        {<span class="cm-variable">value</span> = <span class="cm-number">1</span>, <span class="cm-variable">name</span> = <span class="cm-string">&quot;Cancel&quot;</span>}
+    }
+
+    <span class="cm-comment">-- A table with the elements needed for the pop-up</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">messageTable</span> = {
+        <span class="cm-variable">icon</span> = <span class="cm-string">&quot;object_smart&quot;</span>,
+        <span class="cm-variable">backColor</span> = <span class="cm-string">&quot;Window.Plugins&quot;</span>,
+        <span class="cm-variable">title</span> = <span class="cm-string">&quot;This is the title&quot;</span>,
+        <span class="cm-variable">message</span> = <span class="cm-string">&quot;This is a message</span>
+<span class="cm-variable">That</span> <span class="cm-variable">can</span> <span class="cm-variable">have</span> <span class="cm-variable">multiple</span> <span class="cm-builtin">lines</span><span class="cm-string">&quot;,</span>
+        <span class="cm-variable">commands</span> = <span class="cm-variable">defaultCommandButtons</span>,
+    }
+
+    <span class="cm-comment">-- The creation on the actual pop-up with the result stored in a variable</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">returnTable</span> = <span class="cm-variable">MessageBox</span>(<span class="cm-variable">messageTable</span>)
+
+    <span class="cm-comment">-- Print the content of the returned table</span>
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Success = &quot;</span>..<span class="cm-builtin">tostring</span>(<span class="cm-variable">returnTable.success</span>))
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Result = &quot;</span>..<span class="cm-variable">returnTable.result</span>)
+<span class="cm-keyword">end</span></pre></pre></td></tr></table><h3 id="h3_1330111219" data-has-heading-anchor="true">Example 3<a href="lua_objectfree_messagebox.html#h3_1330111219" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h3>
+
+<p>This example displays a message box for 3 seconds and then closes itself:</p>
+
+<table class="CHCodeSample_container notranslate" cellspacing="0" cellpadding="0"><tr class="CHCodeSample_tr1"><td class="CHCodeSample_header"><div class="CHCodeSample_copyCode nonPrintable"><a onclick="copyCodeSample(this)" href="javascript:void(0)">Copy Code</a></div><div class="CHCodeSample_langName notranslate">Lua</div></td></tr><tr class="CHCodeSample_tr2"><td class="CHCodeSample_code notranslate cm-s-default"><pre><pre class="cm-s-default"><span class="cm-keyword">return</span> <span class="cm-keyword">function</span> ()
+    <span class="cm-comment">-- This variable contains the table used as argument for the messagebox</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">messageTable</span> = {
+        <span class="cm-variable">title</span> = <span class="cm-string">&quot;Do not worry&quot;</span>,
+        <span class="cm-variable">message</span> = <span class="cm-string">&quot;This message will self destruct</span>
+<span class="cm-variable">Goodbye</span>!<span class="cm-string">&quot;,</span>
+        <span class="cm-variable">timeout</span> = <span class="cm-number">3000</span>,
+        <span class="cm-variable">timeoutResultCancel</span> = <span class="cm-keyword">false</span>,
+        <span class="cm-variable">timeoutResultID</span> = <span class="cm-number">99</span>,
+    }
+
+    <span class="cm-comment">-- This creates the messagebox pop-up and store the return table in a variable</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">returnTable</span> = <span class="cm-variable">MessageBox</span>(<span class="cm-variable">messageTable</span>)
+
+    <span class="cm-comment">-- Print the content of the returned table</span>
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Success = &quot;</span>..<span class="cm-builtin">tostring</span>(<span class="cm-variable">returnTable.success</span>))
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Result = &quot;</span>..<span class="cm-variable">returnTable.result</span>)
+<span class="cm-keyword">end</span></pre></pre></td></tr></table><h3 id="h3_1330111212" data-has-heading-anchor="true">Example 4<a href="lua_objectfree_messagebox.html#h3_1330111212" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h3>
+
+<p>This example adds state buttons to the message box. The buttons are added to a table for a better overview.</p>
+
+<table class="CHCodeSample_container notranslate" cellspacing="0" cellpadding="0"><tr class="CHCodeSample_tr1"><td class="CHCodeSample_header"><div class="CHCodeSample_copyCode nonPrintable"><a onclick="copyCodeSample(this)" href="javascript:void(0)">Copy Code</a></div><div class="CHCodeSample_langName notranslate">Lua</div></td></tr><tr class="CHCodeSample_tr2"><td class="CHCodeSample_code notranslate cm-s-default"><pre><pre class="cm-s-default"><span class="cm-keyword">return</span> <span class="cm-keyword">function</span> ()
+    <span class="cm-comment">-- A table with two default buttons for the pop-up</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">defaultCommandButtons</span> = {
+        {<span class="cm-variable">value</span> = <span class="cm-number">2</span>, <span class="cm-variable">name</span> = <span class="cm-string">&quot;OK&quot;</span>},
+        {<span class="cm-variable">value</span> = <span class="cm-number">1</span>, <span class="cm-variable">name</span> = <span class="cm-string">&quot;Cancel&quot;</span>}
+    }
+    <span class="cm-comment">-- A table with three state buttons </span>
+    <span class="cm-comment">-- The buttons will be displayed alphabetically in the pop-up</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">stateButtons</span> = {
+        {<span class="cm-variable">name</span> = <span class="cm-string">&quot;State B&quot;</span>, <span class="cm-variable">state</span> = <span class="cm-keyword">false</span>},
+        {<span class="cm-variable">name</span> = <span class="cm-string">&quot;State A&quot;</span>, <span class="cm-variable">state</span> = <span class="cm-keyword">false</span>},
+        {<span class="cm-variable">name</span> = <span class="cm-string">&quot;New State&quot;</span>, <span class="cm-variable">state</span> = <span class="cm-keyword">false</span>}
+    }
+
+    <span class="cm-comment">-- A table with the elements needed for the pop-up</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">messageTable</span> = {
+        <span class="cm-variable">icon</span> = <span class="cm-string">&quot;object_smart&quot;</span>,
+        <span class="cm-variable">backColor</span> = <span class="cm-string">&quot;Window.Plugins&quot;</span>,
+        <span class="cm-variable">title</span> = <span class="cm-string">&quot;This is state buttons&quot;</span>,
+        <span class="cm-variable">message</span> = <span class="cm-string">&#39;Toggle the states and click &quot;Ok&quot;&#39;</span>,
+        <span class="cm-variable">commands</span> = <span class="cm-variable">defaultCommandButtons</span>,
+        <span class="cm-variable">states</span> = <span class="cm-variable">stateButtons</span>,
+    }
+
+    <span class="cm-comment">-- The creation on the actual pop-up with the result stored in a variable</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">returnTable</span> = <span class="cm-variable">MessageBox</span>(<span class="cm-variable">messageTable</span>)
+
+    <span class="cm-comment">-- Print the content of the returned table</span>
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Success = &quot;</span>..<span class="cm-builtin">tostring</span>(<span class="cm-variable">returnTable.success</span>))
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Result = &quot;</span>..<span class="cm-variable">returnTable.result</span>)
+    
+    <span class="cm-comment">-- Print a list with the state of the stateButtons</span>
+    <span class="cm-keyword">for</span> <span class="cm-variable">name</span>,<span class="cm-variable">state</span> <span class="cm-keyword">in</span> <span class="cm-builtin">pairs</span>(<span class="cm-variable">returnTable.states</span>) <span class="cm-keyword">do</span>
+        <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;State &#39;%s&#39; = &#39;%s&#39;&quot;</span>,<span class="cm-variable">name</span>,<span class="cm-builtin">tostring</span>(<span class="cm-variable">state</span>))
+    <span class="cm-keyword">end</span>
+<span class="cm-keyword">end</span></pre></pre></td></tr></table><h3 id="h3_1330111213" data-has-heading-anchor="true">Example 5<a href="lua_objectfree_messagebox.html#h3_1330111213" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h3>
+
+<p>This example shows the input fields.</p>
+
+<table class="CHCodeSample_container notranslate" cellspacing="0" cellpadding="0"><tr class="CHCodeSample_tr1"><td class="CHCodeSample_header"><div class="CHCodeSample_copyCode nonPrintable"><a onclick="copyCodeSample(this)" href="javascript:void(0)">Copy Code</a></div><div class="CHCodeSample_langName notranslate">Lua</div></td></tr><tr class="CHCodeSample_tr2"><td class="CHCodeSample_code notranslate cm-s-default"><pre><pre class="cm-s-default"><span class="cm-keyword">return</span> <span class="cm-keyword">function</span> ()
+    <span class="cm-comment">-- A table with two default buttons for the pop-up</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">defaultCommandButtons</span> = {
+        {<span class="cm-variable">value</span> = <span class="cm-number">2</span>, <span class="cm-variable">name</span> = <span class="cm-string">&quot;OK&quot;</span>},
+        {<span class="cm-variable">value</span> = <span class="cm-number">1</span>, <span class="cm-variable">name</span> = <span class="cm-string">&quot;Cancel&quot;</span>}
+    }
+    <span class="cm-comment">-- A table with three input fields</span>
+    <span class="cm-comment">-- The fields will be displayed alphabetically in the pop-up based on name</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">inputFields</span> = {
+        {<span class="cm-variable">name</span> = <span class="cm-string">&quot;Numbers Only&quot;</span>, <span class="cm-variable">value</span> = <span class="cm-string">&quot;1234&quot;</span>, <span class="cm-variable">whiteFilter</span> = <span class="cm-string">&quot;0123456789&quot;</span>, <span class="cm-variable">vkPlugin</span> = <span class="cm-string">&quot;NumericInput&quot;</span>},
+        {<span class="cm-variable">name</span> = <span class="cm-string">&quot;Text Only&quot;</span>, <span class="cm-variable">value</span> = <span class="cm-string">&quot;abcdef&quot;</span>, <span class="cm-variable">blackFilter</span> = <span class="cm-string">&quot;0123456789&quot;</span>},
+        {<span class="cm-variable">name</span> = <span class="cm-string">&quot;Maximum 10 characters&quot;</span>, <span class="cm-variable">value</span> = <span class="cm-string">&quot;&quot;</span>, <span class="cm-variable">maxTextLength</span> = <span class="cm-number">10</span>}
+    }
+    <span class="cm-comment">-- Possible vkPlugin values:</span>
+    <span class="cm-comment">-- - &quot;TextInput&quot; : same as default - standrd on-screne keyboard</span>
+    <span class="cm-comment">-- - &quot;TextInputNumOnly&quot; : text input but only with number buttons</span>
+    <span class="cm-comment">-- - &quot;TextInputNumOnlyRange&quot; : text input but only with number and related range buttons </span>
+    <span class="cm-comment">-- - &quot;TextInputTimeOnly&quot; : text input styled for time input - includes buttons for time values</span>
+    <span class="cm-comment">-- - &quot;NumericInput&quot; : general number input</span>
+    <span class="cm-comment">-- - &quot;CueNumberInput&quot; : number input styled for cue number</span>
+    <span class="cm-comment">-- - &quot;RelCueNumberInput&quot; : number input with the relative &quot;delta&quot; button</span>
+    <span class="cm-comment">-- - &quot;IP4Prefix&quot; : designed for inputting an IPv4 address allowing CIDR notation</span>
+
+    <span class="cm-comment">-- A table with the elements needed for the pop-up</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">messageTable</span> = {
+        <span class="cm-variable">icon</span> = <span class="cm-string">&quot;object_smart&quot;</span>,
+        <span class="cm-variable">backColor</span> = <span class="cm-string">&quot;Window.Plugins&quot;</span>,
+        <span class="cm-variable">title</span> = <span class="cm-string">&quot;This is input fields&quot;</span>,
+        <span class="cm-variable">message</span> = <span class="cm-string">&#39;Change the values in the input fields and click &quot;Ok&quot;&#39;</span>,
+        <span class="cm-variable">commands</span> = <span class="cm-variable">defaultCommandButtons</span>,
+        <span class="cm-variable">inputs</span> = <span class="cm-variable">inputFields</span>,
+        <span class="cm-variable">autoCloseOnInput</span> = <span class="cm-keyword">false</span>
+    }
+
+    <span class="cm-comment">-- The creation on the actual pop-up with the result stored in a variable</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">returnTable</span> = <span class="cm-variable">MessageBox</span>(<span class="cm-variable">messageTable</span>)
+
+    <span class="cm-comment">-- Print the content of the returned table</span>
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Success = &quot;</span>..<span class="cm-builtin">tostring</span>(<span class="cm-variable">returnTable.success</span>))
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Result = &quot;</span>..<span class="cm-variable">returnTable.result</span>)
+    <span class="cm-comment">-- Print a list with the values of the input fields</span>
+    <span class="cm-keyword">for</span> <span class="cm-variable">name</span>,<span class="cm-variable">value</span> <span class="cm-keyword">in</span> <span class="cm-builtin">pairs</span>(<span class="cm-variable">returnTable.inputs</span>) <span class="cm-keyword">do</span>
+        <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Input &#39;%s&#39; = &#39;%s&#39;&quot;</span>,<span class="cm-variable">name</span>,<span class="cm-builtin">tostring</span>(<span class="cm-variable">value</span>))
+    <span class="cm-keyword">end</span>
+<span class="cm-keyword">end</span></pre></pre></td></tr></table><h3 id="h3_1330111214" data-has-heading-anchor="true">Example 6<a href="lua_objectfree_messagebox.html#h3_1330111214" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h3>
+
+<p>This example shows the different selector buttons.</p>
+
+<table class="CHCodeSample_container notranslate" cellspacing="0" cellpadding="0"><tr class="CHCodeSample_tr1"><td class="CHCodeSample_header"><div class="CHCodeSample_copyCode nonPrintable"><a onclick="copyCodeSample(this)" href="javascript:void(0)">Copy Code</a></div><div class="CHCodeSample_langName notranslate">Lua</div></td></tr><tr class="CHCodeSample_tr2"><td class="CHCodeSample_code notranslate cm-s-default"><pre><pre class="cm-s-default"><span class="cm-keyword">return</span> <span class="cm-keyword">function</span> ()
+    <span class="cm-comment">-- A table with two default buttons for the pop-up</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">defaultCommandButtons</span> = {
+        {<span class="cm-variable">value</span> = <span class="cm-number">2</span>, <span class="cm-variable">name</span> = <span class="cm-string">&quot;OK&quot;</span>},
+        {<span class="cm-variable">value</span> = <span class="cm-number">1</span>, <span class="cm-variable">name</span> = <span class="cm-string">&quot;Cancel&quot;</span>}
+    }
+    <span class="cm-comment">-- A table with selector buttons</span>
+    <span class="cm-comment">-- The buttons will be displayed alphabetically in the pop-up based on name</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">selectorButtons</span> = {
+        { <span class="cm-variable">name</span>=<span class="cm-string">&quot;Swipe Selector&quot;</span>, <span class="cm-variable">selectedValue</span>=<span class="cm-number">1</span>, <span class="cm-builtin">type</span>=<span class="cm-number">0</span>, <span class="cm-variable">values</span>={[<span class="cm-string">&quot;Swipe1&quot;</span>]=<span class="cm-number">1</span>,[<span class="cm-string">&quot;Swipe2&quot;</span>]=<span class="cm-number">2</span>}},
+        { <span class="cm-variable">name</span>=<span class="cm-string">&quot;Radio Selector&quot;</span>, <span class="cm-variable">selectedValue</span>=<span class="cm-number">2</span>, <span class="cm-builtin">type</span>=<span class="cm-number">1</span>, <span class="cm-variable">values</span>={[<span class="cm-string">&quot;Radio1&quot;</span>]=<span class="cm-number">1</span>,[<span class="cm-string">&quot;Radio2&quot;</span>]=<span class="cm-number">2</span>}},
+        { <span class="cm-variable">name</span>=<span class="cm-string">&quot;Another Radio&quot;</span>, <span class="cm-variable">selectedValue</span>=<span class="cm-number">3</span>, <span class="cm-builtin">type</span>=<span class="cm-number">1</span>, <span class="cm-variable">values</span>={[<span class="cm-string">&quot;Radio3&quot;</span>]=<span class="cm-number">3</span>,[<span class="cm-string">&quot;Radio4&quot;</span>]=<span class="cm-number">4</span>}}
+    }
+
+    <span class="cm-comment">-- State button to show grouping with swipe Selector button</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">stateButton</span> = {
+        {<span class="cm-variable">name</span> = <span class="cm-string">&quot;State Button&quot;</span>, <span class="cm-variable">state</span> = <span class="cm-keyword">false</span>},
+    }
+    <span class="cm-comment">-- A table with the elements needed for the pop-up</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">messageTable</span> = {
+        <span class="cm-variable">icon</span> = <span class="cm-string">&quot;object_smart&quot;</span>,
+        <span class="cm-variable">backColor</span> = <span class="cm-string">&quot;Window.Plugins&quot;</span>,
+        <span class="cm-variable">title</span> = <span class="cm-string">&quot;This is input fields&quot;</span>,
+        <span class="cm-variable">message</span> = <span class="cm-string">&#39;Change the values in the input fields and click &quot;Ok&quot;&#39;</span>,
+        <span class="cm-variable">commands</span> = <span class="cm-variable">defaultCommandButtons</span>,
+        <span class="cm-variable">states</span> = <span class="cm-variable">stateButton</span>,
+        <span class="cm-variable">selectors</span> = <span class="cm-variable">selectorButtons</span>,
+    }
+
+    <span class="cm-comment">-- The creation on the actual pop-up with the result stored in a variable</span>
+    <span class="cm-keyword">local</span> <span class="cm-variable">returnTable</span> = <span class="cm-variable">MessageBox</span>(<span class="cm-variable">messageTable</span>)
+
+    <span class="cm-comment">-- Print the content of the returned table</span>
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Success = &quot;</span>..<span class="cm-builtin">tostring</span>(<span class="cm-variable">returnTable.success</span>))
+    <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Result = &quot;</span>..<span class="cm-variable">returnTable.result</span>)
+    <span class="cm-comment">-- Print a list with the values of the selection buttons</span>
+    <span class="cm-keyword">for</span> <span class="cm-variable">name</span>,<span class="cm-variable">value</span> <span class="cm-keyword">in</span> <span class="cm-builtin">pairs</span>(<span class="cm-variable">returnTable.selectors</span>) <span class="cm-keyword">do</span>
+        <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;Input &#39;%s&#39; = &#39;%s&#39;&quot;</span>,<span class="cm-variable">name</span>,<span class="cm-builtin">tostring</span>(<span class="cm-variable">value</span>))
+    <span class="cm-keyword">end</span>
+    <span class="cm-comment">-- Print a list with the state of the stateButton</span>
+    <span class="cm-keyword">for</span> <span class="cm-variable">name</span>,<span class="cm-variable">state</span> <span class="cm-keyword">in</span> <span class="cm-builtin">pairs</span>(<span class="cm-variable">returnTable.states</span>) <span class="cm-keyword">do</span>
+        <span class="cm-variable">Printf</span>(<span class="cm-string">&quot;State &#39;%s&#39; = &#39;%s&#39;&quot;</span>,<span class="cm-variable">name</span>,<span class="cm-builtin">tostring</span>(<span class="cm-variable">state</span>))
+    <span class="cm-keyword">end</span>
+<span class="cm-keyword">end</span></pre></pre></td></tr></table></div>
+
+					<div id="offline-content"><br/></div>
+
+					<div id="offline-content"></div>
+
+					<div id="offline-subtopics"><ul></ul></div>
+				</div>
+			</main>
+		</div>
+
+		
+			
+
+	
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>  
+</body>
+</html>

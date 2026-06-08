@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.6.0 — June 8, 2026
+
+### 🛠️ Updated 2.3 API version
+
+- Changed: The return type has been updated to Handle[] for functions that return a table of handles. This allows the Lua Language Server to correctly identify the object type.
+
+### ➕ Added support of 2.4 API version
+
+- Added documentation of **Set** function
+- Added Autocomplete for new functions:
+  - `CurrentDataPool(nothing): light_userdata:handle`
+  - `CurrentObjectSelection(nothing): light_userdata:handle`
+  - `GetPresetDataFast(light_userdata:preset_handle[, boolean:phasers_only(default=false)[, boolean:by_fixtures(default=true)]]): table:phaser_data`
+  - `CompareHandle(light_userdata:handle): bool : equal`
+  - `UndoEnable(nothing): nothing`
+  - `UndoDisable(nothing): nothing`
+  - `CompareImages(light_userdata:image a, light_userdata:image b, light_userdata:image diff out): integer:differing-pixels`
+  - `CmdlineIndex(light_userdata:handle): integer:index`
+  - `GetTargetList(light_userdata:handle): {light_userdata:target_handle}`
+  - `IsRunningPlayback(light_userdata:handle): boolean:result`
+  - `GridGetFirstSelectedObject(light_userdata:handle to UIGrid (or derived)): light_userdata:handle`
+- Updated functions:
+  - `GetVar(light_userdata:variables, string:varname): value, integer:version`
+  - `IsClass(light_userdata:handle, string:class_name): boolean:result`
+  - `GridGetScrollCell(light_userdata:handle to UIGrid (or derived)): {r, c, r_UniqueId, r_GroupId, c_UniqueId, c_GroupId} focused cell`
+
 ## 1.5.4 — May 9, 2026
 
 - Fixed: set Handle:GetReferences return type to table

@@ -1,0 +1,495 @@
+{
+  "_Ma3_API_Version": "2.4",
+  "Handle:Addr": {
+    "prefix": "Addr(baseLocationHandle, useToAddrIndex, isCueObject)",
+    "body": [
+      "Addr(${1:_baseLocationHandle}, ${2:_useToAddrIndex}, ${3:_isCueObject})"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_addr.html#h2_873740972 \"Link to this heading\")\n---------------------------------------------------------------------------------------------------------------------\n\nThe **Addr** Lua object function converts a handle to an address string that can be used in commands.\n\nSee the [Handle topic](https://help.malighting.com/grandMA3/2.3/HTML/lua_handle.html) for more info regarding handles and links to other related functions.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_addr.html#h2__615384334 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------\n\n-   **Handle**:\\\n    The function takes a handle of the type \"light_userdata\" as an argument. This is the handle to the object where the address is requested.\\\n    It can be omitted when using the colon notation on an object.\n\n-   **Handle** (optional):\\\n    The returned address is from the root as a default. This optional handle can specify a different base location. It must still be a base location in the address path from the root to the object.\n-   **Boolean | nil** (optional):\\\n    This can be useful if there is a difference between the ToAddr() and Addr(). Setting this to \"true\" uses the index number from the ToAddr() instead of the Addr() index number. See the example below.\n-   **Boolean**(optional):\\\n    In some edge cases, the cue address is not resolved correctly. Setting this boolean to true will fix this.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_addr.html#h2__607298120 \"Link to this heading\")\n-----------------------------------------------------------------------------------------------------------------\n\n-   **String**:\\\n    Text string with the address in a parent-child number format separated by dots."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints different versions of the address to a cue in a sequence:"
+
+        ,
+        "code": "return function()\n    -- Creates a cue in sequence 1\n    Cmd(\"Store Sequence 1 Cue 100 /Merge /NoConfirmation\")\n    --Store a handle to the created cue\n    local cueObject = ObjectList(\"Sequence 1 Cue 100\")[1]\n    --Print different version of the handle address\n    Printf(\"ToAddr:              \" .. cueObject:ToAddr())\n    Printf(\"Addr:                \" .. cueObject:Addr())\n    Printf(\"Addr(Parent, false, false): \" .. cueObject:Addr(cueObject:Parent(), false, false))\n    Printf(\"Addr(Parent, true, false):  \" .. cueObject:Addr(cueObject:Parent(), true, false))\n    Printf(\"Addr(Parent, false, true): \" .. cueObject:Addr(cueObject:Parent(), false, true))\n    Printf(\"Addr(Parent, true, true):  \" .. cueObject:Addr(cueObject:Parent(), true, true))\nend"
+        
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:AddrNative": {
+    "prefix": "AddrNative(baseLocationHandle, returnNamesInQuotes)",
+    "body": [
+      "AddrNative(${1:_baseLocationHandle}, ${2:_returnNamesInQuotes})"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_addrnative.html#h2_873740972 \"Link to this heading\")\n---------------------------------------------------------------------------------------------------------------------------\n\nThe **AddrNative** Lua object function converts a handle to an address string that can be used in commands.\n\nSee the [Handle topic](https://help.malighting.com/grandMA3/2.3/HTML/lua_handle.html) for more info regarding handles and links to other related functions.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_addrnative.html#h2__615384334 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle**:\\\n    The function takes a handle as an argument. This is the handle to the object where the address is requested.\\\n    It can be omitted when using the colon notation on an object.\n\n-   **Handle** (optional):\\\n    The returned address is from the root as a default. This optional handle can specify a different base location. It still needs to be a base location in the address path from the root to the object.\n-   **Boolean** (optional):\\\n    Set this to \"true\" to get the returned names in quotation marks."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints the address of the first sequence:\n\n"
+
+        ,
+        "code": "return function()\n    -- Stores the handle to the first sequence.\n    local mySequence = DataPool().Sequences[1]\n    -- Print the native address.\n    Printf(\"The full address is: \" .. mySequence:AddrNative())\n    -- Stores a handle to the default DataPool.\n    local myDataPool = DataPool()\n    -- Print the native address to the datapool using the default datapool as a base.\n    Printf(\"The address in the datapool is: \" .. mySequence:AddrNative(myDataPool))\n    -- Print the native address to the datapool, using the default datapool as a base, with names as strings.\n    Printf(\"The address in the datapool with quotes around the names is: \" .. mySequence:AddrNative(myDataPool, true))\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:Children": {
+    "prefix": "Children()",
+    "body": [
+      "Children()"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_addrnative.html#h2_873740972 \"Link to this heading\")\n---------------------------------------------------------------------------------------------------------------------------\n\nThe **AddrNative** Lua object function converts a handle to an address string that can be used in commands.\n\nSee the [Handle topic](https://help.malighting.com/grandMA3/2.3/HTML/lua_handle.html) for more info regarding handles and links to other related functions.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_addrnative.html#h2__615384334 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle**:\\\n    The function takes a handle as an argument. This is the handle to the object where the address is requested.\\\n    It can be omitted when using the colon notation on an object.\n\n-   **Handle** (optional):\\\n    The returned address is from the root as a default. This optional handle can specify a different base location. It still needs to be a base location in the address path from the root to the object.\n-   **Boolean** (optional):\\\n    Set this to \"true\" to get the returned names in quotation marks. \n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_addrnative.html#h2__607298120 \"Link to this heading\")\n-----------------------------------------------------------------------------------------------------------------------\n\n-   **String**:\\\n    Text string with the address in a parent-child name format separated by dots."
+    
+    ,
+    "examples": {
+      "1": {
+        "description": "This example returns the name of the cues in the first sequence of the selected data pool:"
+
+        ,
+        "code": "return function()\n    -- Stores the handle for sequence 1 in a variable.\n    local mySequence = DataPool().Sequences[1]\n    if mySequence ~= nil then\n            -- Use the \"Children()\" function to store a table with all the children in a new variable.\n        local cues = mySequence:Children()\n        -- For loop that uses the length operator on the cue variable.\n        for i = 1, #cues do\n            -- Text is printed for each child.\n            Printf(\"Sequence 1 Child \" .. i .. \" = \" .. cues[i].name)\n        end\n    else\n        ErrPrintf(\"Sequence could not be found.\")\n    end\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:Count": {
+    "prefix": "Count()",
+    "body": [
+      "Count()"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_count.html#h2_873740972 \"Link to this heading\")\n----------------------------------------------------------------------------------------------------------------------\n\nThe **Count** function returns an integer number indicating the number of child objects.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_count.html#h2__615384334 \"Link to this heading\")\n---------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_count.html#h2__607298120 \"Link to this heading\")\n------------------------------------------------------------------------------------------------------------------\n\n-   **Integer**:\\\n    The function returns an integer indicating the number of children of the object."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints the selected sequence's number of children (cues)."
+
+        ,
+        "code": "return function()\n    local numberChildren = SelectedSequence():Count()\n    Printf(\"The selected Sequence has \" .. numberChildren .. \" cues.\")\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:Dump": {
+    "prefix": "Dump()",
+    "body": [
+      "Dump()"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_dump.html#h2_873740972 \"Link to this heading\")\n---------------------------------------------------------------------------------------------------------------------\n\nThe **Dump** function returns a string with information about the object, for instance, the name, class, path of the object, its properties, and children.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_dump.html#h2__615384334 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation for object-oriented calls.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_dump.html#h2__607298120 \"Link to this heading\")\n-----------------------------------------------------------------------------------------------------------------\n\nThe function returns nothing but outputs information about the object in the [Command Line History window](https://help.malighting.com/grandMA3/2.3/HTML/ws_ui_command_line.html)."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "These examples all print information about the selected sequence in the Command Line History.\n\nThe first example using the colon operator:\n\n"
+
+        ,
+        "code": "return function ()\n    -- Dump() is called on a function\n    Printf(\"=============== START OF DUMP ===============\")\n    SelectedSequence():Dump()\n    Printf(\"================ END OF DUMP ================\")\nend"
+        
+        ,
+        "suffix": ""
+        
+      },
+      "2": {
+        "description": "The second example uses a variable with the same result:"
+
+        ,
+        "code": "return function ()\n    --Stores the handle for the selected sequence in a local variable.\n    local mySeqHandle = SelectedSequence()\n    -- Dump() is called on the variable.\n    Printf(\"=============== START OF DUMP ===============\")\n    mySeqHandle:Dump()\n    Printf(\"================ END OF DUMP ================\")\nend"
+        
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:Export": {
+    "prefix": "Export(filePath, fileName)",
+    "body": [
+      "Export(${1:filePath}, ${2:fileName})"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_export.html#h2_873740972 \"Link to this heading\")\n-----------------------------------------------------------------------------------------------------------------------\n\nThe **Export** object Lua function exports an object into an XML file.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_export.html#h2__615384334 \"Link to this heading\")\n----------------------------------------------------------------------------------------------------------------------\n\n-   **Handle**:\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n-   **String**:\\\n    This is a string with the file path for the exported file.\n-   **String**:\\\n    This is a string containing the file name of the exported file.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_export.html#h2__607298120 \"Link to this heading\")\n-------------------------------------------------------------------------------------------------------------------\n\n-   **Boolean**:\\\n    The function returns a boolean indicating if the export was a success."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example exports the selected sequence into an XML file:\n\n"
+
+        ,
+        "code": "return function()\n    --SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    if selectedSequence == nil then\n        ErrPrintf(\"The selected sequence could not be found.\")\n        return\n    end\n    --The path is stored in a variable.\n    local exportPath = GetPath(Enums.PathType.UserSequences)\n    --The actual export function.\n    local success = selectedSequence:Export(exportPath, \"mySelectedSequence.xml\")\n    --Print some feedback. \n    if success then\n        Printf(\"The sequence is exported to: \" .. exportPath)\n    else\n        ErrPrintf(\"The sequence could not be exported.\")\n    end\nend"
+        
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": "Related Object Functions[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_export.html#h2_1194798447 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------------------------\n\n[Import](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_import.html) - object function used to import an XML table."
+    
+  },
+  "Handle:Get": {
+    "prefix": "Get(propertyName, roleInteger)",
+    "body": [
+      "Get(${1:propertyName}, ${2:_roleInteger})"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_get.html#h2_873740972 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------\n\nThe **Get** function returns a string with information about a specified property of the object, for instance, the object's name, class, or path.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_get.html#h2__615384334 \"Link to this heading\")\n-------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n\n-   **String**:\\\n    The string must be the name of a valid property for the object.\n\n-   **Integer**  (optional):\\\n    A valid role integer can be supplied. This will make the returned value a text string.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_get.html#h2__607298120 \"Link to this heading\")\n----------------------------------------------------------------------------------------------------------------\n\n-   **String**:\\\n    The function returns the value of the property. If the property is a boolean, then the return is \"0\" or \"1\" unless a role is defined (see optional integer argument above). When the role is supplied, a boolean is returned as \"No\" or \"Yes\"."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints information about the \"Tracking\" property of the selected sequence."
+
+        ,
+        "code": "return function ()\n    -- SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    -- Check if there is a selected sequence. If not, then exit the function.\n    if selectedSequence == nil then\n        ErrPrintf(\"The selected sequence could not be found.\")\n        return\n    end\n    -- Set a variable with the property name.\n    local propertyName = \"Tracking\"\n    -- Get the value of the property. \n    local propertyValue = selectedSequence:Get(propertyName)\n    local propertyValueString = selectedSequence:Get(propertyName, Enums.Roles.Edit)\n    -- Return some feedback.\n    if propertyValue ~= nil then\n        Printf(\"The selected sequence's property \" .. propertyName.. \" has the value '\" .. propertyValue .. \"' and a string value of '\" .. propertyValueString .. \"'.\")\n    else\n        ErrPrintf(\"The property could not be found.\")\n    end\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:GetChildClass": {
+    "prefix": "GetChildClass()",
+    "body": [
+      "GetChildClass()"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getchildclass.html#h2_873740972 \"Link to this heading\")\n------------------------------------------------------------------------------------------------------------------------------\n\nThe **GetChildClass** function returns a string with the name of the class of the object's children.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getchildclass.html#h2__615384334 \"Link to this heading\")\n-----------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getchildclass.html#h2__607298120 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------------\n\n-   **String**:\\\n    The function returns a text string with the name of the class of the object's children."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints the class name of the selected sequences' children."
+
+        ,
+        "code": "return function()\n    -- Gets the class name of children of the selected sequence.\n    Printf(\"The class name is \" .. SelectedSequence():GetChildClass())\nend"
+        
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:GetClass": {
+    "prefix": "GetClass()",
+    "body": [
+      "GetClass()"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getclass.html#h2_873740972 \"Link to this heading\")\n-------------------------------------------------------------------------------------------------------------------------\n\nThe **GetClass** function returns a string with information about the class for the object.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getclass.html#h2__615384334 \"Link to this heading\")\n------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getclass.html#h2__607298120 \"Link to this heading\")\n---------------------------------------------------------------------------------------------------------------------\n\n-   **String**:\\\n    The function returns the text string with the name of the object's class."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints the class name of the selected sequence."
+
+        ,
+        "code": "return function()\n    -- Gets the class name of the selected sequence.\n    Printf(\"The class name is \" .. SelectedSequence():GetClass())\nend"
+        
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:GetDependencies": {
+    "prefix": "GetDependencies()",
+    "body": [
+      "GetDependencies()"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getdependencies.html#h2_873740972 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------------------\n\nThe **GetDependencies** function returns a table with the objects' dependencies.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getdependencies.html#h2__615384334 \"Link to this heading\")\n-------------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getdependencies.html#h2__607298120 \"Link to this heading\")\n----------------------------------------------------------------------------------------------------------------------------\n\n-   **Table**:\\\n    The function returns a table with the handles for the different dependency objects."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints a dump of the selected sequence's first object in the returned table."
+
+        ,
+        "code": "return function()\n    -- SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    -- Get the dependencies for the sequence.\n    local seqDependencies = selectedSequence:GetDependencies()\n    -- Check if there are any dependencies and output a relevant feedback.\n    if seqDependencies ~= nil then\n        -- There is a dependency table returned. Print a dump of the first table element.\n        Printf(\"=============== START OF DUMP ===============\")\n        seqDependencies[1]:Dump()\n        Printf(\"================ END OF DUMP ================\")\n    else\n        Printf(\"No dependencies found\")\n    end\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:GetFader": {
+    "prefix": "GetFader(tokenAndIndex)",
+    "body": [
+      "GetFader(${1:tokenAndIndex})"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getfader.html#h2_873740972 \"Link to this heading\")\n-------------------------------------------------------------------------------------------------------------------------\n\nThe **GetFader** function returns a float number indicating a fader position for the object.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getfader.html#h2__615384334 \"Link to this heading\")\n------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument. It can be omitted when using the colon notation on an object. See the examples below.\n-   **Table**:\\\n    The table can contain two different elements: Token and Index. The important element is the token.\n    -   **Token**: This is used to specify which fader the value is requested for. These are the valid values:\n        -   FaderMaster\n        -   FaderX\n        -   FaderXA\n        -   FaderXB\n        -   FaderTemp\n        -   FaderRate\n        -   FaderSpeed\n        -   FaderHighlight\n        -   FaderLowlight\n        -   FaderSolo\n        -   FaderTime\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getfader.html#h2__607298120 \"Link to this heading\")\n---------------------------------------------------------------------------------------------------------------------\n\n-   **Number**:\\\n    The function returns a float number indicating the fader position."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints the fader positions of the Master and Rate faders for the selected sequence."
+
+        ,
+        "code": "return function()\n    -- SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    -- Get the value for the Master fader.\n    local faderMasterValue = selectedSequence:GetFader({})\n    -- Get the value for the Rate fader.\n    local faderRateValue = selectedSequence:GetFader({token=\"FaderRate\"})\n    -- Print feedback with the values.\n    Printf(\"The selected sequence Master fader value is: \".. tostring(faderMasterValue))\n    Printf(\"The selected sequence Rate fader value is: \".. tostring(faderRateValue))\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:GetFaderText": {
+    "prefix": "GetFaderText(tokenAndIndex)",
+    "body": [
+      "GetFaderText(${1:tokenAndIndex})"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getfadertext.html#h2_873740972 \"Link to this heading\")\n-----------------------------------------------------------------------------------------------------------------------------\n\nThe **GetFaderText** function returns a text string indicating a fader value for the object.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getfadertext.html#h2__615384334 \"Link to this heading\")\n----------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument. It can be omitted when using the colon notation on an object. See the examples below.\n-   **Table**:\\\n    The table can contain two different elements: Token and Index. The important element is the token.\n    -   **Token**: This is used to specify which fader the value is requested for. These are the valid values:\n        -   FaderMaster\n        -   FaderX\n        -   FaderXA\n        -   FaderXB\n        -   FaderTemp\n        -   FaderRate\n        -   FaderSpeed\n        -   FaderHighlight\n        -   FaderLowlight\n        -   FaderSolo\n        -   FaderTime\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getfadertext.html#h2__607298120 \"Link to this heading\")\n-------------------------------------------------------------------------------------------------------------------------\n\n-   **String**:\\\n    The function returns a text string indicating the fader value."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints the fader value text of the Master and Rate faders for the selected sequence."
+
+        ,
+        "code": "return function()\n    -- SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    -- Get the value for the Master fader. Since it is the default, no token needs to be defined.\n    local faderMasterText = selectedSequence:GetFaderText({})\n    -- Get the value for the Rate fader.\n    local faderRateText = selectedSequence:GetFaderText({token=\"FaderRate\"})\n    -- Print feedback with the values.\n    Printf(\"The selected sequence Master fader value text is: \".. tostring(faderMasterText))\n    Printf(\"The selected sequence Rate fader value text is: \".. tostring(faderRateText))\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:GetReferences": {
+    "prefix": "GetReferences()",
+    "body": [
+      "GetReferences()"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getreferences.html#h2_873740972 \"Link to this heading\")\n------------------------------------------------------------------------------------------------------------------------------\n\nThe **GetReferences** function returns a table with handles for the objects referencing this object.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getreferences.html#h2__615384334 \"Link to this heading\")\n-----------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getreferences.html#h2__607298120 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------------\n\n-   **Table**:\\\n    The function returns a table with the handles for the different objects referencing this object."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints a dump of the selected sequence's first object in the returned table."
+
+        ,
+        "code": "return function()\n    -- SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    -- Get the references for the sequence.\n    local seqReferences = selectedSequence:GetReferences()\n    -- Check if there are any references and output a relevant feedback.\n    if seqReferences ~= nil then\n        -- There is a reference table returned. Print a dump of the first table element.\n        Printf(\"=============== START OF DUMP ===============\")\n        seqReferences[1]:Dump()\n        Printf(\"================ END OF DUMP ================\")\n    else\n        Printf(\"No references found\")\n    end\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:GetUIEditor": {
+    "prefix": "GetUIEditor()",
+    "body": [
+      "GetUIEditor()"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getuieditor.html#h2_873740972 \"Link to this heading\")\n----------------------------------------------------------------------------------------------------------------------------\n\nThe **GetUIEditor** function returns a text string with the name of the UI editor for the object.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getuieditor.html#h2__615384334 \"Link to this heading\")\n---------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getuieditor.html#h2__607298120 \"Link to this heading\")\n------------------------------------------------------------------------------------------------------------------------\n\n-   **String**:\\\n    The function returns a text string with the name of the object's UI editor."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints the name of the selected sequence's editor."
+        
+        ,
+        "code": "return function()\n    -- SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    -- Get the name of the editor for the sequence object. \n    local seqEditor = selectedSequence:GetUIEditor()\n    -- Print some feedback.\n    if seqEditor ~= nil then\n        Printf(\"The name of the editor is: \" .. seqEditor)\n    else\n        Printf(\"The object does not appear to have an editor.\")\n    end\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:GetUISettings": {
+    "prefix": "GetUISettings()",
+    "body": [
+      "GetUISettings()"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getuisettings.html#h2_873740972 \"Link to this heading\")\n------------------------------------------------------------------------------------------------------------------------------\n\nThe **GetUISettings** function returns a text string with the name of the UI settings for the object.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getuisettings.html#h2__615384334 \"Link to this heading\")\n-----------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_getuisettings.html#h2__607298120 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------------\n\n-   **String**:\\\n    The function returns a text string with the name of the object's UI settings."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints the name of the selected sequence's settings."
+
+        ,
+        "code": "return function()\n    -- SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    -- Get the name of the editor for the sequence object. \n    local seqSettings = selectedSequence:GetUISettings()\n    -- Print some feedback.\n    if seqSettings ~= nil then\n        Printf(\"The name of the settings is: \" .. seqSettings)\n    else\n        Printf(\"The object does not appear to have an editor.\")\n    end\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:HasActivePlayback": {
+    "prefix": "HasActivePlayback()",
+    "body": [
+      "HasActivePlayback()"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_hasactiveplayback.html#h2_873740972 \"Link to this heading\")\n----------------------------------------------------------------------------------------------------------------------------------\n\nThe **HasActivePlayback** Lua function returns a boolean indicating if an object has a currently active playback, for instance, if a sequence has an active cue.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_hasactiveplayback.html#h2__615384334 \"Link to this heading\")\n---------------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle**:\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_hasactiveplayback.html#h2__607298120 \"Link to this heading\")\n------------------------------------------------------------------------------------------------------------------------------\n\n-   **Boolean**:\\\n    The function returns a boolean indicating the playback status:\n    -   **True**: There is active playback.\n    -   **False**: There is no active playback."
+    ,
+    "examples": {
+      "1": {
+        "description": "To return the information if the selected sequence has an active playback, create a plugin with this code:"
+
+        ,
+        "code": "return function()\n    -- Stores the handle of the selected sequence.\n    local selectedSequence = SelectedSequence()\n\n    -- The following 'if' gives different feedback based on the playback status.\n    if selectedSequence:HasActivePlayback() then\n        Printf(\"Sequence '\" ..selectedSequence.name.. \"' has active playback.\")\n    else\n        Printf(\"Sequence '\" ..selectedSequence.name.. \"' has NO active playback.\")\n    end\nend"
+        
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:Import": {
+    "prefix": "Import(filePath, fileName)",
+    "body": [
+      "Import(${1:filePath}, ${2:fileName})"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_import.html#h2_873740972 \"Link to this heading\")\n-----------------------------------------------------------------------------------------------------------------------\n\nThe Import object Lua function imports an object written in XML format.\n\n![](https://help.malighting.com/grandMA3/2.3/Storage/grandma3-user-manual-publication/Client/Content/images/icons/restriction_gray.png) **Restriction:**\nThe imported files need to exist already to be imported.\n\n![](https://help.malighting.com/grandMA3/2.3/Storage/grandma3-user-manual-publication/Client/Content/images/icons/important_gray.png) **Important:**\nThe Lua import will merge the content of the XML file into the object without any confirmation pop-up.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_import.html#h2__615384334 \"Link to this heading\")\n----------------------------------------------------------------------------------------------------------------------\n\n-   **Handle**:\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n-   **String**:\\\n    This is a string with the path to the file location.\n-   **String**:\\\n    This is a string containing the file name of the desired file.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_import.html#h2__607298120 \"Link to this heading\")\n-------------------------------------------------------------------------------------------------------------------\n\n-   **Boolean**:\\\n    The function returns a boolean indicating if the import was a success."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example imports the content of an XML file into the selected sequence. The file is called \"MySelectedSequence\", and it is located at \"../gma3_library/datapools/sequences\". The file can be created using the example in the [Export object function](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_export.html)."
+
+        ,
+        "code": "return function()\n    --SelectedSequence() creates a handle to the selected sequence.\n    -- The imported object will be merged into this sequence.\n    local selectedSequence = SelectedSequence()\n    -- Check if there is a selected sequence - if not then exit the function.\n    if selectedSequence == nil then\n        ErrPrintf(\"The selected sequence could not be found.\")\n        return\n    end\n    --The path is stored in a variable.\n    local path = GetPath(Enums.PathType.UserSequences)\n    --The actual import function.\n    local success = selectedSequence:Import(path, \"mySelectedSequence.xml\")\n    --Print some feedback. \n    if success then\n        Printf(\"The sequence is imported from: \" .. path .. GetPathSeparator() .. \"mySelectedSequence.xml\")\n    else\n        ErrPrintf(\"The object could not be imported.\")\n    end\nend"
+
+        ,
+        "suffix": "Related Object Function[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_import.html#h2_357420112 \"Link to this heading\")\n-----------------------------------------------------------------------------------------------------------------------------------\n\n[Export](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_export.html) - object function used to export an XML table."
+
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:Set": {
+    "prefix": "Set(propertyName, propertyValue, overrideChangeLevel)",
+    "body": [
+      "Set(${1:propertyName}, ${2:propertyValue}, ${3:_overrideChangeLevel})"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.4/HTML/lua_object_set.html#h2_873740972 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------\n\nThe **Set** function sets a value to a specified property of the object, for instance, the object's name.\n\nArguments[](https://help.malighting.com/grandMA3/2.4/HTML/lua_object_set.html#h2__615384334 \"Link to this heading\")\n-------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n\n-   **String**:\\\n    The string must be the name of a valid property for the object.\n-   **String**:\\\n    This string must be the desired value for the property.\n\n-   **Integer**  (optional):\\\n    ?\n\nReturn[](https://help.malighting.com/grandMA3/2.4/HTML/lua_object_set.html#h2__607298120 \"Link to this heading\")\n----------------------------------------------------------------------------------------------------------------\n\nThis function does not return anything."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example changes the \"Tracking\" property of the selected sequence to \"No\"."
+        
+        ,
+        "code": "return function()\n    -- SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    -- Set a variable with the property name.\n    local propertyName = \"Tracking\"\n    -- Set the property.\n    selectedSequence:Set(propertyName, \"No\")\nend"
+
+        ,
+        "suffix": ""
+
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:Ptr": {
+    "prefix": "Ptr(childIndex)",
+    "body": [
+      "Ptr(${1:childIndex})"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_ptr.html#h2_873740972 \"Link to this heading\")\n--------------------------------------------------------------------------------------------------------------------\n\nThe **Ptr** Lua function returns the handle to a child object.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_ptr.html#h2__615384334 \"Link to this heading\")\n-------------------------------------------------------------------------------------------------------------------\n\n-   **Handle**:\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n-   **Integer**:\\\n    This is the index number for the desired child object. This index is 1-based.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_ptr.html#h2__607298120 \"Link to this heading\")\n----------------------------------------------------------------------------------------------------------------\n\n-   **Handle** | **nil**:\\\n    The function returns a handle to the child object. If the child object does not exist, then it returns nil."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example prints the data connected to the first child of the selected sequence. It uses the Dump() function."
+
+        ,
+        "code": "return function()\n    -- SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    -- Check that a handle was returned - if not then exit function.\n    if selectedSequence == nil then\n        ErrPrintf(\"There is no selected sequence.\")\n        return\n    end\n    -- Get a handle to the first child object.\n    local firstChild = selectedSequence:Ptr(1)\n    -- Print some feedback.\n    if firstChild ~= nil then\n        Printf(\"=============== START OF DUMP ===============\")\n        firstChild:Dump()\n        Printf(\"================ END OF DUMP ================\")\n    else\n        ErrPrintf(\"The object do not have a child object.\")\n    end\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:SetFader": {
+    "prefix": "SetFader(settingsTable)",
+    "body": [
+      "SetFader(${1:settingsTable})"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_setfader.html#h2_873740972 \"Link to this heading\")\n-------------------------------------------------------------------------------------------------------------------------\n\nThe **Set Fader** function sets a fader to a specified level. It must be used on an object that has faders.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_setfader.html#h2__615384334 \"Link to this heading\")\n------------------------------------------------------------------------------------------------------------------------\n\n-   **Handle:**\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n\n-   **Table**:\\\n    The table can contain up to three named elements using the key/value methods.\n    -   **\"value\"**:\\\n        This is a float number indicating the fader position on a scale from 0 to 100. This should always be part of the table.\n\n    -   **\"token\"**:\\\n        This is a string indicating the fader. The string must start with \"Fader\". It can be omitted, and then the value will be assigned to the Master fader. The fader name must be valid for the object being used. Possible tokens include:\n        -   \"FaderMaster\"\n        -   \"FaderX\"\n        -   \"FaderXA\"\n        -   \"FaderXB\"\n        -   \"FaderTemp\"\n        -   \"FaderRate\"\n        -   \"FaderSpeed\"\n        -   \"FaderHighlight\"\n        -   \"FaderLowlight\"\n        -   \"FaderTime\"\n        -   \"FaderSolo\"\n    -   **\"faderEnabled\"**:\\\n        If the fader can be toggled, then this boolean can be used to enable or disable the fader. A true value sets the fader to enabled.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_setfader.html#h2__607298120 \"Link to this heading\")\n---------------------------------------------------------------------------------------------------------------------\n\nThis function does not return anything."
+
+    ,
+    "examples": {
+      "1": {
+        "description": "This example changes the selected sequences' Master fader to 100% and the Time fader to 5 seconds and enables the time fader."
+
+        ,
+        "code": "return function()\n    -- SelectedSequence() creates a handle to the selected sequence.\n    local selectedSequence = SelectedSequence()\n    -- Set the master fader to 100. The FaderMaster is the default token, so it can be omitted.\n    selectedSequence:SetFader({value=100.0})\n    -- Set the time fader to 5 seconds and enable the fader.\n    selectedSequence:SetFader({value=50.0, faderEnabled=1, token=\"FaderTime\"})\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  },
+  "Handle:ToAddr": {
+    "prefix": "ToAddr(returnName)",
+    "body": [
+      "ToAddr(${1:returnName})"
+    ],
+    "description": "Description[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_toaddr.html#h2_873740972 \"Link to this heading\")\n-----------------------------------------------------------------------------------------------------------------------\n\nThe **ToAddr** Lua object function converts a handle to an address string that can be used in commands.\n\nSee the [Handle topic](https://help.malighting.com/grandMA3/2.3/HTML/lua_handle.html) for more info regarding handles and links to other related functions.\n\nArguments[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_toaddr.html#h2__615384334 \"Link to this heading\")\n----------------------------------------------------------------------------------------------------------------------\n\n-   **Handle**:\\\n    The function takes a handle of the type \"light_userdata\" as an argument.\\\n    It can be omitted when using the colon notation on an object.\n-   **Boolean**:\\\n    Set this to \"true\" to get the returned name. \"False\" will return the object type and index number.\n\nReturn[](https://help.malighting.com/grandMA3/2.3/HTML/lua_object_toaddr.html#h2__607298120 \"Link to this heading\")\n-------------------------------------------------------------------------------------------------------------------\n\n-   **String**:\\\n    Text string with the address."
+    
+    ,
+    "examples": {
+      "1": {
+        "description": "This example returns the address of the first sequence of the selected data pool, prints the address in the Command Line History, and creates a grandMA3 command with a \"Go\" keyword in front of the address. This command is sent to the grandMA3 command line."
+
+        ,
+        "code": "return function()\n    -- Stores the handle in a variable.\n    local mySequence = DataPool().Sequences[1]\n    if mySequence ~= nil then\n        -- Converts the handle to the address and store in variable.\n        local mySequenceAddressName = mySequence:ToAddr(true)\n        local mySequenceAddress = mySequence:ToAddr(false)\n        -- Print the address to the Command Line History.\n        Printf(\"The named address of the sequence is: \" .. mySequenceAddressName)\n        Printf(\"The system address of the sequence is: \" .. mySequenceAddress)\n        -- Send a 'Go' command with the address appended.\n        Cmd(\"Go %s\", mySequenceAddress)\n    else\n        ErrPrintf(\"The sequence could not be found\")\n    end\nend"
+
+        ,
+        "suffix": ""
+        
+      }
+    },
+    "suffix": ""
+    
+  }
+}

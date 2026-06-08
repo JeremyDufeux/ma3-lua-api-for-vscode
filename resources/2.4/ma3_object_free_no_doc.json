@@ -1,0 +1,416 @@
+{
+  "_Ma3_API_Version": "2.4",
+  "CallRealtimeLockedProtected": {
+    "prefix": "CallRealtimeLockedProtected(functionName)",
+    "body": [
+      "CallRealtimeLockedProtected(${1:functionName})"
+    ],
+    "code": "CallRealtimeLockedProtected(function:name): result of function"
+  },
+  "ChannelTable": {
+    "prefix": "ChannelTable(attributeNameOrIndex)",
+    "body": [
+      "ChannelTable(${1:attributeNameOrIndex})"
+    ],
+    "code": "ChannelTable(string:attribute_name or integer:attribute_index): table of ui_channel_index"
+  },
+  "CloseMessageQueue": {
+    "prefix": "CloseMessageQueue(queueName)",
+    "body": [
+      "CloseMessageQueue(${1:queueName})"
+    ],
+    "code": "CloseMessageQueue(string:queue name): boolean:success"
+  },
+  "ColMeasureDeviceDarkCalibrate": {
+    "prefix": "ColMeasureDeviceDarkCalibrate()",
+    "body": [
+      "ColMeasureDeviceDarkCalibrate()"
+    ],
+    "code": "ColMeasureDeviceDarkCalibrate(nothing): integer:flag"
+  },
+  "ColMeasureDeviceDoMeasurement": {
+    "prefix": "ColMeasureDeviceDoMeasurement()",
+    "body": [
+      "ColMeasureDeviceDoMeasurement()"
+    ],
+    "code": "ColMeasureDeviceDoMeasurement(nothing): table:values"
+  },
+  "CompareHandle": {
+    "prefix": "CompareHandle(handle)",
+    "body": [
+      "CompareHandle(${1:handle})"
+    ],
+    "code": "CompareHandle(light_userdata:handle): bool : equal"
+  },
+  "CompareImages": {
+    "prefix": "CompareImages(imageA, imageB, diffOut)",
+    "body": [
+      "CompareImages(${1:imageA}, ${2:imageB}, ${3:diffOut})"
+    ],
+    "code": "CompareImages(light_userdata:image a, light_userdata:image b, light_userdata:image diff out): integer:differing-pixels"
+  },
+  "CopyFile": {
+    "prefix": "CopyFile(sourcePath, destinationPath)",
+    "body": [
+      "CopyFile(${1:sourcePath}, ${2:destinationPath})"
+    ],
+    "code": "CopyFile(string:source_path, string:destination_path): boolean:result"
+  },
+  "CreateDirectoryRecursive": {
+    "prefix": "CreateDirectoryRecursive(path)",
+    "body": [
+      "CreateDirectoryRecursive(${1:path})"
+    ],
+    "code": "CreateDirectoryRecursive(string:path): boolean:result"
+  },
+  "CurrentDataPool": {
+    "prefix": "CurrentDataPool()",
+    "body": [
+      "CurrentDataPool()"
+    ],
+    "code": "CurrentDataPool(nothing): light_userdata:handle"
+  },
+  "CurrentObjectSelection": {
+    "prefix": "CurrentObjectSelection()",
+    "body": [
+      "CurrentObjectSelection()"
+    ],
+    "code": "CurrentObjectSelection(nothing): light_userdata:handle"
+  },
+  "DevMode3d": {
+    "prefix": "DevMode3d()",
+    "body": [
+      "DevMode3d()"
+    ],
+    "code": "DevMode3d(nothing): string:devMode3d"
+  },
+  "FSExtendedModeHasDots": {
+    "prefix": "FSExtendedModeHasDots(handle, cell)",
+    "body": [
+      "FSExtendedModeHasDots(${1:handle}, ${2:cell})"
+    ],
+    "code": "FSExtendedModeHasDots(light_userdata:handle to UIGrid (or derived), {r, c}:cell): boolean"
+  },
+  "FindBestDMXPatchAddr": {
+    "prefix": "FindBestDMXPatchAddr(patch, startingAddress, footprint)",
+    "body": [
+      "FindBestDMXPatchAddr(${1:patch}, ${2:startingAddress}, ${3:footprint})"
+    ],
+    "code": "FindBestDMXPatchAddr(light_userdata:patch, integer:starting_address, integer:footprint): integer:absolute_address"
+  },
+  "FindBestFocus": {
+    "prefix": "FindBestFocus(handle)",
+    "body": [
+      "FindBestFocus(${1:_handle})"
+    ],
+    "code": "FindBestFocus([light_userdata:handle]): nothing"
+  },
+  "FindNextFocus": {
+    "prefix": "FindNextFocus(backwards, reason)",
+    "body": [
+      "FindNextFocus(${1:_backwards}, ${2:_reason})"
+    ],
+    "code": "FindNextFocus([bool:backwards(false)[, int(Focus::Reason):reason(UserTabKey)]]): nothing"
+  },
+  "GetAttributeColumnId": {
+    "prefix": "GetAttributeColumnId(handle, attribute)",
+    "body": [
+      "GetAttributeColumnId(${1:handle}, ${2:attribute})"
+    ],
+    "code": "GetAttributeColumnId(light_userdata:handle, light_userdata:attribute): integer:column_id"
+  },
+  "GetBlockInput": {
+    "prefix": "GetBlockInput()",
+    "body": [
+      "GetBlockInput()"
+    ],
+    "code": "GetBlockInput(nothing): boolean:block_input"
+  },
+  "GetObject": {
+    "prefix": "GetObject(address)",
+    "body": [
+      "GetObject(${1:address})"
+    ],
+    "code": "GetObject(string:address): light_userdata:handle"
+  },
+  "GetProgPhaser": {
+    "prefix": "GetProgPhaser(uiChannelIndex, phaserOnly)",
+    "body": [
+      "GetProgPhaser(${1:uiChannelIndex}, ${2:phaserOnly})"
+    ],
+    "code": "GetProgPhaser(integer:ui_channel_index, boolean:phaser_only): {['abs_preset'=light_userdata:handle], ['rel_preset'=light_userdata:handle], ['fade'=float:seconds], ['delay'=float:seconds], ['speed'=float:hz], ['phase'=float:degree], ['measure'=float:percent], ['gridPos'=integer:value], ['mask_active_phaser'=integer:bitmask], ['mask_active_value'=integer:bitmask], ['mask_individual'=integer:bitmask]}"
+  },
+  "GetPresetDataFast": {
+    "prefix": "GetPresetDataFast(phasersOnly, byFixtures)",
+    "body": [
+      "GetPresetDataFast(${1:_phasersOnly}, ${2:_byFixtures})"
+    ],
+    "code": "GetPresetDataFast(light_userdata:preset_handle[, boolean:phasers_only(default=false)[, boolean:by_fixtures(default=true)]]): table:phaser_data"
+  },
+  "GetProgPhaserValue": {
+    "prefix": "GetProgPhaserValue(uiChannelIndex, step)",
+    "body": [
+      "GetProgPhaserValue(${1:uiChannelIndex}, ${2:step})"
+    ],
+    "code": "GetProgPhaserValue(integer:ui_channel_index, integer:step): {['channel_function'=integer:value], ['absolute'=number:percent], ['absolute_value'=number:value], ['relative'=number:percent]}"
+  },
+  "GetPropertyColumnId": {
+    "prefix": "GetPropertyColumnId(handle, propertyName)",
+    "body": [
+      "GetPropertyColumnId(${1:handle}, ${2:propertyName})"
+    ],
+    "code": "GetPropertyColumnId(light_userdata:handle, string:property_name): integer:column_id"
+  },
+  "GetRemoteVideoInfo": {
+    "prefix": "GetRemoteVideoInfo()",
+    "body": [
+      "GetRemoteVideoInfo()"
+    ],
+    "code": "GetRemoteVideoInfo(nothing): integer:wingID, boolean:isExtension"
+  },
+  "GetTextScreenLine": {
+    "prefix": "GetTextScreenLine()",
+    "body": [
+      "GetTextScreenLine()"
+    ],
+    "code": "GetTextScreenLine(nothing): integer:internal line number"
+  },
+  "GetTextScreenLineCount": {
+    "prefix": "GetTextScreenLineCount(startingInternalLineNumber)",
+    "body": [
+      "GetTextScreenLineCount(${1:_startingInternalLineNumber})"
+    ],
+    "code": "GetTextScreenLineCount([integer:starting internal line number]): integer:line count"
+  },
+  "GetUIChannel": {
+    "prefix": "GetUIChannel(uiChannelIndex, attributeIndex)",
+    "body": [
+      "GetUIChannel(${1:uiChannelIndex}, ${2:attributeIndex})"
+    ],
+    "code": "GetUIChannel(integer:ui_channel_index or light_userdata: subFixture_reference, integer:attribute_index or string:attribute_name): table:ui_channel_descriptor"
+  },
+  "GetVarVersion": {
+    "prefix": "GetVarVersion(variableHandle, varName)",
+    "body": [
+      "GetVarVersion(${1:variableHandle}, ${2:varName})"
+    ],
+    "code": "GetVarVersion(light_userdata:variables, string:varName): integer:version"
+  },
+  "HostRevision": {
+    "prefix": "HostRevision()",
+    "body": [
+      "HostRevision()"
+    ],
+    "code": "HostRevision(nothing): string:hostRevision"
+  },
+  "Keyboard": {
+    "prefix": "Keyboard(displayIndex, type, charOrKeycode, shift, ctrl, alt, numLock)",
+    "body": [
+      "Keyboard(${1:displayIndex}, ${2:type}, ${3:_charOrKeycode}, ${4:_shift}, ${5:_ctrl}, ${6:_alt}, ${7:_numLock})"
+    ],
+    "code": "Keyboard(integer:display_index, string:type('press', 'char', 'release')[ ,string:char(for type 'char') or string:keycode, boolean:shift, boolean:ctrl, boolean:alt, boolean:numLock]): nothing"
+  },
+  "LoadExecConfig": {
+    "prefix": "LoadExecConfig(executor)",
+    "body": [
+      "LoadExecConfig(${1:executor})"
+    ],
+    "code": "LoadExecConfig(light_userdata:executor): nothing"
+  },
+  "Mouse": {
+    "prefix": "Mouse(displayIndex, type, buttonOrAbsX, absY)",
+    "body": [
+      "Mouse(${1:displayIndex}, ${2:type}, ${3:buttonOrAbsX}, ${4:_absY})"
+    ],
+    "code": "Mouse(integer:display_index, string:type('press', 'move', 'release')[ ,string:button('Left', 'Middle', 'Right' for 'press', 'release') or integer:abs_x, integer:abs_y)]): nothing"
+  },
+  "OpenMessageQueue": {
+    "prefix": "OpenMessageQueue(queueName)",
+    "body": [
+      "OpenMessageQueue(${1:queueName})"
+    ],
+    "code": "OpenMessageQueue(string:queue name): boolean:success"
+  },
+  "OverallDeviceCertificate": {
+    "prefix": "OverallDeviceCertificate()",
+    "body": [
+      "OverallDeviceCertificate()"
+    ],
+    "code": "OverallDeviceCertificate(nothing): light_userdata:handle"
+  },
+  "PluginVars": {
+    "prefix": "PluginVars(pluginName)",
+    "body": [
+      "PluginVars(${1:_pluginName})"
+    ],
+    "code": "PluginVars([string:plugin_name]): light_userdata:plugin_preferences"
+  },
+  "PopupInput": {
+    "prefix": "PopupInput(options)",
+    "body": [
+      "PopupInput(${1:options})"
+    ],
+    "code": "PopupInput({title:str, caller:handle, items:table, selectedValue:str, x:int, y:int, target:handle, render_options:{left_icon, number, right_icon}, useTopLeft:bool, properties:{prop:value}, add_args:{FilterSupport='Yes'/'No'}}): integer:selected_index, string:selected_value"
+  },
+  "PrepareWaitObjectChange": {
+    "prefix": "PrepareWaitObjectChange(handle, changeLevelThreshold)",
+    "body": [
+      "PrepareWaitObjectChange(${1:handle}, ${2:_changeLevelThreshold})"
+    ],
+    "code": "PrepareWaitObjectChange(light_userdata:handle[ ,integer:change_level_threshold]): boolean:true or nothing"
+  },
+  "RefreshLibrary": {
+    "prefix": "RefreshLibrary(handle)",
+    "body": [
+      "RefreshLibrary(${1:handle})"
+    ],
+    "code": "RefreshLibrary(light_userdata:handle): nothing"
+  },
+  "RemoteCommand": {
+    "prefix": "RemoteCommand(ip, command)",
+    "body": [
+      "RemoteCommand(${1:ip}, ${2:command})"
+    ],
+    "code": "RemoteCommand(string:ip, string:command): boolean:success"
+  },
+  "RemoteCallRunning": {
+    "prefix": "RemoteCallRunning()",
+    "body": [
+      "RemoteCallRunning()"
+    ],
+    "code": "RemoteCallRunning(nothing): boolean:remoteCall_is_running"
+  },
+  "SaveExecConfig": {
+    "prefix": "SaveExecConfig(executor)",
+    "body": [
+      "SaveExecConfig(${1:executor})"
+    ],
+    "code": "SaveExecConfig(light_userdata:executor): nothing"
+  },
+  "SelectedDrive": {
+    "prefix": "SelectedDrive()",
+    "body": [
+      "SelectedDrive()"
+    ],
+    "code": "SelectedDrive(nothing): light_userdata:handle"
+  },
+  "SelectionComponentX": {
+    "prefix": "SelectionComponentX()",
+    "body": [
+      "SelectionComponentX()"
+    ],
+    "code": "SelectionComponentX(nothing): integer:min, integer:max, integer:index, integer:block, integer:group"
+  },
+  "SelectionComponentY": {
+    "prefix": "SelectionComponentY()",
+    "body": [
+      "SelectionComponentY()"
+    ],
+    "code": "SelectionComponentY(nothing): integer:min, integer:max, integer:index, integer:block, integer:group"
+  },
+  "SelectionComponentZ": {
+    "prefix": "SelectionComponentZ()",
+    "body": [
+      "SelectionComponentZ()"
+    ],
+    "code": "SelectionComponentZ(nothing): integer:min, integer:max, integer:index, integer:block, integer:group"
+  },
+  "SelectionNotifyBegin": {
+    "prefix": "SelectionNotifyBegin(context)",
+    "body": [
+      "SelectionNotifyBegin(${1:context})"
+    ],
+    "code": "SelectionNotifyBegin(light_userdata:associated_context): nothing"
+  },
+  "SelectionNotifyEnd": {
+    "prefix": "SelectionNotifyEnd(context)",
+    "body": [
+      "SelectionNotifyEnd(${1:context})"
+    ],
+    "code": "SelectionNotifyEnd(light_userdata:associated_context): nothing"
+  },
+  "SelectionNotifyObject": {
+    "prefix": "SelectionNotifyObject(objectToNotify)",
+    "body": [
+      "SelectionNotifyObject(${1:objectToNotify})"
+    ],
+    "code": "SelectionNotifyObject(light_userdata:object_to_notify_about): nothing"
+  },
+  "SelectionTable": {
+    "prefix": "SelectionTable()",
+    "body": [
+      "SelectionTable()"
+    ],
+    "code": "SelectionTable(nothing): table of subFixture_index"
+  },
+  "SendLuaMessage": {
+    "prefix": "SendLuaMessage(ipOrStation, channelName, data)",
+    "body": [
+      "SendLuaMessage(${1:ipOrStation}, ${2:channelName}, ${3:data})"
+    ],
+    "code": "SendLuaMessage(string:ip/station, string:channel name, table:data): boolean:success"
+  },
+  "SetColor": {
+    "prefix": "SetColor(colorModel, tripel1, tripel2, tripel3, brightness, quality, constBrightness)",
+    "body": [
+      "SetColor(${1:colorModel}, ${2:tripel1}, ${3:tripel2}, ${4:tripel3}, ${5:brightness}, ${6:quality}, ${7:constBrightness})"
+    ],
+    "code": "SetColor(string:color_model('RGB', 'xyY', 'Lab', 'XYZ', 'HSB'), float:tripel1, float:tripel2, float:tripel3, float:brightness, float:quality, boolean:const_brightness): integer:flag"
+  },
+  "SetProgPhaser": {
+    "prefix": "SetProgPhaser(uiChannelIndex, options)",
+    "body": [
+      "SetProgPhaser(${1:uiChannelIndex}, ${2:options})"
+    ],
+    "code": "SetProgPhaser(integer:ui_channel_index, {['abs_preset'=light_userdata:handle], ['rel_preset'=light_userdata:handle], ['fade'=number:seconds], ['delay'=number:seconds], ['speed'=number:hz], ['phase'=number:degree], ['measure'=number:percent], ['gridPos'=integer:value], {['channel_function'=integer:value], ['absolute'=number:percent], ['absolute_value'=integer:value], ['relative'=number:percent], ['accel'=number:percent[, 'accel_type'=integer:enum_value(Enums.SplineType)]], ['decel'=number:percent[, 'decel_type'=integer:enum_value(Enums.SplineType)]], ['trans'=number:percent], ['width'=number:percent], ['integrated'=light_userdata:preset_handle]}}): nothing"
+  },
+  "SetProgPhaserValue": {
+    "prefix": "SetProgPhaserValue(uiChannelIndex, step, options)",
+    "body": [
+      "SetProgPhaserValue(${1:uiChannelIndex}, ${2:step}, ${3:options})"
+    ],
+    "code": "SetProgPhaserValue(integer:ui_channel_index, integer:step, {['channel_function'=integer:value], ['absolute'=number:percent], ['absolute_value'=integer:value], ['relative'=number:percent], ['accel'=number:percent[, 'accel_type'=integer:enum_value(Enums.SplineType)]], ['decel'=number:percent[, 'decel_type'=integer:enum_value(Enums.SplineType)]], ['trans'=number:percent], ['width'=number:percent], ['integrated'=light_userdata:preset_handle]}): nothing"
+  },
+  "SyncFS": {
+    "prefix": "SyncFS()",
+    "body": [
+      "SyncFS()"
+    ],
+    "code": "SyncFS(nothing): nothing"
+  },
+  "UndoEnable": {
+    "prefix": "UndoEnable()",
+    "body": [
+      "UndoEnable()"
+    ],
+    "code": "UndoEnable(nothing): nothing"
+  },
+  "UndoDisable": {
+    "prefix": "UndoDisable()",
+    "body": [
+      "UndoDisable()"
+    ],
+    "code": "UndoDisable(nothing): nothing"
+  },
+  "Touch": {
+    "prefix": "Touch(displayIndex, type, touchId, absX, absY)",
+    "body": [
+      "Touch(${1:displayIndex}, ${2:type}, ${3:touchId}, ${4:absX}, ${5:absY})"
+    ],
+    "code": "Touch(integer:display_index, string:type('press', 'move', 'release'), integer:touch_id, integer:abs_x, integer:abs_y): nothing"
+  },
+  "WaitModal": {
+    "prefix": "WaitModal(secondsToWait)",
+    "body": [
+      "WaitModal(${1:_secondsToWait]})"
+    ],
+    "code": "WaitModal([number:seconds to wait]): handle to modal overlay or nil on failure(timeout)"
+  },
+  "WaitObjectDelete": {
+    "prefix": "WaitObjectDelete(handle, secondsToWait)",
+    "body": [
+      "WaitObjectDelete(${1:handle}, ${2:_secondsToWait})"
+    ],
+    "code": "WaitObjectDelete(light_userdata:handle to UIObject[, number:seconds to wait]): boolean:true on success, nil on timeout"
+  }
+}

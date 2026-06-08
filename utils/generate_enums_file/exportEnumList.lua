@@ -1,6 +1,6 @@
 function ExportEnumsToFile()
     Printf("ExportEnumsToFile")
-    local fileName = "enumsList.txt"
+    local fileName = "enums_list.txt"
     local file = io.open("D:\\Downloads\\"..fileName, "w")
     if file then
 

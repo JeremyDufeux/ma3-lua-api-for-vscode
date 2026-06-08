@@ -1,0 +1,1031 @@
+{
+  "_Ma3_API_Version": "2.4",
+  "Handle:Acquire": {
+    "prefix": "Acquire(class, undo)",
+    "body": [
+      "Acquire(${1:_class}, ${2:_undo})"
+    ],
+    "description" : "Create new slot at the beginning, auto-resizes if no empty slot.\n\nFor object-types that can have gaps (empty slots) e.g. macros inside a macro pool.\n\nSee also 'Append', 'Insert', 'Create', 'MaxCount' and 'Resize' functions.",
+    "code": "Acquire(light_userdata:handle[, string:class[, light_userdata:undo]]): light_userdata:child_handle"   
+  },
+  "Handle:AddListChildren": {
+    "prefix": "AddListChildren(parent, role)",
+    "body": [
+      "AddListChildren(${1:parent}, ${2:_role})"
+    ],
+    "code": "AddListChildren(light_userdata:handle, light_userdata:parent[, enum{Roles}:role]): nothing"   
+  },
+  "Handle:AddListChildrenNames": {
+    "prefix": "AddListChildrenNames(parent, role)",
+    "body": [
+      "AddListChildrenNames(${1:parent}, ${2:_role})"
+    ],
+    "code": "AddListChildrenNames(light_userdata:handle, light_userdata:parent[, enum{Roles}:role]): nothing"
+  },
+  "Handle:AddListLuaItem": {
+    "prefix": "AddListLuaItem(name, value, callback, argument, appearance)",
+    "body": [
+      "AddListLuaItem(${1:name}, ${2:value}, ${3:callback}, ${4:_argument}, ${5:_appearance})"
+    ],
+    "code": "AddListLuaItem(light_userdata:handle, string:name, string:value/function name, lua_function:callback reference[, <any lua type>:argument to pass to callback[, {[left={...}][right={...}]}:appearance]]): nothing"
+  },
+  "Handle:AddListLuaItems": {
+    "prefix": "AddListLuaItems(items)",
+    "body": [
+      "AddListLuaItems(${1:items})"
+    ],
+    "code": "AddListLuaItems(light_userdata:handle, table{item={[1]=name, [2]=value/function name, [3]=callback reference[, [4]=argument of any lua type to pass to callback]}, ...}): nothing"
+  },
+  "Handle:AddListNumericItem": {
+    "prefix": "AddListNumericItem(name, value, baseHandle, appearance)",
+    "body": [
+      "AddListNumericItem(${1:name}, ${2:value}, ${3:_baseHandle}, ${4:_appearance})"
+    ],
+    "code": "AddListNumericItem(light_userdata:handle, string:name, number:value[,light_userdata:base handle[, {[left={...}][right={...}]}:appearance]]): nothing"
+  },
+  "Handle:AddListNumericItems": {
+    "prefix": "AddListNumericItems(items)",
+    "body": [
+      "AddListNumericItems(${1:items})"
+    ],
+    "code": "AddListNumericItems(light_userdata:handle, table{item={[1]=name, [2]=integer:value}, ...}): nothing"
+  },
+  "Handle:AddListObjectItem": {
+    "prefix": "AddListObjectItem(targetObject, explicitName, roleOrAppearance, extendedName, appearance, postNameText)",
+    "body": [
+      "AddListObjectItem(${1:targetObject}, ${2:_explicitName}, ${3:_roleOrAppearance}, ${4:_extendedName}, ${5:_appearance}, ${6:_postNameText})"
+    ],
+    "code": "AddListObjectItem(light_userdata:handle, light_userdata:target object[, (string: explicit name[, {[boolean:appearance],[left={...}][right={...}]}:appearance] | enum{Roles}: role [, :boolean: extended_name[, {[left={...}][right={...}]}:appearance],[string:postNameText])]): nothing"
+  },
+  "Handle:AddListPropertyItem": {
+    "prefix": "AddListPropertyItem(name, value, targetHandle, appearance)",
+    "body": [
+      "AddListPropertyItem(${1:name}, ${2:value}, ${3:targetHandle}, ${4:_appearance})"
+    ],
+    "code": "AddListPropertyItem(light_userdata:handle, string:name, string:value, light_userdata:target handle[,{[left={...}][right={...}]}:appearance]): nothing"
+  },
+  "Handle:AddListPropertyItems": {
+    "prefix": "AddListPropertyItems(items)",
+    "body": [
+      "AddListPropertyItems(${1:items})"
+    ],
+    "code": "AddListPropertyItems(light_userdata:handle, table{item={[1]=name, [2]=property name, [3]=target handle}, ...}): nothing"
+  },
+  "Handle:AddListRecursiveNames": {
+    "prefix": "AddListRecursiveNames(parent, role)",
+    "body": [
+      "AddListRecursiveNames(${1:parent}, ${2:_role})"
+    ],
+    "code": "AddListRecursiveNames(light_userdata:handle, light_userdata:parent[, enum{Roles}:role]): nothing"
+  },
+  "Handle:AddListStringItem": {
+    "prefix": "AddListStringItem(name, value, appearance)",
+    "body": [
+      "AddListStringItem(${1:name}, ${2:value}, ${3:_appearance})"
+    ],
+    "code": "AddListStringItem(light_userdata:handle, string:name, string:value[, {[left={...}][right={...}]}:appearance]): nothing"
+  },
+  "Handle:AddListStringItems": {
+    "prefix": "AddListStringItems(items)",
+    "body": [
+      "AddListStringItems(${1:items})"
+    ],
+    "code": "AddListStringItems(light_userdata:handle, table{item={[1]=name, [2]=value}, ...}): nothing"
+  },
+  "Handle:Append": {
+    "prefix": "Append(class, undo, count)",
+    "body": [
+      "Append(${1:_class}, ${2:_undo}, ${3:_count})"
+    ],
+    "description" : "Create new slot at the end.\nFor object-types that cannot have gaps (empty slots) e.g. macro lines inside a macro.\n\nSee also 'Insert', 'Create', 'MaxCount', 'Resize' and 'Acquire' functions.",
+    "code": "Append(light_userdata:handle[, string:class[, light_userdata:undo[, integer:count]]]): light_userdata:child_handle"
+  },
+  "Handle:Changed": {
+    "prefix": "Changed(changeLevelEnum)",
+    "body": [
+      "Changed(${1:changeLevelEnum})"
+    ],
+    "code": "Changed(light_userdata:handle, string:change_level_enum_name): nothing"
+  },
+  "Handle:ClearList": {
+    "prefix": "ClearList()",
+    "body": [
+      "ClearList()"
+    ],
+    "code": "ClearList(light_userdata:handle): nothing"
+  },
+  "Handle:ClearUIChildren": {
+    "prefix": "ClearUIChildren()",
+    "body": [
+      "ClearUIChildren()"
+    ],
+    "code": "ClearUIChildren(light_userdata:handle to UIObject): nothing"
+  },
+  "Handle:CmdlineChildren": {
+    "prefix": "CmdlineChildren()",
+    "body": [
+      "CmdlineChildren()"
+    ],
+    "code": "CmdlineChildren(light_userdata:handle): {light_userdata:child_handles}"
+  },
+  "Handle:CmdlineIndex": {
+    "prefix": "CmdlineIndex()",
+    "body": [
+      "CmdlineIndex()"
+    ],
+    "code": "CmdlineIndex(light_userdata:handle): integer:index"
+  },
+  "Handle:CmdlinePtr": {
+    "prefix": "CmdlinePtr(index)",
+    "body": [
+      "CmdlinePtr(${1:index})"
+    ],
+    "code": "CmdlinePtr(light_userdata:handle, integer:index(1-based)): light_userdata:child_handle"
+  },
+  "Handle:CommandAt": {
+    "prefix": "CommandAt()",
+    "body": [
+      "CommandAt()"
+    ],
+    "code": "CommandAt(light_userdata:handle): nothing"
+  },
+  "Handle:CommandCall": {
+    "prefix": "CommandCall(destHandle, focusSearchAllowed)",
+    "body": [
+      "CommandCall(${1:destHandle}, ${2:_focusSearchAllowed})"
+    ],
+    "code": "CommandCall(light_userdata:handle, light_userdata:dest_handle, boolean:focus_search_allowed(default:true)): nothing"
+  },
+  "Handle:CommandCreateDefaults": {
+    "prefix": "CommandCreateDefaults()",
+    "body": [
+      "CommandCreateDefaults()"
+    ],
+    "code": "CommandCreateDefaults(light_userdata:handle): nothing"
+  },
+  "Handle:CommandDelete": {
+    "prefix": "CommandDelete()",
+    "body": [
+      "CommandDelete()"
+    ],
+    "code": "CommandDelete(light_userdata:handle): nothing"
+  },
+  "Handle:CommandStore": {
+    "prefix": "CommandStore()",
+    "body": [
+      "CommandStore()"
+    ],
+    "code": "CommandStore(light_userdata:handle): nothing"
+  },
+  "Handle:Compare": {
+    "prefix": "Compare(otherHandle)",
+    "body": [
+      "Compare(${1:otherHandle})"
+    ],
+    "code": "Compare(light_userdata:handle, light_userdata:handle): boolean:is_equal, string:what_differs"
+  },
+  "Handle:Copy": {
+    "prefix": "Copy(srcHandle, undo)",
+    "body": [
+      "Copy(${1:srcHandle}, ${2:_undo})"
+    ],
+    "code": "Copy(light_userdata:dst_handle, light_userdata:src_handle[, light_userdata:undo]): nothing"
+  },
+  "Handle:Create": {
+    "prefix": "Create(childIndex, class, undo)",
+    "body": [
+      "Create(${1:childIndex}, ${2:_class}, ${3:_undo})"
+    ],
+    "description" : "Return or create new slot at specified index.\nFor object-types that can have gaps (empty slots) e.g. macros inside a macro pool.\n\nSee also 'Append', 'Insert', 'MaxCount', 'Resize' and 'Acquire' functions.",
+    "code": "Create(light_userdata:handle, integer:child_index(1-based)[, string:class[, light_userdata:undo]]): light_userdata:child_handle"
+  },
+  "Handle:CurrentChild": {
+    "prefix": "CurrentChild()",
+    "body": [
+      "CurrentChild()"
+    ],
+    "code": "CurrentChild(light_userdata:handle): light_userdata:current_child or nothing"
+  },
+  "Handle:Delete": {
+    "prefix": "Delete(childIndex, undo)",
+    "body": [
+      "Delete(${1:childIndex}, ${2:_undo})"
+    ],
+    "code": "Delete(light_userdata:handle, integer:child_index(1-based)[, light_userdata:undo]): nothing"
+  },
+  "Handle:FSExtendedModeHasDots": {
+    "prefix": "FSExtendedModeHasDots(cell)",
+    "body": [
+      "FSExtendedModeHasDots(${1:cell})"
+    ],
+    "code": "FSExtendedModeHasDots(light_userdata:handle to UIGrid (or derived), {r, c}:cell): boolean"
+  },
+  "Handle:Find": {
+    "prefix": "Find(searchName, searchClassName)",
+    "body": [
+      "Find(${1:searchName}, ${2:_searchClassName})"
+    ],
+    "code": "Find(light_userdata:search_start_handle, string:search_name[, string:search_class_name]): light_userdata:found_handle"
+  },
+  "Handle:FindListItemByName": {
+    "prefix": "FindListItemByName(value)",
+    "body": [
+      "FindListItemByName(${1:value})"
+    ],
+    "code": "FindListItemByName(light_userdata:handle, string:value): integer:1-based index"
+  },
+  "Handle:FindListItemByValueStr": {
+    "prefix": "FindListItemByValueStr(value)",
+    "body": [
+      "FindListItemByValueStr(${1:value})"
+    ],
+    "code": "FindListItemByValueStr(light_userdata:handle, string:value): integer:1-based index"
+  },
+  "Handle:FindParent": {
+    "prefix": "FindParent(searchClassName)",
+    "body": [
+      "FindParent(${1:searchClassName})"
+    ],
+    "code": "FindParent(light_userdata:search_start_handle, string:search_class_name): light_userdata:found_handle"
+  },
+  "Handle:FindRecursive": {
+    "prefix": "FindRecursive(searchName, searchClassName)",
+    "body": [
+      "FindRecursive(${1:searchName}, ${2:_searchClassName})"
+    ],
+    "code": "FindRecursive(light_userdata:search_start_handle, string:search_name[, string:search_class_name]): light_userdata:found_handle"
+  },
+  "Handle:FindWild": {
+    "prefix": "FindWild(searchName)",
+    "body": [
+      "FindWild(${1:searchName})"
+    ],
+    "code": "FindWild(light_userdata:search_start_handle, string:search_name): light_userdata:found_handle"
+  },
+  "Handle:GetListItemAdditionalInfo": {
+    "prefix": "GetListItemAdditionalInfo(index)",
+    "body": [
+      "GetListItemAdditionalInfo(${1:index})"
+    ],
+    "code": "GetListItemAdditionalInfo(light_userdata:handle, integer:index): string:value"
+  },
+  "Handle:GetAssignedObj": {
+    "prefix": "GetAssignedObj()",
+    "body": [
+      "GetAssignedObj()"
+    ],
+    "code": "GetAssignedObj(light_userdata:handle): light_userdata:handle"
+  },
+  "Handle:GetDisplay": {
+    "prefix": "GetDisplay()",
+    "body": [
+      "GetDisplay()"
+    ],
+    "code": "GetDisplay(light_userdata:handle to UIObject): light_userdata:display_handle"
+  },
+  "Handle:GetDisplayIndex": {
+    "prefix": "GetDisplayIndex()",
+    "body": [
+      "GetDisplayIndex()"
+    ],
+    "code": "GetDisplayIndex(light_userdata:handle to UIObject): integer:display_index"
+  },
+  "Handle:GetExportFileName": {
+    "prefix": "GetExportFileName(camelCaseToFileName)",
+    "body": [
+      "GetExportFileName(${1:_camelCaseToFileName})"
+    ],
+    "code": "GetExportFileName(light_userdata:handle[, boolean:camel_case_to_file_name]): string:file_name"
+  },
+  "Handle:GridGetFirstSelectedObject": {
+    "prefix": "GridGetFirstSelectedObject()",
+    "body": [
+      "GridGetFirstSelectedObject()"
+    ],
+    "code": "GridGetFirstSelectedObject(light_userdata:handle to UIGrid (or derived)): light_userdata:handle"
+  },
+  "Handle:GetLineAt": {
+    "prefix": "GetLineAt(lineNumber)",
+    "body": [
+      "GetLineAt(${1:lineNumber})"
+    ],
+    "code": "GetLineAt(light_userdata:handle, integer:line_number): string:line_content"
+  },
+  "Handle:GetLineCount": {
+    "prefix": "GetLineCount()",
+    "body": [
+      "GetLineCount()"
+    ],
+    "code": "GetLineCount(light_userdata:handle): integer:count"
+  },
+  "Handle:GetListItemAppearance": {
+    "prefix": "GetListItemAppearance(index)",
+    "body": [
+      "GetListItemAppearance(${1:index})"
+    ],
+    "code": "GetListItemAppearance(light_userdata:handle, integer:index): {left={AppearanceData}, right={AppearanceData}}"
+  },
+  "Handle:GetListItemButton": {
+    "prefix": "GetListItemButton(index)",
+    "body": [
+      "GetListItemButton(${1:index})"
+    ],
+    "code": "GetListItemButton(light_userdata:handle, integer:index): light_userdata:button or nil if not visible"
+  },
+  "Handle:GetListItemName": {
+    "prefix": "GetListItemName(index)",
+    "body": [
+      "GetListItemName(${1:index})"
+    ],
+    "code": "GetListItemName(light_userdata:handle, integer:index): string:name"
+  },
+  "Handle:GetListItemValueI64": {
+    "prefix": "GetListItemValueI64(index)",
+    "body": [
+      "GetListItemValueI64(${1:index})"
+    ],
+    "code": "GetListItemValueI64(light_userdata:handle, integer:index): integer:value"
+  },
+  "Handle:GetListItemValueStr": {
+    "prefix": "GetListItemValueStr(index)",
+    "body": [
+      "GetListItemValueStr(${1:index})"
+    ],
+    "code": "GetListItemValueStr(light_userdata:handle, integer:index): string:value"
+  },
+  "Handle:GetListItemsCount": {
+    "prefix": "GetListItemsCount()",
+    "body": [
+      "GetListItemsCount()"
+    ],
+    "code": "GetListItemsCount(light_userdata:handle): integer:amount of items in the list"
+  },
+  "Handle:GetListSelectedItemIndex": {
+    "prefix": "GetListSelectedItemIndex()",
+    "body": [
+      "GetListSelectedItemIndex()"
+    ],
+    "code": "GetListSelectedItemIndex(light_userdata:handle): integer:1-based index"
+  },
+  "Handle:GetOverlay": {
+    "prefix": "GetOverlay()",
+    "body": [
+      "GetOverlay()"
+    ],
+    "code": "GetOverlay(light_userdata:handle to UIObject): light_userdata:overlay_handle"
+  },
+  "Handle:GetScreen": {
+    "prefix": "GetScreen()",
+    "body": [
+      "GetScreen()"
+    ],
+    "code": "GetScreen(light_userdata:handle to UIObject): light_userdata:handle"
+  },
+  "Handle:GetTargetList": {
+    "prefix": "GetTargetList()",
+    "body": [
+      "GetTargetList()"
+    ],
+    "code": "GetTargetList(light_userdata:handle): {light_userdata:target_handle}"
+  },
+  "Handle:GetUIChild": {
+    "prefix": "GetUIChild(index)",
+    "body": [
+      "GetUIChild(${1:index})"
+    ],
+    "code": "GetUIChild(light_userdata:handle to UIObject, integer:index(1-based)): light_userdata:handle to UIObject"
+  },
+  "Handle:GetUIChildrenCount": {
+    "prefix": "GetUIChildrenCount()",
+    "body": [
+      "GetUIChildrenCount()"
+    ],
+    "code": "GetUIChildrenCount(light_userdata:handle to UIObject): integer:count"
+  },
+  "Handle:GridCellExists": {
+    "prefix": "GridCellExists(cell)",
+    "body": [
+      "GridCellExists(${1:cell})"
+    ],
+    "code": "GridCellExists(light_userdata:handle to UIGrid (or derived), {r, c}:cell): boolean"
+  },
+  "Handle:GridGetBase": {
+    "prefix": "GridGetBase()",
+    "body": [
+      "GridGetBase()"
+    ],
+    "code": "GridGetBase(light_userdata:handle to UIGrid (or derived)): light_userdata:handle to GridBase"
+  },
+  "Handle:GridGetCellData": {
+    "prefix": "GridGetCellData(cell)",
+    "body": [
+      "GridGetCellData(${1:cell})"
+    ],
+    "code": "GridGetCellData(light_userdata:handle to UIGrid (or derived), {r, c}:cell): {text, color={text, back}}"
+  },
+  "Handle:GridGetCellDimensions": {
+    "prefix": "GridGetCellDimensions(cell)",
+    "body": [
+      "GridGetCellDimensions(${1:cell})"
+    ],
+    "code": "GridGetCellDimensions(light_userdata:handle to UIGrid (or derived), {r, c}:cell): {x, y, w, h}"
+  },
+  "Handle:GridGetData": {
+    "prefix": "GridGetData()",
+    "body": [
+      "GridGetData()"
+    ],
+    "code": "GridGetData(light_userdata:handle to UIGrid (or derived)): light_userdata:handle to GridData"
+  },
+  "Handle:GridGetDimensions": {
+    "prefix": "GridGetDimensions()",
+    "body": [
+      "GridGetDimensions()"
+    ],
+    "code": "GridGetDimensions(light_userdata:handle to UIGrid (or derived)): {r, c}"
+  },
+  "Handle:GridGetParentRowId": {
+    "prefix": "GridGetParentRowId(rowId)",
+    "body": [
+      "GridGetParentRowId(${1:rowId})"
+    ],
+    "code": "GridGetParentRowId(light_userdata:handle to UIGrid (or derived), integer: rowId): parent row id (integer) or nil (if there's no parent)"
+  },
+  "Handle:GridGetScrollCell": {
+    "prefix": "GridGetScrollCell()",
+    "body": [
+      "GridGetScrollCell()"
+    ],
+    "code": "GridGetScrollCell(light_userdata:handle to UIGrid (or derived)): {r, c, r_UniqueId, r_GroupId, c_UniqueId, c_GroupId} focused cell"
+  },
+  "Handle:GridGetScrollOffset": {
+    "prefix": "GridGetScrollOffset()",
+    "body": [
+      "GridGetScrollOffset()"
+    ],
+    "code": "GridGetScrollOffset(light_userdata:handle to UIGrid (or derived)): {v = {index, offset}, h={index, offset}}"
+  },
+  "Handle:GridGetSelectedCells": {
+    "prefix": "GridGetSelectedCells()",
+    "body": [
+      "GridGetSelectedCells()"
+    ],
+    "code": "GridGetSelectedCells(light_userdata:handle to UIGrid (or derived)): array of {r, c, r_UniqueId, r_GroupId, c_UniqueId, c_GroupId} cells in the selection"
+  },
+  "Handle:GridGetSelection": {
+    "prefix": "GridGetSelection()",
+    "body": [
+      "GridGetSelection()"
+    ],
+    "code": "GridGetSelection(light_userdata:handle to UIGrid (or derived)): light_userdata:handle to GridSelection"
+  },
+  "Handle:GridGetSettings": {
+    "prefix": "GridGetSettings()",
+    "body": [
+      "GridGetSettings()"
+    ],
+    "code": "GridGetSettings(light_userdata:handle to UIGrid (or derived)): light_userdata:handle to GridSettings"
+  },
+  "Handle:GridIsCellReadOnly": {
+    "prefix": "GridIsCellReadOnly(cell)",
+    "body": [
+      "GridIsCellReadOnly(${1:cell})"
+    ],
+    "code": "GridIsCellReadOnly(light_userdata:handle to UIGrid (or derived), {r, c}:cell): boolean"
+  },
+  "Handle:GridIsCellVisible": {
+    "prefix": "GridIsCellVisible(cell)",
+    "body": [
+      "GridIsCellVisible(${1:cell})"
+    ],
+    "code": "GridIsCellVisible(light_userdata:handle to UIGrid (or derived), {r, c}:cell): boolean"
+  },
+  "Handle:GridMoveSelection": {
+    "prefix": "GridMoveSelection(x, y)",
+    "body": [
+      "GridMoveSelection(${1:x}, ${2:y})"
+    ],
+    "code": "GridMoveSelection(light_userdata:handle to UIGrid (or derived), x, y): nothing"
+  },
+  "Handle:GridScrollCellIntoView": {
+    "prefix": "GridScrollCellIntoView(cell)",
+    "body": [
+      "GridScrollCellIntoView(${1:cell})"
+    ],
+    "code": "GridScrollCellIntoView(light_userdata:handle to UIGrid (or derived), {r, c}:cell): nothing"
+  },
+  "Handle:GridSetColumnSize": {
+    "prefix": "GridSetColumnSize(columnId, size)",
+    "body": [
+      "GridSetColumnSize(${1:columnId}, ${2:size})"
+    ],
+    "code": "GridSetColumnSize(light_userdata:handle to UIGrid (or derived), integer: columnId, integer:size in pixels): nothing"
+  },
+  "Handle:GridsGetColumnById": {
+    "prefix": "GridsGetColumnById(columnId)",
+    "body": [
+      "GridsGetColumnById(${1:columnId})"
+    ],
+    "code": "GridsGetColumnById(light_userdata:handle to UIGrid (or derived), integer: columnId): column index or nil (if there's no such visible column)"
+  },
+  "Handle:GridsGetExpandHeaderCell": {
+    "prefix": "GridsGetExpandHeaderCell()",
+    "body": [
+      "GridsGetExpandHeaderCell()"
+    ],
+    "code": "GridsGetExpandHeaderCell(light_userdata:handle to UIGrid (or derived)): {r, c} or nil"
+  },
+  "Handle:GridsGetExpandHeaderCellState": {
+    "prefix": "GridsGetExpandHeaderCellState()",
+    "body": [
+      "GridsGetExpandHeaderCellState()"
+    ],
+    "code": "GridsGetExpandHeaderCellState(light_userdata:handle to UIGrid (or derived)): boolean or nil"
+  },
+  "Handle:GridsGetLevelButtonWidth": {
+    "prefix": "GridsGetLevelButtonWidth(cell)",
+    "body": [
+      "GridsGetLevelButtonWidth(${1:cell})"
+    ],
+    "code": "GridsGetLevelButtonWidth(light_userdata:handle to UIGrid (or derived), {r, c}:cell): width in pixels or nil"
+  },
+  "Handle:GridsGetRowById": {
+    "prefix": "GridsGetRowById(rowId)",
+    "body": [
+      "GridsGetRowById(${1:rowId})"
+    ],
+    "code": "GridsGetRowById(light_userdata:handle to UIGrid (or derived), integer: rowId): row index or nil (if there's no such visible row)"
+  },
+  "Handle:HasDependencies": {
+    "prefix": "HasDependencies()",
+    "body": [
+      "HasDependencies()"
+    ],
+    "code": "HasDependencies(light_userdata:handle): boolean:result"
+  },
+  "Handle:HasEditSettingUI": {
+    "prefix": "HasEditSettingUI()",
+    "body": [
+      "HasEditSettingUI()"
+    ],
+    "code": "HasEditSettingUI(light_userdata:handle): boolean:result"
+  },
+  "Handle:HasEditUI": {
+    "prefix": "HasEditUI()",
+    "body": [
+      "HasEditUI()"
+    ],
+    "code": "HasEditUI(light_userdata:handle): boolean:result"
+  },
+  "Handle:HasParent": {
+    "prefix": "HasParent(objectToCheck)",
+    "body": [
+      "HasParent(${1:objectToCheck})"
+    ],
+    "code": "HasParent(light_userdata:handle, handle:object_to_check): nothing"
+  },
+  "Handle:HasReferences": {
+    "prefix": "HasReferences()",
+    "body": [
+      "HasReferences()"
+    ],
+    "code": "HasReferences(light_userdata:handle): boolean:result"
+  },
+  "Handle:HookDelete": {
+    "prefix": "HookDelete(callback, argument)",
+    "body": [
+      "HookDelete(${1:callback}, ${2:_argument})"
+    ],
+    "code": "HookDelete(light_userdata:handle to UIObject, function:callback to invoke on deletion[, any:argument to pass by]): boolean:true on success, nil on failure"
+  },
+  "Handle:Index": {
+    "prefix": "Index()",
+    "body": [
+      "Index()"
+    ],
+    "code": "Index(light_userdata:handle): integer:index"
+  },
+  "Handle:InputCallFunction": {
+    "prefix": "InputCallFunction(functionName)",
+    "body": [
+      "InputCallFunction(${1:functionName})"
+    ],
+    "code": "InputCallFunction(light_userdata:handle, string:function name[, ...parameters to function]): <depends on function>"
+  },
+  "Handle:InputHasFunction": {
+    "prefix": "InputHasFunction(functionName)",
+    "body": [
+      "InputHasFunction(${1:functionName})"
+    ],
+    "code": "InputHasFunction(light_userdata:handle, string:function name): true or nil"
+  },
+  "Handle:InputRun": {
+    "prefix": "InputRun()",
+    "body": [
+      "InputRun()"
+    ],
+    "code": "InputRun(light_userdata:handle): nothing"
+  },
+  "Handle:InputSetAdditionalParameter": {
+    "prefix": "InputSetAdditionalParameter(parameterName, parameterValue)",
+    "body": [
+      "InputSetAdditionalParameter(${1:parameterName}, ${2:parameterValue})"
+    ],
+    "code": "InputSetAdditionalParameter(light_userdata:handle, string:parameter name, string:parameter value): nothing"
+  },
+  "Handle:InputSetEditTitle": {
+    "prefix": "InputSetEditTitle(nameValue)",
+    "body": [
+      "InputSetEditTitle(${1:nameValue})"
+    ],
+    "code": "InputSetEditTitle(light_userdata:handle, string:name_value): nothing"
+  },
+  "Handle:InputSetMaxLength": {
+    "prefix": "InputSetMaxLength(length)",
+    "body": [
+      "InputSetMaxLength(${1:length})"
+    ],
+    "code": "InputSetMaxLength(light_userdata:handle, integer:length): nothing"
+  },
+  "Handle:InputSetTitle": {
+    "prefix": "InputSetTitle(nameValue)",
+    "body": [
+      "InputSetTitle(${1:nameValue})"
+    ],
+    "code": "InputSetTitle(light_userdata:handle, string:name_value): nothing"
+  },
+  "Handle:InputSetValue": {
+    "prefix": "InputSetValue(value)",
+    "body": [
+      "InputSetValue(${1:value})"
+    ],
+    "code": "InputSetValue(light_userdata:handle, string:value): nothing"
+  },
+  "Handle:Insert": {
+    "prefix": "Insert(childIndex, class, undo, count)",
+    "body": [
+      "Insert(${1:childIndex}, ${2:_class}, ${3:_undo}, ${4:_count})"
+    ],
+    "description" : "Create new slot at specified index.\nFor object-types that cannot have gaps (empty slots) e.g. macro lines inside a macro.\n\nSee also 'Append', 'Create', 'MaxCount', 'Resize' and 'Acquire' functions.",
+    "code": "Insert(light_userdata:handle, integer:child_index(1-based)[, string:class[, light_userdata:undo[, integer:count]]]): light_userdata:child_handle"
+  },
+  "Handle:IsClass": {
+    "prefix": "IsClass(${1:className})",
+    "body": [
+      "IsClass(className)"
+    ],
+    "code": "IsClass(light_userdata:handle, string:class_name): boolean:result"
+  },
+  "Handle:IsEmpty": {
+    "prefix": "IsEmpty()",
+    "body": [
+      "IsEmpty()"
+    ],
+    "code": "IsEmpty(light_userdata:handle): boolean:object_is_empty"
+  },
+  "Handle:IsEnabled": {
+    "prefix": "IsEnabled()",
+    "body": [
+      "IsEnabled()"
+    ],
+    "code": "IsEnabled(light_userdata:handle to UIObject): bool:is enabled"
+  },
+  "Handle:IsListItemEmpty": {
+    "prefix": "IsListItemEmpty(index)",
+    "body": [
+      "IsListItemEmpty(${1:index})"
+    ],
+    "code": "IsListItemEmpty(light_userdata:handle, integer:index): nothing"
+  },
+  "Handle:IsListItemEnabled": {
+    "prefix": "IsListItemEnabled(index)",
+    "body": [
+      "IsListItemEnabled(${1:index})"
+    ],
+    "code": "IsListItemEnabled(light_userdata:handle, integer:index): nothing"
+  },
+  "Handle:IsLocked": {
+    "prefix": "IsLocked()",
+    "body": [
+      "IsLocked()"
+    ],
+    "code": "IsLocked(light_userdata:handle): boolean:object_is_locked"
+  },
+  "Handle:IsRunningPlayback": {
+    "prefix": "IsRunningPlayback()",
+    "body": [
+      "IsRunningPlayback()"
+    ],
+    "code": "IsRunningPlayback(light_userdata:handle): boolean:result"
+  },
+  "Handle:IsValid": {
+    "prefix": "IsValid()",
+    "body": [
+      "IsValid()"
+    ],
+    "code": "IsValid(light_userdata:handle): boolean:result"
+  },
+  "Handle:IsVisible": {
+    "prefix": "IsVisible()",
+    "body": [
+      "IsVisible()"
+    ],
+    "code": "IsVisible(light_userdata:handle to UIObject): bool:is visible"
+  },
+  "Handle:Load": {
+    "prefix": "Load(filePath, fileName)",
+    "body": [
+      "Load(${1:filePath}, ${2:fileName})"
+    ],
+    "code": "Load(light_userdata:handle, string:file_path, string:file_name): boolean:success"
+  },
+  "Handle:MaxCount": {
+    "prefix": "MaxCount()",
+    "body": [
+      "MaxCount()"
+    ],
+    "description": "Return the maximum of allowed slots\nFor object-types that can have gaps (empty slots) e.g. macros inside a macro pool.\n\nSee also 'Append', 'Insert', 'Create', 'Resize' and 'Acquire' functions.",
+    "code": "MaxCount(light_userdata:handle): integer:child_count"
+  },
+  "Handle:OverlaySetCloseCallback": {
+    "prefix": "OverlaySetCloseCallback(callbackName, ctx)",
+    "body": [
+      "OverlaySetCloseCallback(${1:callbackName}, ${2:_ctx})"
+    ],
+    "code": "OverlaySetCloseCallback(light_userdata:handle to Overlay, callbackName:string[, ctx:anything]): nothing"
+  },
+  "Handle:Parent": {
+    "prefix": "Parent()",
+    "body": [
+      "Parent()"
+    ],
+    "code": "Parent(light_userdata:handle): light_userdata:parent_handle"
+  },
+  "Handle:PrepareAccess": {
+    "prefix": "PrepareAccess()",
+    "body": [
+      "PrepareAccess()"
+    ],
+    "code": "PrepareAccess(light_userdata:handle): nothing"
+  },
+  "Handle:PropertyCount": {
+    "prefix": "PropertyCount()",
+    "body": [
+      "PropertyCount()"
+    ],
+    "code": "PropertyCount(light_userdata:handle): integer:property_count"
+  },
+  "Handle:PropertyInfo": {
+    "prefix": "PropertyInfo(propertyIndex)",
+    "body": [
+      "PropertyInfo(${1:propertyIndex})"
+    ],
+    "code": "PropertyInfo(light_userdata:handle, integer:property_index): {'ReadOnly'=boolean:read_only_flag, 'ExportIgnore'=boolean:export_ignore_flag, 'ImportIgnore'=boolean:import_ignore_flag, 'EnumCollection'=string:enum_collection_name}"
+  },
+  "Handle:PropertyName": {
+    "prefix": "PropertyName(propertyIndex)",
+    "body": [
+      "PropertyName(${1:propertyIndex})"
+    ],
+    "code": "PropertyName(light_userdata:handle, integer:property_index): string:property_name"
+  },
+  "Handle:PropertyType": {
+    "prefix": "PropertyType(propertyIndex)",
+    "body": [
+      "PropertyType(${1:propertyIndex})"
+    ],
+    "code": "PropertyType(light_userdata:handle, integer:property_index): string:property_type"
+  },
+  "Handle:Remove": {
+    "prefix": "Remove(childIndex, undo)",
+    "body": [
+      "Remove(${1:childIndex}, ${2:_undo})"
+    ],
+    "code": "Remove(light_userdata:handle, integer:child_index(1-based)[, light_userdata:undo]): nothing"
+  },
+  "Handle:RemoveListItem": {
+    "prefix": "RemoveListItem(name)",
+    "body": [
+      "RemoveListItem(${1:name})"
+    ],
+    "code": "RemoveListItem(light_userdata:handle, string:name): nothing"
+  },
+  "Handle:Resize": {
+    "prefix": "Resize(size)",
+    "body": [
+      "Resize(${1:size})"
+    ],
+    "description": "Resize the number of slots to specified size\nFor object-types that can have gaps (empty slots) e.g. macros inside a macro pool.\n\nSee also 'Append', 'Insert', 'Create', 'MaxCount' and 'Acquire' functions.",
+    "code": "Resize(light_userdata:handle, integer:size): nothing"
+  },
+  "Handle:Save": {
+    "prefix": "Save(filePath, fileName)",
+    "body": [
+      "Save(${1:filePath}, ${2:fileName})"
+    ],
+    "code": "Save(light_userdata:handle, string:file_path, string:file_name): boolean:success"
+  },
+  "Handle:ScrollDo": {
+    "prefix": "ScrollDo(scrollType, scrollEntity, valueType, value, updateOpposite)",
+    "body": [
+      "ScrollDo(${1:scrollType}, ${2:scrollEntity}, ${3:valueType}, ${4:value}, ${5:updateOpposite})"
+    ],
+    "code": "ScrollDo(light_userdata:handle, integer:scroll type (see 'ScrollType' enum), integer:scroll entity (item or area, see 'ScrollParamEntity' enum), integer:value type (absolute or relative, see 'ScrollParamValueType' enum), number: value to scroll (items - 1-based), boolean: updateOpposite side): boolean:true scroll"
+  },
+  "Handle:ScrollGetInfo": {
+    "prefix": "ScrollGetInfo(scrollType)",
+    "body": [
+      "ScrollGetInfo(${1:scrollType})"
+    ],
+    "code": "ScrollGetInfo(light_userdata:handle, integer:scroll type (see 'ScrollType' enum)): {index(1-based), offset, visibleArea, totalArea, itemsCount, itemsOnPage} or nil"
+  },
+  "Handle:ScrollGetItemByOffset": {
+    "prefix": "ScrollGetItemByOffset(scrollType, offset)",
+    "body": [
+      "ScrollGetItemByOffset(${1:scrollType}, ${2:offset})"
+    ],
+    "code": "ScrollGetItemByOffset(light_userdata:handle, integer:scroll type (see 'ScrollType' enum), integer:offset): integer:1-based item index"
+  },
+  "Handle:ScrollGetItemOffset": {
+    "prefix": "ScrollGetItemOffset(scrollType, itemIdx)",
+    "body": [
+      "ScrollGetItemOffset(${1:scrollType}, ${2:itemIdx})"
+    ],
+    "code": "ScrollGetItemOffset(light_userdata:handle, integer:scroll type (see 'ScrollType' enum), integer:1-based item idx): integer:offset of the item or nil"
+  },
+  "Handle:ScrollGetItemSize": {
+    "prefix": "ScrollGetItemSize(scrollType, itemIdx)",
+    "body": [
+      "ScrollGetItemSize(${1:scrollType}, ${2:itemIdx})"
+    ],
+    "code": "ScrollGetItemSize(light_userdata:handle, integer:scroll type (see 'ScrollType' enum), integer:1-based item idx): integer:size of the item of nil"
+  },
+  "Handle:ScrollIsNeeded": {
+    "prefix": "ScrollIsNeeded(scrollType)",
+    "body": [
+      "ScrollIsNeeded(${1:scrollType})"
+    ],
+    "code": "ScrollIsNeeded(light_userdata:handle, integer:scroll type (see 'ScrollType' enum)): boolean:true if scroll of the requested type is needed"
+  },
+  "Handle:SelectListItemByIndex": {
+    "prefix": "SelectListItemByIndex(index)",
+    "body": [
+      "SelectListItemByIndex(${1:index})"
+    ],
+    "code": "SelectListItemByIndex(light_userdata:handle, integer:index(1-based)): nothing"
+  },
+  "Handle:SelectListItemByName": {
+    "prefix": "SelectListItemByName(nameValue)",
+    "body": [
+      "SelectListItemByName(${1:nameValue})"
+    ],
+    "code": "SelectListItemByName(light_userdata:handle, string:name_value): nothing"
+  },
+  "Handle:SelectListItemByValue": {
+    "prefix": "SelectListItemByValue(value)",
+    "body": [
+      "SelectListItemByValue(${1:value})"
+    ],
+    "code": "SelectListItemByValue(light_userdata:handle, string:value): nothing"
+  },
+  "Handle:SetListItemAdditionalInfo": {
+    "prefix": "SetListItemAdditionalInfo(index, value)",
+    "body": [
+      "SetListItemAdditionalInfo(${1:index}, ${2:value})"
+    ],
+    "code": "SetListItemAdditionalInfo(light_userdata:handle, integer:index, string:value): nothing"
+  },
+  "Handle:SetChildren": {
+    "prefix": "SetChildren(propertyName, propertyValue, recursive)",
+    "body": [
+      "SetChildren(${1:propertyName}, ${2:propertyValue}, ${3:_recursive})"
+    ],
+    "code": "SetChildren(light_userdata:handle_of_parent, string:property_name, string:property_value[, boolean:recursive (default: false)]): nothing"
+  },
+  "Handle:SetChildrenRecursive": {
+    "prefix": "SetChildrenRecursive(propertyName, propertyValue, recursive)",
+    "body": [
+      "SetChildrenRecursive(${1:propertyName}, ${2:propertyValue}, ${3:_recursive})"
+    ],
+    "code": "SetChildrenRecursive(light_userdata:handle_of_parent, string:property_name, string:property_value[, boolean:recursive (default: false)]): nothing"
+  },
+  "Handle:SetContextSensHelpLink": {
+    "prefix": "SetContextSensHelpLink(topicName)",
+    "body": [
+      "SetContextSensHelpLink(${1:topicName})"
+    ],
+    "code": "SetContextSensHelpLink(light_userdata:handle to UIObject, string:topic name): nothing"
+  },
+  "Handle:SetEmptyListItem": {
+    "prefix": "SetEmptyListItem(index, empty)",
+    "body": [
+      "SetEmptyListItem(${1:index}, ${2:_empty})"
+    ],
+    "code": "SetEmptyListItem(light_userdata:handle, integer:index[, bool:empty(default:true)]): nothing"
+  },
+  "Handle:SetEnabledListItem": {
+    "prefix": "SetEnabledListItem(index, enable)",
+    "body": [
+      "SetEnabledListItem(${1:index}, ${2:_enable})"
+    ],
+    "code": "SetEnabledListItem(light_userdata:handle, integer:index[, bool:enable(default:true)]): nothing"
+  },
+  "Handle:SetListItemAppearance": {
+    "prefix": "SetListItemAppearance(index, appearance)",
+    "body": [
+      "SetListItemAppearance(${1:index}, ${2:appearance})"
+    ],
+    "code": "SetListItemAppearance(light_userdata:handle, integer:index, {[left={...AppearanceData...}][right={...AppearanceData...}]}): nothing"
+  },
+  "Handle:SetListItemName": {
+    "prefix": "SetListItemName(index, name)",
+    "body": [
+      "SetListItemName(${1:index}, ${2:name})"
+    ],
+    "code": "SetListItemName(light_userdata:handle, integer:index, string:name): nothing"
+  },
+  "Handle:SetListItemValueStr": {
+    "prefix": "SetListItemValueStr(index, value)",
+    "body": [
+      "SetListItemValueStr(${1:index}, ${2:value})"
+    ],
+    "code": "SetListItemValueStr(light_userdata:handle, integer:index, string:value): nothing"
+  },
+  "Handle:SetPositionHint": {
+    "prefix": "SetPositionHint(x, y)",
+    "body": [
+      "SetPositionHint(${1:x}, ${2:y})"
+    ],
+    "code": "SetPositionHint(light_userdata:handle, integer:x, integer:y): nothing"
+  },
+  "Handle:ShowModal": {
+    "prefix": "ShowModal(callback)",
+    "body": [
+      "ShowModal(${1:callback})"
+    ],
+    "code": "ShowModal(light_userdata:handle, callback:function): nothing"
+  },
+  "Handle:UIChildren": {
+    "prefix": "UIChildren()",
+    "body": [
+      "UIChildren()"
+    ],
+    "code": "UIChildren(light_userdata:handle to UIObject): {light_userdata:child_handles}"
+  },
+  "Handle:UILGGetColumnAbsXLeft": {
+    "prefix": "UILGGetColumnAbsXLeft(index)",
+    "body": [
+      "UILGGetColumnAbsXLeft(${1:index})"
+    ],
+    "code": "UILGGetColumnAbsXLeft(light_userdata:handle to UILayoutGrid, integer:index): integer:x"
+  },
+  "Handle:UILGGetColumnAbsXRight": {
+    "prefix": "UILGGetColumnAbsXRight(index)",
+    "body": [
+      "UILGGetColumnAbsXRight(${1:index})"
+    ],
+    "code": "UILGGetColumnAbsXRight(light_userdata:handle to UILayoutGrid, integer:index): integer:x"
+  },
+  "Handle:UILGGetColumnWidth": {
+    "prefix": "UILGGetColumnWidth(index)",
+    "body": [
+      "UILGGetColumnWidth(${1:index})"
+    ],
+    "code": "UILGGetColumnWidth(light_userdata:handle to UILayoutGrid, integer:index): integer:size"
+  },
+  "Handle:UILGGetRowAbsYBottom": {
+    "prefix": "UILGGetRowAbsYBottom(index)",
+    "body": [
+      "UILGGetRowAbsYBottom(${1:index})"
+    ],
+    "code": "UILGGetRowAbsYBottom(light_userdata:handle to UILayoutGrid, integer:index): integer:y"
+  },
+  "Handle:UILGGetRowAbsYTop": {
+    "prefix": "UILGGetRowAbsYTop(index)",
+    "body": [
+      "UILGGetRowAbsYTop(${1:index})"
+    ],
+    "code": "UILGGetRowAbsYTop(light_userdata:handle to UILayoutGrid, integer:index): integer:y"
+  },
+  "Handle:UILGGetRowHeight": {
+    "prefix": "UILGGetRowHeight(index)",
+    "body": [
+      "UILGGetRowHeight(${1:index})"
+    ],
+    "code": "UILGGetRowHeight(light_userdata:handle to UILayoutGrid, integer:index): integer:size"
+  },
+  "Handle:WaitChildren": {
+    "prefix": "WaitChildren(expectedChildren, secondsToWait)",
+    "body": [
+      "WaitChildren(${1:expectedChildren}, ${2:_secondsToWait})"
+    ],
+    "code": "WaitChildren(light_userdata:handle to UIObject, integer:expected amount of children[, number:seconds to wait]): boolean:true on success, nil on timeout or if object doesn't exist"
+  },
+  "Handle:WaitInit": {
+    "prefix": "WaitInit(secondsToWait, forceReInit)",
+    "body": [
+      "WaitInit(${1:_secondsToWait}, ${2:_forceReInit})"
+    ],
+    "code": "WaitInit(light_userdata:handle to UIObject[, number:seconds to wait[, bool:force to re-init, default - false]]): boolean:true on success, nil on timeout or if object doesn't exist"
+  }
+}

@@ -36,7 +36,7 @@ function Handle:AddrNative(baseLocationHandle, returnNamesInQuotes)
     return ""
 end
 
----@return table children
+---@return Handle[] children
 function Handle:Children()
     return {}
 end
@@ -73,7 +73,7 @@ function Handle:GetClass()
     return ""
 end
 
----@return table dependencies
+---@return Handle[] dependencies
 function Handle:GetDependencies()
     return {}
 end
@@ -90,7 +90,7 @@ function Handle:GetFaderText(tokenAndIndex)
     return ""
 end
 
----@return table references
+---@return Handle[] references
 function Handle:GetReferences()
     return {}
 end
