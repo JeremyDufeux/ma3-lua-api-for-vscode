@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.1 — June 9, 2026
+
+- Updated `Printf`, `ErrPrintf`, `Echo`, and `ErrEcho` signatures to support variadic arguments (`...`).
+
 ## 1.6.0 — June 8, 2026
 
 ### 🛠️ Updated 2.3 API version

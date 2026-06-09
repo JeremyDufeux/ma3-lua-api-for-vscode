@@ -177,16 +177,15 @@ function DumpAllHooks()
 end
 
 ---@param message string
-function Echo(message)
+function Echo(message, ...)
 end
 
 ---@param message string
-function ErrEcho(message)
+function ErrEcho(message, ...)
 end
 
 ---@param message string
-function ErrPrintf(message)
-    
+function ErrPrintf(message, ...)
 end
 
 ---@param fileName string
@@ -595,7 +594,7 @@ function Patch()
 end
 
 ---@param message string
-function Printf(message)
+function Printf(message, ...)
 end
 
 ---@return Handle programmerHandle
