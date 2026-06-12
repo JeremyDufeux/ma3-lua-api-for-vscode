@@ -36,11 +36,11 @@
     "code": "ColMeasureDeviceDoMeasurement(nothing): table:values"
   },
   "CompareHandle": {
-    "prefix": "CompareHandle(handle)",
+    "prefix": "CompareHandle(handleA, handleB)",
     "body": [
-      "CompareHandle(${1:handle})"
+      "CompareHandle(${1:handleA}, ${1:handleB})"
     ],
-    "code": "CompareHandle(light_userdata:handle): bool : equal"
+    "code": "CompareHandle(light_userdata:handle a, light_userdata:handle b): bool : equal"
   },
   "CompareImages": {
     "prefix": "CompareImages(imageA, imageB, diffOut)",

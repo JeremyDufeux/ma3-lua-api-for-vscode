@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.2 — June 12, 2026
+
+- Updated dummy function and documentation for CompareHandle function that takes two handles as parameters.
+
 ## 1.6.1 — June 9, 2026
 
 - Updated `Printf`, `ErrPrintf`, `Echo`, and `ErrEcho` signatures to support variadic arguments (`...`).

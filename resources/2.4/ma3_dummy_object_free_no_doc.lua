@@ -33,9 +33,10 @@ function ColMeasureDeviceDoMeasurement()
     return {}
 end
 
----@param handle Handle
+---@param handleA Handle
+---@param handleB Handle
 ---@return boolean equal
-function CompareHandle(handle)
+function CompareHandle(handleA, handleB)
     return true
 end
 
