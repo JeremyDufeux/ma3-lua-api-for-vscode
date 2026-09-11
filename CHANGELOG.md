@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.0 — September 11, 2026
+
+### ➕ Added support of 2.5 API version
+
+- Added new function: `GeneratePhasersForChannels(integer:ui_channel_index, {['abs_preset'=light_userdata:handle], ['rel_preset'=light_userdata:handle], ['fade'=number:seconds], ['delay'=number:seconds], ['speed'=number:hz], ['phase'=number:degree], ['measure'=number:percent], ['gridpos'=integer:value], {['channel_function'=integer:value], ['absolute'=number:percent], ['absolute_value'=integer:value], ['relative'=number:percent], ['accel'=number:percent[, 'accel_type'=integer:enum_value(Enums.SplineType)]], ['decel'=number:percent[, 'decel_type'=integer:enum_value(Enums.SplineType)]], ['trans'=number:percent], ['width'=number:percent], ['integrated'=light_userdata:preset_handle]}}): nothing`
+
 ## 1.6.2 — June 12, 2026
 
 - Updated dummy function and documentation for CompareHandle function that takes two handles as parameters.

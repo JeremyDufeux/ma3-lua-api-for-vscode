@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" dir="ltr" class="">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="MobileOptimized" content="width">
+  <meta name="HandheldFriendly" content="true">
+  <link rel='shortcut icon' href='../_webHelpImages/favicon.ico' /><link rel='icon' href='../_webHelpImages/favicon.ico' />
+  <link rel='stylesheet' type='text/css' href='../_webHelpStyles/CHWebHelp.css?t='/><link rel='stylesheet' type='text/css' href='../_webHelpStyles/CommonControls.css?t='/><link rel='stylesheet' type='text/css' href='../_webHelpStyles/CommonControls/FontAwesome/css/font-awesome.min-ignore.css?t='/><link rel='stylesheet' type='text/css' href='../_webHelpStyles/RTL.css?t='/>
+  <script  src='../_webHelpScripts/Master/1-script.js?t=' type='text/javascript'></script><script  src='../_webHelpScripts/Master/toc_nav.js?t=' type='text/javascript'></script>
+  
+<script type="text/javascript">//<!--
+appendEventHandler(window, 'load', function() {webHelpSelectTocNodeByExtId('lua_objectfree',true);});
+//--></script><title>Lua Functions - Object-Free API</title><script type="text/javascript">//<!--
+var imgPopupTexts={openInNewWindowText: 'Open in new window', closeText: 'Close'};var articleTitleText='Lua Functions - Object-Free API';
+//--></script><link rel="stylesheet" type="text/css" href="../Styles/article-published.css"/><link rel="stylesheet" type="text/css" href="../Styles/grandma3-user-manual-publication/global-shared-style.css"/><link rel="stylesheet" type="text/css" href="../Styles/grandma3-user-manual-publication/SiteOffline.css"/><script src="../Scripts/article-published.js" type="text/javascript"></script><meta charset="utf-8"><meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  
+  <script src='../_webHelpScripts/video.js' type='text/javascript'></script>
+  <script src='../_webHelpScripts/console.js' type='text/javascript'></script>
+  <!-- Matomo -->
+  <script>
+    var _paq = window._paq = window._paq || [];
+    /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+    (function() {
+      var u="https://stats.help.m-a-lighting.de/";
+      _paq.push(['setTrackerUrl', u+'matomo.php']);
+      _paq.push(['setSiteId', '2']);
+      var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+      g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+    })();
+  </script>
+  <!-- End Matomo Code -->
+</head>
+<body class="WebHelp_body" onload="consoleSubInit();">
+  <div id="pnlContainer" class="CHOffCanvasPanel_container">
+    <div class="CHOffCanvasPanel_content">
+      <nav id="pnlOffCanvasNav" class="CHOffCanvasPanel_nav noselect">
+        <div id="pnlOffCanvasHeader" class="BaseMaster_offCanvasHeader">
+        </div>
+        <script  type='text/javascript'>//<!--
+window['mobileMenu']=new CHMenu('pnlOffCanvasHeader',{"cssClasses":{"menu":null,"popup":null},"templates":{"itemContent":null,"treeItemContent":null,"dropDownArrow":null},"isMobileViewIfParentOverflow":false,"mobileViewMinWidthThreshold":-1,"selectedItemId":"tabContents","isAllowItemSelection":true,"isEscapeMenuItemText":true,"isUseFontAwesomeIcons":true,"fontAwesomeVersion":"4","isMovePopupToBodyChildLevel":true,"isShowPopupOnHover":false},[{"id":"menuItemMenu","t":"Menu","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}},{"id":"tabContents","t":"Topics","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}},{"id":"tabSearch","t":"Search","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}}]);window['mobileMenu'].onItemClick=function(s,e){webHelpMobileMenuItemClick(s,e);};
+//--></script>
+        <div id="pnlOffCanvasContent" class="BaseMaster_offCanvasContent">
+        </div>        
+      </nav>
+      <div id="pnlOffCanvasOverlay" class="CHOffCanvasPanel_overlay"></div>
+      <nav id="pnlMainMenuContainer" class="BaseMaster_mainMenuContainer">
+        <button type="button" aria-label="Show mobile menu" title="Show mobile menu" id="btnMobileMenu" style="display:none"
+          class="CHHamburger_container CHHamburger_container-htla BaseMaster_hamburgerMenuIcon">
+          <span></span>
+        </button>
+        <a title='As master distributor MA Lighting International is responsible for worldwide sales and marketing of the renowned MA control systems, digital dimming systems'  ><img alt='As master distributor MA Lighting International is responsible for worldwide sales and marketing of the renowned MA control systems, digital dimming systems' class='BaseMaster_imgLogo' src='../_webHelpImages/MA_Logo_2-farbig_cmyk.svg' /></a>
+        <div id="pnlMainMenu" class="BaseMaster_pnlMainMenu"></div>
+        <script  type='text/javascript'>//<!--
+window['mainMenu']=new CHMenu('pnlMainMenu',{"cssClasses":{"menu":null,"popup":null},"templates":{"itemContent":null,"treeItemContent":null,"dropDownArrow":null},"isMobileViewIfParentOverflow":true,"mobileViewMinWidthThreshold":979,"selectedItemId":null,"isAllowItemSelection":false,"isEscapeMenuItemText":true,"isUseFontAwesomeIcons":true,"fontAwesomeVersion":"4","isMovePopupToBodyChildLevel":true,"isShowPopupOnHover":false},[]);window['mainMenu'].onViewSwitched=function(s,e){webHelpMasterPageMainMenuViewSwitched(s,e);};
+//--></script>
+        <div class="WebHelp_searchBoxContainer">
+          <input id="edtSearch" type="search" class="WebHelp_searchBox" aria-label="Search" />
+          <button id="btnSearch" class="btnSearch" alt="Search" title="Search" aria-label="Search" href="javascript:void(0)"></button>
+        </div>
+      </nav>
+      <div id="pnlContentContainer" class="BaseMaster_contentContainer clearfix">
+        <nav id="pnlArticlesNav" class="WebHelp_navPanel">
+          <div id="pnlNavTabs" class="WebHelp_navMenu"></div>
+          <script  type='text/javascript'>//<!--
+window['navMenu']=new CHMenu('pnlNavTabs',{"cssClasses":{"menu":null,"popup":null},"templates":{"itemContent":null,"treeItemContent":null,"dropDownArrow":null},"isMobileViewIfParentOverflow":false,"mobileViewMinWidthThreshold":-1,"selectedItemId":"tabContents","isAllowItemSelection":true,"isEscapeMenuItemText":true,"isUseFontAwesomeIcons":true,"fontAwesomeVersion":"4","isMovePopupToBodyChildLevel":true,"isShowPopupOnHover":false},[{"id":"tabContents","t":"Topics","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}},{"id":"tabSearch","t":"Search","imgs":{},"c":[],"s":-1,"d":0,"e":0,"vals":{"_faIconCssClass":"","_popupPosition":"bottom"}}]);window['navMenu'].onItemClick=function(s,e){webHelpNavMenuItemClick(s,e);};
+//--></script>
+          <div id="pnlTocContainer" class="WebHelp_navPanelContent ArticleSelector_tabContent TocTreeLight_container">
+            <div id="pnlToc"></div>
+          </div>
+          <div id="pnlIndex" class="WebHelp_navPanelContent ArticleSelector_tabContent" style="display:none">
+            <iframe id="frameIndex" style="height: 100%; width:100%; display:block;" frameborder="0"></iframe>
+          </div>
+          <div id="pnlSearch" class="WebHelp_navPanelContent ArticleSelector_tabContent" style="display:none">
+            <iframe id="frameSearch" src="../search.html" style="height: 100%; width:100%; display: block;" frameborder="0"></iframe>
+          </div>
+        </nav>
+        <article class="TopicViewer_container">
+          <header id="pnlTopicHeader" class="TopicViewer_header" >
+            <div class="TopicViewer_headerText">
+              <div class="ArticleEditor_projectName">grandMA3 User Manual Publication</div>
+              <strong id="pnlTitle" class="ArticleEditor_title">Lua Functions - Object-Free API</strong>
+              <button type="button" id="btnPrint" class="CHImageButton ArticleEditor_imageButton ArticleEditor_fontAwesomeButton ArticleEditor_btnPrint" title="Print this topic">
+                <i class="fa fa-print"></i>
+              </button>
+            </div>
+          </header>
+          <div id="pnlTopicContentContainer" class="TopicViewer_contentContainer">
+            <style>
+  #body {
+    margin-top: 0px;
+    height: 100%;
+  }
+  
+  .topic-tree {
+    display: none
+  }
+  
+  #offline-topic {
+    margin-left: 10px;
+  }
+</style>
+
+
+<div id="body">
+  
+  
+  <main>
+    <div id="offline-topic" class="topic-content">
+      
+      <h1 id="offline-title">
+      </h1>
+      
+      <div id="offline-content">
+        <table class="FlatTable" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td class="FlatTable  " style="width: 80%">
+        <span class="CHBreadcrumb"><span class="CHBreadcrumb_item"><a href="help.html">grandMA3 User Manual</a></span><span class="CHBreadcrumb_separator"> » </span><span class="CHBreadcrumb_item"><a href="plugins.html">Plugins</a></span><span class="CHBreadcrumb_separator"> » </span><span class="CHBreadcrumb_item CHBreadcrumb_itemSelf">Lua Functions - Object-Free API</span></span>
+        <br/>
+      </td>
+      <td style="text-align: right;">
+        Version 2.2
+        <br/>
+      </td>
+    </tr>
+  </tbody>
+</table>
+        <p>
+          Object-Free API means Lua functions that are not functions/methods of objects.
+        </p>
+        
+      </div>
+      
+      <div id="offline-subtopics">
+        <h4 id="h4__984025291" data-has-heading-anchor="true">
+          <span class=" CHNavCaption">Subtopics</span><ul class="CHSeeAlso_hasChildren CHSeeAlso"><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_addfixtures.html">AddFixtures(table)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_addonvars.html">AddonVars(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_builddetails.html">BuildDetails()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_checkdmxcollision.html">CheckDMXCollision(handle, string[, integer[, integer]])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_checkfidcollision.html">CheckFIDCollision(integer[, integer[, integer]])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_classexists.html">ClassExists(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_closealloverlays.html">CloseAllOverlays()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_closeundo.html">CloseUndo(handle)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_cmd.html">Cmd(string[, handle])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_cmdindirect.html">CmdIndirect(string[, handle[, handle]])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_cmdindirectwait.html">CmdIndirectWait(string[, handle[, handle]])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_cmdobj.html">CmdObj()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_configtable.html">ConfigTable()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_confirm.html">Confirm(string[, string[, integer[, boolean]]])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_createmultipatch.html">CreateMultiPatch({handles}, integer[, string])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_createundo.html">CreateUndo(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_currentenvironment.html">CurrentEnvironment()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_currentexecpage.html">CurrentExecPage()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_currentprofile.html">CurrentProfile()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_currentscreenconfig.html">CurrentScreenConfig()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_currentuser.html">CurrentUser()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_datapool.html">DataPool()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_defaultdisplaypositions.html">DefaultDisplayPositions()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_delvar.html">DelVar(handle, string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_desklocked.html">DeskLocked()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_deviceconfiguration.html">DeviceConfiguration()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_dirlist.html">DirList(string[, string])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_drawpointer.html">DrawPointer(integer,table[,integer])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_dumpallhooks.html">DumpAllHooks()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_echo.html">Echo(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_errecho.html">ErrEcho(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_errprintf.html">ErrPrintf(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_export.html">Export(filename, export_data)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_exportcsv.html">ExportCSV(filename, export_data)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_exportjson.html">ExportJson(filename, export_data)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_fileexists.html">FileExists(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_findtexture.html">FindTexture(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_firstdmxmodefixture.html">FirstDmxModeFixture(handle)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_fixturetype.html">FixtureType()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_fromaddr.html">FromAddr(string[, handle])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getapidescriptor.html">GetApiDescriptor()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getattributebyuichannel.html">GetAttributeByUIChannel(integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getattributecount.html">GetAttributeCount()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getattributeindex.html">GetAttributeIndex(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getbutton.html">GetButton(handle)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getchannelfunction.html">GetChannelFunction(integer, integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getchannelfunctionindex.html">GetChannelFunctionIndex()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getclassderivationlevel.html">GetClassDerivationLevel(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getcurrentcue.html">GetCurrentCue()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getdebugfps.html">GetDebugFPS()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getdisplaybyindex.html">GetDisplayByIndex(integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getdisplaycollect.html">GetDisplayCollect()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getdmxuniverse.html">GetDMXUniverse(integer[, boolean])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getdmxvalue.html">GetDMXValue(integer[, integer, boolean])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getexecutor.html">GetExecutor(integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getfocus.html">GetFocus()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getfocusdisplay.html">GetFocusDisplay()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getobjapidescriptor.html">GetObjApiDescriptor()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getpath.html">GetPath(string[, boolean] | integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getpathoverridefor.html">GetPathOverrideFor(string|integer, string[, boolean])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getpathseparater.html">GetPathSeparator()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getpathtype.html">GetPathType(handle[, integer])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getrtchannel.html">GetRTChannel(integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getpresetdata.html">GetPresetData(handle[, boolean[, boolean]])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getrtchannelcount.html">GetRTChannelCount()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getrtchannels.html">GetRTChannels(integer[,boolean] OR handle[,boolean])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getsample.html">GetSample(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getscreencontent.html">GetScreenContent(handle)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getselectedattribute.html">GetSelectedAttribute()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getshowfilestatus.html">GetShowFileStatus()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getsubfixture.html">GetSubfixture(integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getsubfixturecount.html">GetSubfixtureCount()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_gettokenname.html">GetTokenName(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_gettokennamebyindex.html">GetTokenNameByIndex(int)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_gettopmodal.html">GetTopModal()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_gettopoverlay.html">GetTopOverlay()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getuichannelcount.html">GetUIChannelCount()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getuichannelindex.html">GetUIChannelIndex(integer, integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getuichannels.html">GetUIChannels(integer[,boolean] OR handle[,boolean])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getuiobjectatposition.html">GetUIObjectAtPosition(integer, table)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_getvar.html">GetVar(handle, string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_globalvars.html">GlobalVars()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_handletoint.html">HandleToInt(handle)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_handletostring.html">HandleToStr(handle)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_hookobjectchange.html">HookObjectChange(function, handle, handle[, handle])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_hostos.html">HostOS()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_hostsubtype.html">HostSubType()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_hosttype.html">HostType()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_import.html">Import(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_incprogress.html">IncProgress(handle, integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_inttohandle.html">IntToHandle(integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_isclassderivedfrom.html">IsClassDerivedFrom(string, string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_isobjectvalid.html">IsObjectValid(handle)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_keyboardobj.html">KeyboardObj()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_masterpool.html">MasterPool()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_messagebox.html">MessageBox(table)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_mouseobj.html">MouseObj()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_needshowsave.html">NeedShowSave()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_objectlist.html">ObjectList(string[, table])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_patch.html">Patch()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_printf.html">Printf(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_programmer.html">Programmer()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_programmerpart.html">ProgrammerPart()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_pult.html">Pult()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_releasetype.html">ReleaseType()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_root.html">Root()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_selectedfeature.html">SelectedFeature()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_selectedlayout.html">SelectedLayout()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_selectedsequence.html">SelectedSequence()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_selectedtimecode.html">SelectedTimecode()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_selectedtimer.html">SelectedTimer()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_selection.html">Selection()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_selectioncount.html">SelectionCount()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_selectionfirst.html">SelectionFirst()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_selectionnext.html">SelectionNext()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_serialnumber.html">SerialNumber()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_setled.html">SetLED(handle,table)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_setprogress.html">SetProgress(handle, integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_setprogressrange.html">SetProgressRange(handle, integer, integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_setprogresstext.html">SetProgressText(handle, string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_setvar.html">SetVar(handle, string, value)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_showdata.html">ShowData()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_showsettings.html">ShowSettings()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_startprogress.html">StartProgress(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_stopprogress.html">StopProgress(handle)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_strtohandle.html">StrToHandle(string)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_textinput.html">TextInput([string[, string[, integer[, integer]]]])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_time.html">Time()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_timer.html">Timer(string, integer, integer[, string[, handle]])</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_touchobj.html">TouchObj()</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_unhook.html">Unhook(integer)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_unhookmultiple.html">UnhookMultiple(function, handle, handle)</a></li><li class="CHSeeAlso_item CHSeeAlso_itemChild"><a href="lua_objectfree_uservars.html">UserVars()</a></li></ul>
+        <a href="lua_objectfree.html#h4__984025291" class="CHHeadingLink" title="Link to this heading" aria-hidden="true"></a></h4>
+        <ul>
+        </ul>
+      </div>
+    </div>
+  </main>
+</div>
+
+
+
+
+
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>  
+</body>
+</html>
