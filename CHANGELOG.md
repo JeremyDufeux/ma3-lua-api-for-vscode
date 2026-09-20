@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.7.1 — September 20, 2026
+
+### ➕ Added
+
+- **Smart Update Notifications:** Added selective notification filtering to only prompt users for major and minor releases or specific key updates.
+
+### ✨ Changed
+
+- Improved update state management to prevent duplicate update notifications on startup.
+
+### 🪛 Fixed
+
+- Fixed test of `CompareHandle` in [tests\test_2.4.lua](tests\test_2.4.lua) that require 2 Handles
+
 ## 1.7.0 — September 11, 2026
 
 ### ➕ Added support of 2.5 API version

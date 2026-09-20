@@ -8,11 +8,16 @@ const EXTENSION_ENABLED_WORKSPACE_KEY  = `extensionEnabled`;
 const EXTENSION_ID = `Carrot-Industries.ma3-lua-api`;
 
 const LAST_INSTALLED_VERSION_KEY  = `${EXTENSION_ID}.lastInstalledVersion`;
+const LAST_NOTIFIED_VERSION_KEY = `${EXTENSION_ID}.lastNotifiedVersion`;
 const MIGRATION_VERSION_KEY = `${EXTENSION_ID}.migration_version`;
 const UPDATE_NOTIFICATION_HIDDEN_KEY  = `${EXTENSION_ID}.updateNotificationHidden`;
 const TERMINAL_PATH_KEY = `${EXTENSION_ID}.terminalPath`;
 const TERMINAL_SYSTEM_MONITOR_VISIBILITY_KEY = `${EXTENSION_ID}.terminalSystemMonitorVisibility`;
 const TERMINAL_COMMAND_LINE_VISIBILITY_KEY = `${EXTENSION_ID}.terminalCommandLineVisibility`;
+
+const NOTIFIED_VERSIONS = [
+    '1.6.0',
+];
 
 const extensionState = {
     hoverProviders: [],
@@ -193,23 +198,35 @@ function getMajorMinor(version) {
     return parts.length >= 2 ? `${parts[0]}.${parts[1]}` : version;
 }
 
+function shouldNotify(lastVersion, currentVersion) {
+    if (!lastVersion) {
+        return false;
+    }
+
+    if (NOTIFIED_VERSIONS.includes(currentVersion)) {
+        return true;
+    }
+
+    const [lastMajor, lastMinor] = lastVersion.split('.').map(Number);
+    const [currMajor, currMinor] = currentVersion.split('.').map(Number);
+
+    const isMajorOrMinorBump = currMajor > lastMajor || (currMajor === lastMajor && currMinor > lastMinor);
+
+    return isMajorOrMinorBump;
+}
+
 async function checkUpdateNotification(context, currentVersion) {
     const lastKnownVersion = context.globalState.get(LAST_INSTALLED_VERSION_KEY);
-    
-    const updateKey = getUpdateHiddenKey(currentVersion);
-    const hasBeenSeen = context.globalState.get(updateKey, false);
+    const lastNotifiedVersion = context.globalState.get(LAST_NOTIFIED_VERSION_KEY);
 
-    if (!lastKnownVersion) {
-        await context.globalState.update(LAST_INSTALLED_VERSION_KEY, currentVersion);
-        await context.globalState.update(updateKey, true);
+    await context.globalState.update(LAST_INSTALLED_VERSION_KEY, currentVersion);
+
+    if (!lastKnownVersion || lastNotifiedVersion === currentVersion) {
         return;
     }
 
-    if (lastKnownVersion !== currentVersion) {
-        await context.globalState.update(LAST_INSTALLED_VERSION_KEY, currentVersion);
-    }
-
-    if (!hasBeenSeen) {
+    if (shouldNotify(lastKnownVersion, currentVersion)) {
+        await context.globalState.update(LAST_NOTIFIED_VERSION_KEY, currentVersion);
         await showUpdateNotification(context, currentVersion);
     }
 }
@@ -219,15 +236,12 @@ async function showUpdateNotification(context, version) {
     const laterAction = "Later";
     const message = `Ma3 Lua Api updated to v${version}. Major changes are available!`;
 
-    vscode.window.showInformationMessage(message, whatsUpAction, laterAction).then(async (selection) => {
-        if (selection === whatsUpAction) {
-            const uri = vscode.Uri.joinPath(context.extensionUri, 'CHANGELOG.md');
-            await vscode.commands.executeCommand('markdown.showPreview', uri);
-            
-            const updateKey = getUpdateHiddenKey(version);
-            await context.globalState.update(updateKey, true);
-        }
-    });
+    const selection = await vscode.window.showInformationMessage(message, whatsUpAction, laterAction);
+
+    if (selection === whatsUpAction) {
+        const uri = vscode.Uri.joinPath(context.extensionUri, 'CHANGELOG.md');
+        await vscode.commands.executeCommand('markdown.showPreview', uri);
+    }
 }
 
 function getUpdateHiddenKey(version) {
