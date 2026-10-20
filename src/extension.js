@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 
 const API_VERSION_WORKSPACE_KEY = `apiVersion`;
 const EXTENSION_ENABLED_WORKSPACE_KEY  = `extensionEnabled`;
@@ -17,9 +18,11 @@ const TERMINAL_COMMAND_LINE_VISIBILITY_KEY = `${EXTENSION_ID}.terminalCommandLin
 
 const NOTIFIED_VERSIONS = [
     '1.6.0',
+    '1.7.2',
 ];
 
 const extensionState = {
+    outputChannel: undefined,
     hoverProviders: [],
     completionProviders: []
 };
@@ -99,6 +102,10 @@ const MIGRATIONS = [
 ];
 
 async function activate(context) {
+    if (!extensionState.outputChannel) {
+        extensionState.outputChannel = vscode.window.createOutputChannel('grandMA3 Debug');
+        context.subscriptions.push(extensionState.outputChannel);
+    }
     const extension = vscode.extensions.getExtension(EXTENSION_ID);
     const currentVersion = extension.packageJSON.version;
     
@@ -144,17 +151,17 @@ function printStateContent(context) {
     console.log('--- Global State Content ---');
     const globalKeys = context.globalState.keys();
     for (const key of globalKeys) {
-        console.log(`${key}: ${context.globalState.get(key)}`);
+        logDebug(`${key}: ${context.globalState.get(key)}`);
     }
-    console.log("----------------------------")
-    console.log("")
-    console.log('--- Workspace State Content ---');
+    logDebug("----------------------------")
+    logDebug("")
+    logDebug('--- Workspace State Content ---');
     const workspaceKeys = context.workspaceState.keys();
     for (const key of workspaceKeys) {
-        console.log(`${key}: ${context.globalState.get(key)}`);
+        logDebug(`${key}: ${context.globalState.get(key)}`);
     }
-    console.log("----------------------------")
-    console.log("")
+    logDebug("----------------------------")
+    logDebug("")
 }
 
 async function runMigrations(context, currentVersion) {
@@ -234,7 +241,7 @@ async function checkUpdateNotification(context, currentVersion) {
 async function showUpdateNotification(context, version) {
     const whatsUpAction = "What's up?";
     const laterAction = "Later";
-    const message = `Ma3 Lua Api updated to v${version}. Major changes are available!`;
+    const message = `Ma3 Lua Api updated to v${version}. Check out what's new!`;
 
     const selection = await vscode.window.showInformationMessage(message, whatsUpAction, laterAction);
 
@@ -249,96 +256,223 @@ function getUpdateHiddenKey(version) {
     return `${UPDATE_NOTIFICATION_HIDDEN_KEY}_${shortVersion}`;
 }
 
-async function getGMA3TerminalPath(context) {
-    const savedPath = context.globalState.get(TERMINAL_PATH_KEY);
-    if (savedPath && fs.existsSync(savedPath)) {
-        return savedPath;
-    }
-    
-    const platform = process.platform;
-    const isWin = platform === 'win32';
-    const isMac = platform === 'darwin';
+function findMacTerminalBinary(apiVersion) {
+    const appsDir = '/Applications';
+    debugLog(`--- findMacTerminalBinary START ---`);
+    debugLog(`Input apiVersion: "${apiVersion}"`);
+    debugLog(`Checking directory: ${appsDir}`);
 
-    const configuration = vscode.workspace.getConfiguration('grandMa3');
-    const selectedVersion = configuration.get(API_VERSION_WORKSPACE_KEY);
-
-    if (!selectedVersion) {
-        vscode.window.showWarningMessage("No grandMA3 API version selected.");
+    if (!fs.existsSync(appsDir)) {
+        debugLog(`ERROR: Directory ${appsDir} does not exist.`);
         return null;
     }
 
-    let possibleScanDirs = [];
-    let binaryName = "";
-
-    if (isWin) {
-        possibleScanDirs = ["C:\\Program Files\\MALightingTechnology"];
-        binaryName = path.join('bin', 'app_terminal.exe');
-    } else if (isMac) {
-        possibleScanDirs = [
-            "/Applications/grandMA3/Contents/MacOS",
-            "/Applications/grandMA3.app/Contents/MacOS"
-        ];
-        binaryName = "app_terminal";
+    let entries = [];
+    try {
+        entries = fs.readdirSync(appsDir);
+        debugLog(`Found ${entries.length} items in ${appsDir}`);
+    } catch (err) {
+        debugLog(`ERROR: fs.readdirSync failed on ${appsDir}: ${err.message}`);
+        return null;
     }
 
-    for (const scanDir of possibleScanDirs) {
-        if (fs.existsSync(scanDir)) {
-            try {
-                const dirs = fs.readdirSync(scanDir);
+    const cleanVersion = (apiVersion || '').toString().replace(/^v/i, '').trim();
+    debugLog(`Cleaned target version: "${cleanVersion}"`);
 
-                const matchingDirs = dirs
-                    .filter(d => d.toLowerCase().startsWith(`gma3_${selectedVersion}`))
-                    .sort((a, b) => b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' }));
+    // 1. Identify all grandMA3 bundles
+    const maBundles = entries.filter(name => {
+        const lower = name.toLowerCase();
+        return lower.includes('grandma3') && lower.endsWith('.app');
+    });
 
-                if (matchingDirs.length > 0) {
-                    const bestMatch = matchingDirs[0];
-                    const terminalPath = path.join(scanDir, bestMatch, binaryName);
-                    
-                    
-                    if (fs.existsSync(terminalPath)) {
-                        return terminalPath;
-                    }
-                }
-            } catch (err) {
-                console.error("Error scanning grandMA3 directory:", err);
-            }
+    debugLog(`Matched GMA3 bundles in /Applications: [${maBundles.join(', ')}]`);
+
+    if (maBundles.length === 0) {
+        debugLog(`WARNING: No grandMA3*.app bundles detected in ${appsDir}`);
+        return null;
+    }
+
+    // 2. Look for bundles matching the target version
+    const versionMatches = maBundles
+        .filter(name => cleanVersion && name.includes(cleanVersion))
+        .sort((a, b) => b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' }));
+
+    debugLog(`Bundles matching version "${cleanVersion}": [${versionMatches.join(', ')}]`);
+
+    for (const bundle of versionMatches) {
+        const candidate = path.join(appsDir, bundle, 'Contents', 'MacOS', 'app_terminal');
+        const exists = fs.existsSync(candidate);
+        debugLog(`Checking candidate: "${candidate}" -> exists: ${exists}`);
+        if (exists) {
+            debugLog(`SUCCESS: Found matching binary: "${candidate}"`);
+            return candidate;
         }
     }
 
-    const profileKey = isWin ? 'terminal.integrated.profiles.windows' : 'terminal.integrated.profiles.osx';
-    const profiles = vscode.workspace.getConfiguration().get(profileKey);
-    if (profiles && profiles['grandMA3'] && profiles['grandMA3'].path) {
-        return profiles['grandMA3'].path;
+    // 3. Fallback: Check any GMA3 bundle from newest to oldest
+    debugLog(`Version match failed. Testing all GMA3 bundles as fallback...`);
+    const allSorted = maBundles.sort((a, b) => 
+        b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' })
+    );
+
+    for (const bundle of allSorted) {
+        const candidate = path.join(appsDir, bundle, 'Contents', 'MacOS', 'app_terminal');
+        const exists = fs.existsSync(candidate);
+        debugLog(`Fallback check candidate: "${candidate}" -> exists: ${exists}`);
+        if (exists) {
+            debugLog(`SUCCESS: Selected fallback binary: "${candidate}"`);
+            return candidate;
+        }
     }
 
-    const manualPath = await askUserForTerminalPath(isMac);
-    if (manualPath) {
-        await context.globalState.update(TERMINAL_PATH_KEY, manualPath);
-        return manualPath;
-    }
-
+    debugLog(`FAILED: No app_terminal binary found in any bundle.`);
     return null;
 }
 
 async function askUserForTerminalPath(isMac) {
-    const fileName = isMac ? 'app_terminal' : 'app_terminal.exe';
-    
-    const defaultUri = isMac 
-        ? vscode.Uri.file('/Applications/grandMA3/Contents/MacOS') 
-        : vscode.Uri.file('C:\\Program Files\\MALightingTechnology');
+    debugLog(`--- askUserForTerminalPath START ---`);
+    debugLog(`Prompting user. isMac: ${isMac}`);
 
-    const selectedFile = await vscode.window.showOpenDialog({
-        canSelectMany: false,
-        openLabel: `Select ${fileName}`,
-        title: `Select grandMA3 ${fileName}`,
-        defaultUri: defaultUri,
-        filters: isMac ? {} : { 'Executable': ['exe'] }
-    });
+    let dialogOptions = {};
 
-    if (selectedFile && selectedFile[0]) {
-        return selectedFile[0].fsPath;
+    if (isMac) {
+        dialogOptions = {
+            canSelectFiles: true,
+            canSelectFolders: true, // macOS bundles can be flagged as directories in picker
+            canSelectMany: false,
+            defaultUri: vscode.Uri.file('/Applications'),
+            openLabel: 'Select grandMA3 onPC App',
+            title: 'Select grandMA3 onPC application (.app)'
+        };
+    } else {
+        dialogOptions = {
+            canSelectFiles: true,
+            canSelectFolders: false,
+            canSelectMany: false,
+            defaultUri: vscode.Uri.file('C:\\Program Files\\MALightingTechnology'),
+            openLabel: 'Select app_terminal.exe',
+            title: 'Select app_terminal executable',
+            filters: {
+                'Executable (*.exe)': ['exe'],
+                'All Files': ['*']
+            }
+        };
     }
-    
+
+    const selectedUris = await vscode.window.showOpenDialog(dialogOptions);
+    if (!selectedUris || selectedUris.length === 0) {
+        debugLog(`User cancelled the file selection dialog.`);
+        return null;
+    }
+
+    let targetPath = selectedUris[0].fsPath;
+    (`User picked path: "${targetPath}"`);
+
+    if (isMac) {
+        // If the user navigated inside the .app bundle, truncate to the root .app path
+        if (!targetPath.endsWith('.app')) {
+            const appIndex = targetPath.indexOf('.app');
+            if (appIndex !== -1) {
+                targetPath = targetPath.substring(0, appIndex + 4);
+                debugLog(`Normalized selection to bundle: "${targetPath}"`);
+            }
+        }
+
+        // Resolve inner executable path
+        const primaryBinary = path.join(targetPath, 'Contents', 'MacOS', 'app_terminal');
+        const fallbackBinary = path.join(targetPath, 'Contents', 'MacOS', 'grandMA3');
+
+        debugLog(`Testing primary inner binary: "${primaryBinary}"`);
+        if (fs.existsSync(primaryBinary)) {
+            targetPath = primaryBinary;
+        } else if (fs.existsSync(fallbackBinary)) {
+            debugLog(`Primary missing, testing fallback binary: "${fallbackBinary}"`);
+            targetPath = fallbackBinary;
+        } else {
+            debugLog(`ERROR: No executable found inside package "${targetPath}"`);
+            vscode.window.showErrorMessage(
+                `Invalid package: Could not find "app_terminal" inside "${targetPath}".`
+            );
+            return null;
+        }
+
+        // Ensure execution permissions on macOS
+        try {
+            fs.chmodSync(targetPath, 0o755);
+            debugLog(`Applied chmod 755 to manual target: "${targetPath}"`);
+        } catch (err) {
+            debugLog(`WARNING: chmod failed on "${targetPath}": ${err.message}`);
+        }
+    }
+
+    debugLog(`Resolved manual path: "${targetPath}"`);
+    return targetPath;
+}
+
+async function getGMA3TerminalPath(context) {
+    const isMac = os.platform() === 'darwin';
+    const isWin = os.platform() === 'win32';
+
+    debugLog(`================ GMA3 TERMINAL RESOLUTION ================`);
+    debugLog(`OS Platform: ${os.platform()} | Arch: ${os.arch()}`);
+
+    const configuration = vscode.workspace.getConfiguration('grandMa3');
+    const selectedVersion = configuration.get('apiVersion'); // Adapt key name if needed
+    debugLog(`Workspace setting "grandMa3.apiVersion": "${selectedVersion}"`);
+
+    // 1. macOS detection
+    if (isMac) {
+        const macPath = findMacTerminalBinary(selectedVersion);
+        if (macPath) {
+            debugLog(`Resolved via macOS auto-detection: "${macPath}"`);
+            return macPath;
+        }
+    }
+
+    // 2. Windows detection
+    if (isWin) {
+        debugLog(`Checking Windows detection...`);
+        const scanDir = 'C:\\Program Files\\MALightingTechnology';
+        if (fs.existsSync(scanDir)) {
+            try {
+                const entries = fs.readdirSync(scanDir);
+                const escapedVersion = (selectedVersion || '').replace('.', '\\.');
+                const versionRegex = new RegExp(`(?:gma3|grandma3)[_\\-\\sv]*${escapedVersion}`, 'i');
+
+                const matchingDirs = entries
+                    .filter(name => {
+                        const fullPath = path.join(scanDir, name);
+                        return fs.statSync(fullPath).isDirectory() && versionRegex.test(name);
+                    })
+                    .sort((a, b) => b.localeCompare(a, undefined, { numeric: true, sensitivity: 'base' }));
+
+                for (const dirName of matchingDirs) {
+                    const binCandidate = path.join(scanDir, dirName, 'bin', 'app_terminal.exe');
+                    if (fs.existsSync(binCandidate)) {
+                        debugLog(`Windows terminal found: "${binCandidate}"`);
+                        return binCandidate;
+                    }
+                    const rootCandidate = path.join(scanDir, dirName, 'app_terminal.exe');
+                    if (fs.existsSync(rootCandidate)) {
+                        debugLog(`Windows terminal found: "${rootCandidate}"`);
+                        return rootCandidate;
+                    }
+                }
+            } catch (err) {
+                debugLog(`ERROR: Windows scan failed: ${err.message}`);
+            }
+        }
+    }
+
+    // 3. Fallback: Ask user
+    debugLog(`Auto-detection returned nothing. Asking user manually...`);
+    const manualPath = await askUserForTerminalPath(isMac);
+    if (manualPath) {
+        debugLog(`Resolved via user selection: "${manualPath}"`);
+        return manualPath;
+    }
+
+    debugLog(`Resolution aborted: No valid terminal path found.`);
     return null;
 }
 
@@ -349,12 +483,8 @@ async function handleTerminal(context, mode) {
         vscode.window.showErrorMessage("Could not find grandMA3 terminal. Please select it manually.");
         return;
     }
-    let terminalName = ""
-    if(mode == "sysmon") {
-        terminalName = "Ma3 System Monitor";
-    } else {
-        terminalName = "Ma3 Command Line";
-    }
+
+    const terminalName = mode === "sysmon" ? "Ma3 System Monitor" : "Ma3 Command Line";
 
     let terminal = vscode.window.terminals.find(t => t.name === terminalName);
     
@@ -372,11 +502,8 @@ async function handleTerminal(context, mode) {
         terminal.show();
         
         setTimeout(() => {
-            if(mode == "sysmon") {
-                terminal.sendText("sysmon");
-            } else {
-                terminal.sendText("cmdline");
-            }
+            const command = mode === "sysmon" ? "sysmon 127.0.0.1" : "cmdline 127.0.0.1";
+            terminal.sendText(command);
         }, 1500);
     } catch (error) {
         await context.globalState.update(TERMINAL_PATH_KEY, undefined);
@@ -485,9 +612,9 @@ function createMenu(context){
                 break;
                 
             case 'Restart extension':
-                const currentApiVersion = getCurrentApiVersion(context);
-                configureWorkspace(context, currentApiVersion);
-                restartLuaServer();
+                const currentApiVersion = await getCurrentApiVersion(context);
+                await configureWorkspace(context, currentApiVersion);
+                await restartLuaServer();
                 vscode.window.showInformationMessage(`GrandMa 3 extension restarted`);
                 break;
         }
@@ -507,18 +634,18 @@ async function toggleExtension(context, enable) {
     const luaConfig = vscode.workspace.getConfiguration('Lua');
 
     if (enable) {
-        const currentApiVersion = getCurrentApiVersion(context);
+        const currentApiVersion = await getCurrentApiVersion(context);
         extensionState.statusBarItem.text = `GrandMa 3 API: ${currentApiVersion}`;
-        configureWorkspace(context, currentApiVersion);
+        await configureWorkspace(context, currentApiVersion);
         vscode.window.showInformationMessage('GrandMa 3 extension enabled for this workspace');
     } else {
-        deactivate()
+        deactivate();
         extensionState.statusBarItem.text = `GrandMa 3 API: Off`;
         await luaConfig.update('workspace.library', [], vscode.ConfigurationTarget.Workspace);
         vscode.window.showInformationMessage('GrandMa 3 extension disabled for this workspace');
     }
 
-    restartLuaServer();
+    await restartLuaServer();
 }
 
 function createApiVersionStatusBarItem() {
@@ -574,7 +701,7 @@ function getAvailableApiVersions(context) {
 
 async function showApiVersionQuickPick(context) {
     const availableVersions = getAvailableApiVersions(context);
-    const currentVersion = getCurrentApiVersion(context);
+    const currentVersion = await getCurrentApiVersion(context);
 
     const selection = await vscode.window.showQuickPick(
         availableVersions.map(version => ({
@@ -587,15 +714,15 @@ async function showApiVersionQuickPick(context) {
         }
     );
 
-    if (selection && selection.label != currentVersion) {
+    if (selection && selection.label !== currentVersion) {
         const configuration = vscode.workspace.getConfiguration('grandMa3');
         await configuration.update(API_VERSION_WORKSPACE_KEY, selection.label, vscode.ConfigurationTarget.Workspace);
 
         extensionState.statusBarItem.text = `GrandMa 3 API: ${selection.label}`;
 
-        configureWorkspace(context, selection.label);
+        await configureWorkspace(context, selection.label);
 
-        restartLuaServer();
+        await restartLuaServer();
         vscode.window.showInformationMessage(`GrandMa 3 API version changed to ${selection.label}`);
     }
 }
@@ -667,35 +794,54 @@ async function loadApiFiles(context, version) {
 }
 
 async function updateCSpellActiveDictionary(context, version) {
-    const cspellConfig = vscode.workspace.getConfiguration('cSpell');
+    // 1. Skip if cSpell is not installed
+    const cspellExtension = vscode.extensions.getExtension('streetsidesoftware.code-spell-checker');
+    if (!cspellExtension) {
+        return;
+    }
+
+    // 2. Ensure a workspace folder is opened (ConfigurationTarget.Workspace requires it)
+    if (!vscode.workspace.workspaceFolders || vscode.workspace.workspaceFolders.length === 0) {
+        return;
+    }
+
     const dictName = `grandma3-api-${version}`;
     const dictPath = path.join(context.extensionPath, 'resources', version, 'ma3_dictionary_for_cspell.txt');
 
-    let definitions = cspellConfig.get('dictionaryDefinitions') || [];
-    
-    definitions = definitions.filter(d => d.name && !d.name.startsWith('grandma3-api-'));
-    
-    definitions.push({
-        name: dictName,
-        path: dictPath,
-    });
+    // 3. Skip if the dictionary file does not exist
+    if (!fs.existsSync(dictPath)) {
+        return;
+    }
 
-    await cspellConfig.update('dictionaryDefinitions', definitions, vscode.ConfigurationTarget.Workspace);
+    try {
+        const cspellConfig = vscode.workspace.getConfiguration('cSpell');
 
-    const dictsInspection = cspellConfig.inspect('dictionaries');
-    let activeDicts = dictsInspection?.workspaceValue || [];
+        // Update dictionaryDefinitions
+        let definitions = cspellConfig.get('dictionaryDefinitions') || [];
+        definitions = definitions.filter(d => d && d.name && !d.name.startsWith('grandma3-api-'));
+        definitions.push({
+            name: dictName,
+            path: dictPath
+        });
 
-    activeDicts = activeDicts.filter(d => typeof d === 'string' && !d.startsWith('grandma3-api-'));
-    
-    activeDicts.push(dictName);
+        await cspellConfig.update('dictionaryDefinitions', definitions, vscode.ConfigurationTarget.Workspace);
 
-    await cspellConfig.update('dictionaries', activeDicts, vscode.ConfigurationTarget.Workspace);
+        // Update active dictionaries list
+        const dictsInspection = cspellConfig.inspect('dictionaries');
+        let activeDicts = dictsInspection?.workspaceValue || [];
+        activeDicts = activeDicts.filter(d => typeof d === 'string' && !d.startsWith('grandma3-api-'));
+        activeDicts.push(dictName);
+
+        await cspellConfig.update('dictionaries', activeDicts, vscode.ConfigurationTarget.Workspace);
+    } catch (err) {
+        console.warn(`[grandMA3] Failed to update cSpell configuration: ${err.message}`);
+    }
 }
 
-async function configureWorkspace(context, version){
-    importDummyFunctions(context, version);
-    loadApiFiles(context, version);
-    updateCSpellActiveDictionary(context, version);
+async function configureWorkspace(context, version) {
+    await importDummyFunctions(context, version);
+    await loadApiFiles(context, version);
+    await updateCSpellActiveDictionary(context, version);
 }
 
 async function importDummyFunctions(context, version){
@@ -1000,6 +1146,16 @@ function getObjectNoDocFilePath(context, version){
 function normalizePath(filePath) {
     const normalizedPath = path.resolve(filePath);
     return normalizedPath
+}
+
+function debugLog(message) {
+    if (!extensionState.outputChannel) {
+        extensionState.outputChannel = vscode.window.createOutputChannel('grandMA3 Debug');
+    }
+
+    const timestamp = new Date().toISOString();
+    extensionState.outputChannel.appendLine(`[${timestamp}] ${message}`);
+    console.log('[grandMA3 Debug] ' + message);
 }
 
 function deactivate() {

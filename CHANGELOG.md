@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.7.2 — October 20, 2026
+
+### 🪛 Fixed
+
+- **Terminal Connection:** Fixed an issue where the grandMA3 terminal could fail to connect to local onPC sessions, especially for version 2.5.1.
+- **Restart Extension:** Fixed a problem where restarting the extension could fail to reload API definitions properly, leaving API functions marked as undefined.
+- **cSpell Compatibility:** Fixed an error when the Code Spell Checker extension was not installed; the extension now safely skips dictionary configuration without raising any issue
+
+### ✨ Improved
+
+- **macOS Terminal & Debugger Detection:** Improved detection on macOS by allowing users to select the `grandMA3 onPC.app` bundle and automatically resolving the internal terminal executable path.
+- **Diagnostic Logging:** Added debug logging for for some functions to make troubleshooting easier.
+
+### 📚 Documentation
+
+- **Spell Checking:** Added a section in the README explaining how the automatic dictionary sync works with the Code Spell Checker extension.
+- **Terminal Setup Guide:** Updated the README with instructions on how to manually select the application bundle on macOS (`.app`) or the terminal executable on Windows (`app_terminal.exe`) when auto-detection fails.
+
 ## 1.7.1 — September 20, 2026
 
 ### ➕ Added

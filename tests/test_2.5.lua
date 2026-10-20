@@ -499,7 +499,7 @@ local function test()
         FindNextFocus(_backwards)
         FindNextFocus(_backwards, _reason)
 
-        GeneratePhasersForChannels(uiChannelIndex, phaserData) -- TODO
+        GeneratePhasersForChannels(uiChannelIndex, phaserData)
         GetAttributeColumnId(handle, attribute)
         GetBlockInput()
         GetObject(address)

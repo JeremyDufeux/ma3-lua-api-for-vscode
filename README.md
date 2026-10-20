@@ -32,6 +32,14 @@ These buttons can be toggled on or off in the extension settings.
 
 ![ma3-terminal](images/ma3-terminal.png)
 
+If the executable cannot be located automatically, you will be prompted to select it manually:
+
+- **macOS:** Select the application bundle directly in your `/Applications` folder (e.g. `grandMA3 onPC x.x.x.x.app`). The extension will automatically resolve the internal terminal binary.
+- **Windows:** Select the terminal executable directly, typically located at:  
+  `C:\Program Files\MALightingTechnology\gma3_x.x.x\bin\app_terminal.exe`
+
+> **Note:** If multiple onPC versions are running simultaneously, the terminal connects to the **first instance launched**.
+
 ## API version selection
 
 The VS Code bottom toolbar display the actual Ma3 API version.
@@ -47,6 +55,12 @@ Clicking on this toolbar button will open a quick pick menu that allow you to:
 
 ![quick-pick-menu](images/quick-pick-menu.png)
 ![version-selection](images/version-selection.png)
+
+## Code Spell Checker integration
+
+If you use the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) extension, this extension automatically provides a dictionary containing all Grand Ma 3 API function names and keywords.
+
+When you switch the Ma3 API version, the dictionary updates automatically to match the selected version. This avoids false typos on specific Ma3 Lua functions while keeping spell checking active for your code and comments.
 
 # How to contribute
 
