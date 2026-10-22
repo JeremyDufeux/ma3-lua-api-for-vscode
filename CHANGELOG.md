@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.7.3 — October 22, 2026
+
+### 🪛 Fixed
+
+- Fixed documentation for KeyboardObj()
+- Fixed links in documentation pointing to the wrong manual version
+
 ## 1.7.2 — October 20, 2026
 
 ### 🪛 Fixed

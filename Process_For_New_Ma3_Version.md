@@ -10,6 +10,7 @@
 * Create a new folder in [ressources](ressources) for the new version, ie: "2.3"
 * Copy last version files in the new folder
 * Change version number at the top of all files
+* Change version number of all links ni json files
 * On the new Ma OnPC version, execute the command: `HelpLua` to generate the file `grandMA3_lua_functions.txt`
 * Move the generated file from [C:\ProgramData\MALightingTechnology\gma3_library](C:\ProgramData\MALightingTechnology\gma3_library) to [resources\2.3](resources\2.3)
 * Use a software like WinMerge to find API différences between folders in [ma_docs](ma_docs) version folders, use also the release notes
